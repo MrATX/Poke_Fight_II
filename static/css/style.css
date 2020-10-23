@@ -1,0 +1,26 @@
+#body{
+    background-color: black;
+}
+
+.jumbotron{
+    background-color: burlywood;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#jumbotitle,#jumbopara{
+    color:teal;
+    text-align: center;
+}
+
+#buttons{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+
+#modes{
+    margin: 15px;
+    background-color: purple;
+    color:white;
+}
