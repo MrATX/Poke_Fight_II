@@ -22,7 +22,7 @@ def servePokemon():
    { '_id': 0})))
 
 @poke2.route("/combat_vars")
-def servePokemon():
+def serveCombatvars():
     return jsonify(list(combat_vars.find({ },
    { '_id': 0})))
 
@@ -35,3 +35,6 @@ def servePokemon():
 # def servePokemon():
 #     return jsonify(list(active.find({ },
 #    { '_id': 0})))
+
+if __name__=="__main__":
+    poke2.run(debug=True)

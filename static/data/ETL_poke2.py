@@ -22,15 +22,21 @@ for i in gen_list:
     wip_df = pokemon.loc[pokemon["Generation"]==i,:]
     for j in range(len(wip_df)):
         for k in range(len(pokedex_fields)):
-            wip_dict_poke[pokedex_fields[k]]=(wip_df.iloc[j,k])
+            if type(wip_df.iloc[j,k])==str:
+                wip_dict_poke[pokedex_fields[k]]=(wip_df.iloc[j,k])
+            else:
+                wip_dict_poke[pokedex_fields[k]]=(wip_df.iloc[j,k].item())
         wip_dict_gen[wip_df.iloc[j,0]] = (wip_dict_poke)
         wip_dict_poke = {}
-    pokedex_dict[f"Generation {i}"] = (wip_dict_gen)
+    pokedex_dict[f"Generation {i}"]=(wip_dict_gen)
     wip_dict_gen = {}
 # Add Legendary Pokemon dict to Pokedex
 for i in range(len(legends)):
     for j in range(len(pokedex_fields)):
-        wip_dict_poke[pokedex_fields[j]]=(legends.iloc[i,j])
+        if type(legends.iloc[i,j])==str:
+            wip_dict_poke[pokedex_fields[j]]=(legends.iloc[i,j])
+        else:
+            wip_dict_poke[pokedex_fields[j]]=(legends.iloc[i,j].item())
     wip_dict_gen[legends.iloc[i,0]] = (wip_dict_poke)
     wip_dict_poke = {}
 pokedex_dict["Legendary"] = (wip_dict_gen)
@@ -45,9 +51,13 @@ types = []
 for i in type_matchups:
     if i != "TYPE":
         types.append(i)
+# Populate type_coeffs dict and push to combat vars
 for i in range(len(types)):
     for j in range(len(types)):
-        wip_dict_type[types[j]]=(type_matchups.loc[types[i],types[j]])
+        if type(type_matchups.loc[types[i],types[j]])==str:
+            wip_dict_type[types[j]]=(type_matchups.loc[types[i],types[j]])
+        else:
+            wip_dict_type[types[j]]=(type_matchups.loc[types[i],types[j]].item())
     type_coeffs[types[i]]=(wip_dict_type)
     wip_dict_type = {}
 combat_vars_dict = {}
