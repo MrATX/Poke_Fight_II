@@ -18,7 +18,7 @@ def index():
     )
 
 @poke2.route("/info_menu")
-def match_setup():
+def info_menu():
     return render_template(
         "info_menu.html",
     )
@@ -30,13 +30,13 @@ def match_setup():
     )
 
 @poke2.route("/match_active")
-def match_setup():
+def match_active():
     return render_template(
         "match_active.html",
     )
 
 @poke2.route("/match_over")
-def match_setup():
+def match_over():
     return render_template(
         "match_over.html",
     )

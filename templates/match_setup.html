@@ -1,1 +1,72 @@
-TESTERZS
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Poke Fight II</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-5">
+            <h1 id="option_head">
+                Choose # of Players
+            </h1>
+            <input type="radio" name="nplayers" value="1P" onchange="radios_val('nplayers',value)"> One Player
+            <input type="radio" name="nplayers" value="2P" onchange="radios_val('nplayers',value)"> Two Player
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-5">
+            <h1 id="option_head">
+                Choose # of Pokemon
+            </h1>
+            <input type="radio" name="npoke" value="1P"> 2
+            <input type="radio" name="npoke" value="1P"> 3
+            <input type="radio" name="npoke" value="1P"> 4
+            <input type="radio" name="npoke" value="1P"> 5
+            <input type="radio" name="npoke" value="1P"> 6
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-8">
+            <h1 id="option_head">
+                Choose Pokemon Generation
+            </h1>
+            <input type="radio" name="gen" value="1P"> 1st Gen - Red, Blue, Yellow, & Green Versions<br>
+            <input type="radio" name="gen" value="1P"> 2nd Gen - Gold, Silver, & Crystal Versions<br>
+            <input type="radio" name="gen" value="1P"> 3rd Gen - Ruby, Sapphire, Emerald, FireRed, & LeafGreen Versions<br>
+            <input type="radio" name="gen" value="1P"> 4th Gen - Diamond, Pearl, Platinum, HeartGold, & SoulSilver Versions<br>
+            <input type="radio" name="gen" value="1P"> 5th Gen - Black & White Versions<br>
+            <input type="radio" name="gen" value="1P"> 6th Gen - X, Y, Omega Ruby, & Alpha Sapphire Versions<br>
+            <input type="radio" name="gen" value="1P"> Legendary Pokemon - All Generations
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <!-- <button id="execute" onclick="window.location.href='match_active';">
+                Begin Match
+            </button> -->
+            <button id="execute" onclick="gimmethosevars()">
+                Begin Match
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/app0.js"></script>
+
+</body>
+
+</html>
