@@ -15,8 +15,8 @@ function radios_val(name,value){
             break;
         }
     }
-    return nplayers_sel;
-            npoke_sel;
+    return nplayers_sel,
+            npoke_sel,
             gen_sel;
 }
 console.log("poop")
