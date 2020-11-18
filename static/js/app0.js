@@ -35,6 +35,10 @@ function beginmatch(){
     }
 }
 
+function testerz(varhere){
+    console.log(varhere);
+}
+
 // function pushvars(){
 //     var match_vars = {
 //         "nplayers":nplayers_sel,
@@ -48,12 +52,12 @@ function beginmatch(){
 //     });
 // }
 
-function pushvars(){
-    var MongoClient = require([('mongodb').MongoClient]);
-    // var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost:27017/pokefight2";
-    MongoClient.connect(url, function(err,db){
-        console.log("We are connected");
-        })
-        db.close();
-};
+// function pushvars(){
+//     var MongoClient = require([('mongodb').MongoClient]);
+//     // var MongoClient = require('mongodb').MongoClient;
+//     var url = "mongodb://localhost:27017/pokefight2";
+//     MongoClient.connect(url, function(err,db){
+//         console.log("We are connected");
+//         })
+//         db.close();
+// };
