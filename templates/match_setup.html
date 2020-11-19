@@ -7,74 +7,75 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="static/css/style.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
 </head>
 
 <body id="body">
 
 <div class="container-fluid">
-    <div class="jumbotron">
-        <div class="row">
-            <!-- <div class="col-md-3"></div> -->
-            <div class="col-md-12">
-                <h1 id="jumbotitle">
-                    Choose # of Players
-                </h1>
-                <p id="jumbopara">
-                <input type="radio" name="nplayers" value="1" id="One Player" onchange="radios_val('nplayers',value,id)"> One Player
-                <input type="radio" name="nplayers" value="2" id="Two Player" onchange="radios_val('nplayers',value,id)"> Two Player
-                </p>
+    <form method='POST' action='/roster_select'>
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 id="jumbotitle">
+                        Choose # of Players
+                    </h1>
+                    <p id="jumbopara">
+                    <input type="radio" name="nplayers" value="1" id="One Player" onchange="radios_val('nplayers',value,id)"> One Player
+                    <input type="radio" name="nplayers" value="2" id="Two Player" onchange="radios_val('nplayers',value,id)"> Two Player
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="jumbotron">
-        <div class="row">
-            <!-- <div class="col-md-3"></div> -->
-            <div class="col-md-12">
-                <h1 id="jumbotitle">
-                    Choose # of Pokemon
-                </h1>
-                <p id="jumbopara">
-                <input type="radio" name="npoke" value="2" id="two" onchange="radios_val('npoke',value,id)"> 2
-                <input type="radio" name="npoke" value="3" id="three" onchange="radios_val('npoke',value,id)"> 3
-                <input type="radio" name="npoke" value="4" id="four" onchange="radios_val('npoke',value,id)"> 4
-                <input type="radio" name="npoke" value="5" id="five" onchange="radios_val('npoke',value,id)"> 5
-                <input type="radio" name="npoke" value="6" id="six" onchange="radios_val('npoke',value,id)"> 6
-                </p>
+        <hr>
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 id="jumbotitle">
+                        Choose # of Pokemon
+                    </h1>
+                    <p id="jumbopara">
+                    <input type="radio" name="npoke" value="2" id="two" onchange="radios_val('npoke',value,id)"> 2
+                    <input type="radio" name="npoke" value="3" id="three" onchange="radios_val('npoke',value,id)"> 3
+                    <input type="radio" name="npoke" value="4" id="four" onchange="radios_val('npoke',value,id)"> 4
+                    <input type="radio" name="npoke" value="5" id="five" onchange="radios_val('npoke',value,id)"> 5
+                    <input type="radio" name="npoke" value="6" id="six" onchange="radios_val('npoke',value,id)"> 6
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="jumbotron">
-        <div class="row">
-            <!-- <div class="col-md-3"></div> -->
-            <div class="col-md-12">
-                <h1 id="jumbotitle">
-                    Choose Pokemon Generation
-                </h1>
-                <p id="jumbopara">
-                <input type="radio" name="gen" value="1" id="1st Generation" onchange="radios_val('gen',value,id)"> 1st Gen - Red, Blue, Yellow, & Green Versions<br>
-                <input type="radio" name="gen" value="2" id="2nd Generation" onchange="radios_val('gen',value,id)"> 2nd Gen - Gold, Silver, & Crystal Versions<br>
-                <input type="radio" name="gen" value="3" id="3rd Generation" onchange="radios_val('gen',value,id)"> 3rd Gen - Ruby, Sapphire, Emerald, FireRed, & LeafGreen Versions<br>
-                <input type="radio" name="gen" value="4" id="4th Generation" onchange="radios_val('gen',value,id)"> 4th Gen - Diamond, Pearl, Platinum, HeartGold, & SoulSilver Versions<br>
-                <input type="radio" name="gen" value="5" id="5th Generation" onchange="radios_val('gen',value,id)"> 5th Gen - Black & White Versions<br>
-                <input type="radio" name="gen" value="6" id="6th Generation" onchange="radios_val('gen',value,id)"> 6th Gen - X, Y, Omega Ruby, & Alpha Sapphire Versions<br>
-                <input type="radio" name="gen" value="L" id="Legendary" onchange="radios_val('gen',value,id)"> Legendary Pokemon - All Generations
-                </p>
+        <hr>
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 id="jumbotitle">
+                        Choose Pokemon Generation
+                    </h1>
+                    <p id="jumbopara">
+                    <input type="radio" name="gen" value="1" id="1st Generation" onchange="radios_val('gen',value,id)"> 1st Gen - Red, Blue, Yellow, & Green Versions<br>
+                    <input type="radio" name="gen" value="2" id="2nd Generation" onchange="radios_val('gen',value,id)"> 2nd Gen - Gold, Silver, & Crystal Versions<br>
+                    <input type="radio" name="gen" value="3" id="3rd Generation" onchange="radios_val('gen',value,id)"> 3rd Gen - Ruby, Sapphire, Emerald, FireRed, & LeafGreen Versions<br>
+                    <input type="radio" name="gen" value="4" id="4th Generation" onchange="radios_val('gen',value,id)"> 4th Gen - Diamond, Pearl, Platinum, HeartGold, & SoulSilver Versions<br>
+                    <input type="radio" name="gen" value="5" id="5th Generation" onchange="radios_val('gen',value,id)"> 5th Gen - Black & White Versions<br>
+                    <input type="radio" name="gen" value="6" id="6th Generation" onchange="radios_val('gen',value,id)"> 6th Gen - X, Y, Omega Ruby, & Alpha Sapphire Versions<br>
+                    <input type="radio" name="gen" value="L" id="Legendary" onchange="radios_val('gen',value,id)"> Legendary Pokemon - All Generations
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <hr>
-    <!-- <div class="jumbotron"> -->
+        <hr>
         <div class="row" id="buttons">
-            <!-- <div class="col-md-3"></div> -->
-            <!-- <div class="col-md-12"> -->
-                <button id="playbtn" onclick="beginmatch()">
-                    Begin Match
-                </button>
-            </div>
+            <button id="setup_button" type="submit" value="Submit" style="display:none;"></button>
         </div>
-    <!-- </div> -->
+        </form>
+        <div class="row" id="buttons">
+            <button id="playbtn" onclick="beginmatch()">Continue</button>
+        </div>
+        <hr>
+        <hr>
 </div>
 
 <script src="../static/js/app0.js"></script>

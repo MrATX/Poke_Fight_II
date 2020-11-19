@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, jsonify, json
+from flask import Flask, render_template, redirect, url_for, jsonify, json, request
 from flask_pymongo import PyMongo
 import requests
+import sys
 
 poke2=Flask(__name__)
 poke2.config['JSON_SORT_KEYS'] = False
@@ -23,11 +24,24 @@ def info_menu():
         "info_menu.html",
     )
 
-@poke2.route("/match_setup")
+@poke2.route("/match_setup",methods=['GET','POST'])
 def match_setup():
     return render_template(
         "match_setup.html",
     )
+
+@poke2.route("/roster_select",methods=['GET','POST'])
+def roster_select():
+    if request.method == 'POST':
+        nplayers = request.form['nplayers']
+        npoke = request.form['npoke']
+        gen = request.form['gen']
+        return render_template(
+            'roster_select.html',
+            nplayers = nplayers,
+            npoke = npoke,
+            gen = gen,
+        )
 
 @poke2.route("/match_active")
 def match_active():
@@ -60,6 +74,25 @@ def serveCombatvars():
 # def servePokemon():
 #     return jsonify(list(active.find({ },
 #    { '_id': 0})))
+
+# @poke2.route("/testerztwo",methods=["GET","POST"])
+# def testerz2():
+#     if request.method == "POST":
+#         data = {}
+#         data['nplayers'] = request.json['nplayers_sel']
+#         print(data)
+#         return jsonify(data)
+
+
+@poke2.route('/PythonFunctionName', methods=['POST', 'GET'])
+def getPage():
+    if request.method == 'POST':
+        strTextBoxVal= request.form['HTMLControlName']
+        if strTextBoxVal=="poop":
+            return render_template(
+                'page.html',
+                strTextBoxVal = strTextBoxVal,
+            )
 
 if __name__=="__main__":
     poke2.run(debug=True)

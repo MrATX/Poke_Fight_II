@@ -26,38 +26,12 @@ function beginmatch(){
             console.log(nplayers_sel,npoke_sel,gen_sel)
             var match_text = "Begin a " + nplayers_text + " match with " +
             npoke_text + " " + gen_text + " Pokemon?"
-            if (confirm(match_text)) {
-                window.location.href = "match_active";
-                }
+            if (confirm(match_text)){
+                document.getElementById('setup_button').click();
+                console.log('iPwn');
+            }
     }
     else{
         alert("Select # of Players, # of Pokemon, and a Pokemon Generation to continue")   
     }
 }
-
-function testerz(varhere){
-    console.log(varhere);
-}
-
-// function pushvars(){
-//     var match_vars = {
-//         "nplayers":nplayers_sel,
-//         "npoke":npoke_sel,
-//         "gen":gen_sel
-//     };
-//     var MongoClient = require(['mongoDB']).MongoClient;
-//     MongoClient.connect("mongodb://localhost:27017/pokefight2",function(err,db){
-//         if(err) throw err;
-//         console.log(match_vars);
-//     });
-// }
-
-// function pushvars(){
-//     var MongoClient = require([('mongodb').MongoClient]);
-//     // var MongoClient = require('mongodb').MongoClient;
-//     var url = "mongodb://localhost:27017/pokefight2";
-//     MongoClient.connect(url, function(err,db){
-//         console.log("We are connected");
-//         })
-//         db.close();
-// };
