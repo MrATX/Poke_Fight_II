@@ -28,7 +28,7 @@ for i in gen_list:
                 wip_dict_poke[pokedex_fields[k]]=(wip_df.iloc[j,k].item())
         wip_dict_gen[wip_df.iloc[j,0]] = (wip_dict_poke)
         wip_dict_poke = {}
-    pokedex_dict[f"Generation {i}"]=(wip_dict_gen)
+    pokedex_dict[f"gen{i}"]=(wip_dict_gen)
     wip_dict_gen = {}
 # Add Legendary Pokemon dict to Pokedex
 for i in range(len(legends)):
@@ -39,7 +39,7 @@ for i in range(len(legends)):
             wip_dict_poke[pokedex_fields[j]]=(legends.iloc[i,j].item())
     wip_dict_gen[legends.iloc[i,0]] = (wip_dict_poke)
     wip_dict_poke = {}
-pokedex_dict["Legendary"] = (wip_dict_gen)
+pokedex_dict["legendary"] = (wip_dict_gen)
 wip_dict_gen = {}
 ### Combat Vars ---------------------------------
 # Read Data

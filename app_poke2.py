@@ -39,18 +39,20 @@ def roster_select():
         nplayers = request.form['nplayers']
         npoke = request.form['npoke']
         gen = request.form['gen']
-        mongo_funz.mongo_push(nplayers,npoke,gen)
+        mongo_funz.match_vars_push(nplayers,npoke,gen)
         return render_template(
             'roster_select.html',
             nplayers = nplayers,
             npoke = npoke,
             gen = gen,
+            pokedex = pokedex,
         )
 
-@poke2.route("/match_active")
+@poke2.route("/match_active",methods=['GET','POST'])
 def match_active():
     return render_template(
-        "match_active.html",
+        'match_active.html',
+        pokedex = pokedex,
     )
 
 @poke2.route("/match_over")
@@ -83,16 +85,6 @@ def serveMatchvars():
 # def servePokemon():
 #     return jsonify(list(active.find({ },
 #    { '_id': 0})))
-
-@poke2.route('/PythonFunctionName', methods=['POST', 'GET'])
-def getPage():
-    if request.method == 'POST':
-        strTextBoxVal= request.form['HTMLControlName']
-        if strTextBoxVal=="poop":
-            return render_template(
-                'page.html',
-                strTextBoxVal = strTextBoxVal,
-            )
 
 if __name__=="__main__":
     poke2.run(debug=True)

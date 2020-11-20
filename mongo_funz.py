@@ -1,6 +1,6 @@
 import pymongo
 
-def mongo_push(nplayers,npoke,gen):
+def match_vars_push(nplayers,npoke,gen):
     conn = 'mongodb://localhost:27017'
     client = pymongo.MongoClient(conn)
     db = client.pokefight2
