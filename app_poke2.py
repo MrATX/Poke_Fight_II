@@ -1,7 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, jsonify, json, request
 from flask_pymongo import PyMongo
+import pymongo
 import requests
 import sys
+import mongo_funz
 
 poke2=Flask(__name__)
 poke2.config['JSON_SORT_KEYS'] = False
@@ -9,6 +11,7 @@ poke2.config["MONGO_URI"]="mongodb://localhost:27017/pokefight2"
 mongo=PyMongo(poke2)
 pokedex = mongo.db.pokedex
 combat_vars = mongo.db.combat_vars
+match_vars = mongo.db.match_vars
 # rosters = mongo.db.rosters
 # active = mongo.db.active
 
@@ -36,6 +39,7 @@ def roster_select():
         nplayers = request.form['nplayers']
         npoke = request.form['npoke']
         gen = request.form['gen']
+        mongo_funz.mongo_push(nplayers,npoke,gen)
         return render_template(
             'roster_select.html',
             nplayers = nplayers,
@@ -65,6 +69,11 @@ def serveCombatvars():
     return jsonify(list(combat_vars.find({ },
    { '_id': 0})))
 
+@poke2.route("/match_vars")
+def serveMatchvars():
+    return jsonify(list(match_vars.find({ },
+   { '_id': 0})))
+
 # @app.route("/rosters")
 # def servePokemon():
 #     return jsonify(list(rosters.find({ },
@@ -74,15 +83,6 @@ def serveCombatvars():
 # def servePokemon():
 #     return jsonify(list(active.find({ },
 #    { '_id': 0})))
-
-# @poke2.route("/testerztwo",methods=["GET","POST"])
-# def testerz2():
-#     if request.method == "POST":
-#         data = {}
-#         data['nplayers'] = request.json['nplayers_sel']
-#         print(data)
-#         return jsonify(data)
-
 
 @poke2.route('/PythonFunctionName', methods=['POST', 'GET'])
 def getPage():
