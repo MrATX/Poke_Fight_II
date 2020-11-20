@@ -2,19 +2,23 @@
 // hopefully avoid some of the bs I'm dealing with here
 
 function roster_table(pokedex,match_vars){
-    // var gen = "gen" + match_vars[0].gen
-    // var gen_names = gen + "_names"
-    // var roster = pokedex[0][gen].Charizard
-    // var roster_names = pokedex[0].gen_name_lists[gen_names]
-    // console.log(roster.name)
-    console.log(pokedex[0].gen1)
+    var gen = "gen" + String(match_vars[0].gen)
     d3.select("tbody")
         .selectAll("tr")
-        .data(pokedex[0].gen1)
+        .data(pokedex[0][gen])
         .enter()
         .append("tr")
-        .html(d => `<td>${d.name}</td>
-            <td>${d.type1}</td>`);
+        .html(d => `<td><input type="radio" name="nplayers" value="1" id="One Player" onchange="radios_val('nplayers',value,id)"></td>
+            <td style="font-weight:bold;">${d.name}</td>
+            <td>${d.type1}</td>
+            <td>${d.total}</td>
+            <td>${d.hp}</td>
+            <td>${d.attack}</td>
+            <td>${d.defense}</td>
+            <td>${d.spatk}</td>
+            <td>${d.spdef}</td>
+            <td>${d.speed}</td>
+            <td>${d.generation}</td>`)
 }
 
 d3.json("pokedex").then(pokedex=>

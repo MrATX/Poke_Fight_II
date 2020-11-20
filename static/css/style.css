@@ -24,3 +24,11 @@
     background-color: purple;
     color:white;
 }
+
+table,td{
+    text-align: center;
+    color:white;
+}
+th{
+    color:gold;
+}
