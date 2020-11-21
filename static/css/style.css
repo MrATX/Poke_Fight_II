@@ -27,8 +27,20 @@
 
 table,td{
     text-align: center;
-    color:white;
+    color:teal;
 }
 th{
-    color:gold;
+    color:white;
+}
+
+#poke_row{
+    background-color: aquamarine;
+}
+
+#checked_row{
+    background-color: chartreuse;
+}
+
+tr{
+    background-color:burlywood;
 }

@@ -8,7 +8,7 @@ function roster_table(pokedex,match_vars){
         .data(pokedex[0][gen])
         .enter()
         .append("tr")
-        .html(d => `<td><input type="radio" name="nplayers" value="1" id="One Player" onchange="radios_val('nplayers',value,id)"></td>
+        .html(d => `<td><input type="checkbox" value="1" name="roster_check" onchange="limit_checks(name)"></td>
             <td style="font-weight:bold;">${d.name}</td>
             <td>${d.type1}</td>
             <td>${d.total}</td>
@@ -27,6 +27,32 @@ d3.json("pokedex").then(pokedex=>
         )
     )
 
+function limit_checks(name){
+    d3.json("match_vars").then(match_vars=>
+        inner_limit_checks(name,match_vars)
+        )
+}
+
+function inner_limit_checks(name,match_vars){
+    var checks = document.getElementsByName(name)
+    var k = 0;
+    var limit = match_vars[0].npoke;
+    for(var i=0, length=checks.length; i<length; i++){
+        var poke_row = document.getElementsByTagName("tr")[i+1]
+        if(checks[i].checked === true){
+            k = k + 1
+            poke_row.style.backgroundColor = "aliceblue"
+            if(k > limit){
+                checks[i].checked = false
+                poke_row.style.backgroundColor = "burlywood"
+                break;
+            }
+        }
+        else{
+            poke_row.style.backgroundColor = "burlywood"
+        }
+    }
+}
 
 // d3.json("pokedex").then(pokemon=>
 //     d3.json("match_vars").then(vars=>
