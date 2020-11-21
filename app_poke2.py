@@ -15,6 +15,10 @@ match_vars = mongo.db.match_vars
 # rosters = mongo.db.rosters
 # active = mongo.db.active
 
+# TEST ROUTE
+
+
+# Frontend App Routes
 @poke2.route("/")
 def index():
     return render_template(
@@ -34,13 +38,6 @@ def servePokdex():
         pokedex = pokedex,
     )
 
-@poke2.route("/master_pokedex")
-def serveMasterPokedex():
-    return render_template(
-        "master_pokedex.html",
-        pokedex = pokedex,
-    )
-
 @poke2.route("/match_setup",methods=['GET','POST'])
 def match_setup():
     return render_template(
@@ -52,12 +49,14 @@ def roster_select():
     if request.method == 'POST':
         nplayers = request.form['nplayers']
         npoke = request.form['npoke']
+        weight_class = request.form['weight_class']
         gen = request.form['gen']
-        mongo_funz.match_vars_push(nplayers,npoke,gen)
+        mongo_funz.match_vars_push(nplayers,npoke,weight_class,gen)
         return render_template(
             'roster_select.html',
             nplayers = nplayers,
             npoke = npoke,
+            weight_class = weight_class,
             gen = gen,
             pokedex = pokedex,
         )
@@ -75,7 +74,8 @@ def match_over():
         "match_over.html",
     )
 
-@poke2.route("/roster_master")
+# Backend App Routes
+@poke2.route("/pokedex_data")
 def servePokemon():
     return jsonify(list(pokedex.find({ },
    { '_id': 0})))

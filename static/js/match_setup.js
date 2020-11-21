@@ -28,7 +28,7 @@ function beginmatch(){
         typeof npoke_sel !=='undefined' &&
         typeof weight_class_sel !== 'undefined' &&
         typeof gen_sel !=='undefined'){
-            console.log(nplayers_sel,npoke_sel,gen_sel)
+            console.log(nplayers_sel,npoke_sel,weight_class_sel,gen_sel)
             var match_text = "Begin a " + nplayers_text + " match with " +
             npoke_text + " " + gen_text + " Pokemon?"
             if (confirm(match_text)){
