@@ -30,7 +30,7 @@ table,td{
     color:teal;
 }
 th{
-    color:white;
+    color: rebeccapurple;
 }
 
 #poke_row{
@@ -44,3 +44,11 @@ th{
 tr{
     background-color:burlywood;
 }
+
+/* SET TO SPECIFIC ID FOR ROSTER SELECT TABLE */
+/* #roster_table{
+    display:none;
+}
+#roster_head{
+    display: none;
+} */

@@ -2,11 +2,11 @@ function roster_table(pokedex,match_vars){
     var gen = "gen" + String(match_vars[0].gen)
     d3.select("tbody")
         .selectAll("tr")
-        .data(pokedex[0][gen])
+        .data(pokedex[0]["master"])
         .enter()
         .append("tr")
-        .html(d => `<td><input type="checkbox" value="${d.gen_index}" name="roster_check" onchange="limit_checks(name,value)"></td>
-            <td><img src='${d.img_url}'></td>
+        .html(d => `<td>${d.num}</td>
+            <td><img src='${d.img_url}' width="150px"></td>
             <td style="font-weight:bold;">${d.name}</td>
             <td>${d.type1}</td>
             <td>${d.total}</td>

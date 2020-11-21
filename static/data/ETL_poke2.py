@@ -3,48 +3,72 @@ import pymongo
 ### Pokedex ---------------------------
 # Read & Clean Data
 pokemon = pd.read_csv("Pokemon.csv")
-pokemon = pokemon.iloc[:,1:]
+pokemon["img_url"] = "hold"
+pokemon["gen_index"] = "hold"
+totalpoke = pokemon.index.nunique()
+for i in range(0,totalpoke):
+    pokemon.iloc[i,14] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
 pokemon = pokemon.drop(columns=["Type 2"])
 # Create Variables
 gen_list = pokemon.loc[:,"Generation"].unique()
-pokedex_fields = ["name","type1","total","hp","attack","defense","spatk","spdef","speed","generation"]
+pokedex_fields = ["num","name","type1","total","hp","attack","defense","spatk","spdef","speed","generation","img_url","gen_index"]
 pokedex_dict = {}
 #wip_dict_gen = {}
 wip_list_gen = []
 wip_dict_poke = {}
+# Master Pokemon df
+pokemon_master = pokemon
+pokemon_master = pokemon_master.drop(columns=["Legendary","Mega"])
 # Subset Legendary Pokemon
 legends = pokemon.loc[(pokemon["Legendary"]=="Yes")&(pokemon["Mega"]=="No")].reset_index()
+legends = legends.drop(columns=["Legendary","Mega"])
 legends = legends.iloc[:,1:]
 # Filter Pokemon >500 Total Power, Non-Legendary, Non-Mega
 pokemon = pokemon.loc[(pokemon["Total"]>=500)&(pokemon["Legendary"] =="No")&(pokemon["Mega"]=="No")].reset_index()
+pokemon = pokemon.drop(columns=["Legendary","Mega"])
 pokemon = pokemon.iloc[:,1:]
+# Master Pokedex dict
+for i in range(len(pokemon_master)):
+    for j in range(len(pokedex_fields)):
+        if type(pokemon_master.iloc[i,j])==str:
+            wip_dict_poke[pokedex_fields[j]]=(pokemon_master.iloc[i,j])
+        else:
+            wip_dict_poke[pokedex_fields[j]]=(pokemon_master.iloc[i,j].item())
+    wip_list_gen.append(wip_dict_poke)
+    wip_dict_poke = {}
+pokedex_dict["master"] = (wip_list_gen)
+wip_list_gen = []
 # Populate Pokedex dict of dicts with all filtered Pokemon, sorted into generations
 for i in gen_list:
     wip_df = pokemon.loc[pokemon["Generation"]==i,:]
-    for j in range(len(wip_df)):
-        for k in range(len(pokedex_fields)):
-            if type(wip_df.iloc[j,k])==str:
-                wip_dict_poke[pokedex_fields[k]]=(wip_df.iloc[j,k])
-            else:
-                wip_dict_poke[pokedex_fields[k]]=(wip_df.iloc[j,k].item())
-        #wip_dict_gen[wip_df.iloc[j,0]] = (wip_dict_poke)
-        wip_list_gen.append(wip_dict_poke)
-        wip_dict_poke = {}
-    pokedex_dict[f"gen{i}"]=(wip_list_gen)
-    #wip_dict_gen = {}
-    wip_list_gen = []
+    index_wip = -1
+    for z in range(0,wip_df.index.nunique()):
+        index_wip = index_wip + 1
+        wip_df.iloc[z,12] = str(index_wip)
+        for j in range(len(wip_df)):
+            for k in range(len(pokedex_fields)):
+                if type(wip_df.iloc[j,k])==str:
+                    wip_dict_poke[pokedex_fields[k]]=(wip_df.iloc[j,k])
+                else:
+                    wip_dict_poke[pokedex_fields[k]]=(wip_df.iloc[j,k].item())
+            wip_list_gen.append(wip_dict_poke)
+            wip_dict_poke = {}
+        pokedex_dict[f"gen{i}"]=(wip_list_gen)
+        wip_list_gen = []
 # Add Legendary Pokemon dict to Pokedex
 for i in range(len(legends)):
-    for j in range(len(pokedex_fields)):
-        if type(legends.iloc[i,j])==str:
-            wip_dict_poke[pokedex_fields[j]]=(legends.iloc[i,j])
-        else:
-            wip_dict_poke[pokedex_fields[j]]=(legends.iloc[i,j].item())
-    #wip_dict_gen[legends.iloc[i,0]] = (wip_dict_poke)
+    index_wip = -1
+    for z in range(0,legends.index.nunique()):
+        index_wip = index_wip + 1
+        legends.iloc[z,12] = str(index_wip)
+        for j in range(len(pokedex_fields)):
+            if type(legends.iloc[i,j])==str:
+                wip_dict_poke[pokedex_fields[j]]=(legends.iloc[i,j])
+            else:
+                wip_dict_poke[pokedex_fields[j]]=(legends.iloc[i,j].item())
     wip_list_gen.append(wip_dict_poke)
     wip_dict_poke = {}
 pokedex_dict["genL"] = (wip_list_gen)
-#wip_dict_gen = {}
 wip_list_gen = []
 # Add dict with Pokemon names for each gen
 gen_name_lists = {}

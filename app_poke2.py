@@ -27,6 +27,20 @@ def info_menu():
         "info_menu.html",
     )
 
+@poke2.route("/pokedex")
+def servePokdex():
+    return render_template(
+        "pokedex.html",
+        pokedex = pokedex,
+    )
+
+@poke2.route("/master_pokedex")
+def serveMasterPokedex():
+    return render_template(
+        "master_pokedex.html",
+        pokedex = pokedex,
+    )
+
 @poke2.route("/match_setup",methods=['GET','POST'])
 def match_setup():
     return render_template(
@@ -61,7 +75,7 @@ def match_over():
         "match_over.html",
     )
 
-@poke2.route("/pokedex")
+@poke2.route("/roster_master")
 def servePokemon():
     return jsonify(list(pokedex.find({ },
    { '_id': 0})))
