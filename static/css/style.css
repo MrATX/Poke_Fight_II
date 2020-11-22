@@ -2,6 +2,11 @@
     background-color: black;
 }
 
+.container-fluid{
+    width:100%;
+    justify-content:center;
+}
+
 .jumbotron{
     background-color: burlywood;
     margin-top: 25px;
@@ -43,6 +48,17 @@ th{
 
 tr{
     background-color:burlywood;
+}
+
+#p1name,#p2name{
+    height:50px;
+    width:500px;
+    font-size:xx-large;
+    text-align:center;
+}
+
+#p1tablejumbo{
+    justify-content:center;
 }
 
 /* SET TO SPECIFIC ID FOR ROSTER SELECT TABLE */

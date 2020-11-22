@@ -30,7 +30,7 @@ function beginmatch(){
         typeof gen_sel !=='undefined'){
             console.log(nplayers_sel,npoke_sel,weight_class_sel,gen_sel)
             var match_text = "Begin a " + nplayers_text + " match with " +
-            npoke_text + " " + gen_text + " Pokemon?"
+            npoke_text + weight_class_text + " Pokemon from " + gen_text + " generation?"
             if (confirm(match_text)){
                 document.getElementById('setup_button').click();
                 console.log('iPwn');
