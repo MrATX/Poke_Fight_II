@@ -11,15 +11,51 @@
 
 <body>
 
-  <h1 id="nplayers">{{nplayers}}</h1>
-  <h1 id="npoke">{{npoke}}</h1>
-  <h1 id="weight_class">{{weight_class}}</h1>
-  <h1 id="gen">{{gen}}</h1>
+  <h1 id="nplayers" style="display:none;">{{nplayers}}</h1>
+  <h1 id="npoke" style="display:none;">{{npoke}}</h1>
+  <h1 id="weight_class" style="display:none;">{{weight_class}}</h1>
+  <h1 id="gen" style="display:none;">{{gen}}</h1>
+
+  <button onclick="roster_table()">iPwn</button>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="jumbotron" id="roster_head" style="width:100%;">
+          <h2 id="jumbotitle">iPwn</h2>
+        </div>
+        <table class="table" id="roster_table" style="width:100%;">
+            <thead>
+                <tr>
+                <th></th>  
+                <th></th>
+                <th>Name</th>
+                <th>Type 1</th>
+                <th>Type 2</th>
+                <th>Total</th>
+                <th>HP</th>
+                <th>Attack</th>
+                <th>Defense</th>
+                <th>Special Attack</th>
+                <th>Special Defense</th>
+                <th>Speed</th>
+                <th>Generation</th>
+                <th>Legendary</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <script src="../static/js/roster_select.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="../static/js/roster_select.js"></script>
+  <!-- <script src="../static/js/roster_select.js"></script> -->
   <script src="https://d3js.org/d3.v6.min.js"></script>
+
+  
 
 </body>
 
