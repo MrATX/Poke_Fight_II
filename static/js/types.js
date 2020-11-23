@@ -25,15 +25,6 @@ function types_table(combat_vars){
             <td id="${d.Fairy.id}">${d.Fairy.coeff}`)
 }
 
-function highlight_coeffs(){
-    rows = document.getElementsByTagName("td");
-    l = rows.length
-    console.log(rows)
-    console.log(l)
-}
-
-// for(var i=0, length=radios.length; i<length; i++){
-
 d3.json("combat_vars").then(combat_vars=>
     types_table(combat_vars),
     )

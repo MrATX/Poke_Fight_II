@@ -1,3 +1,7 @@
+var weight_class = document.getElementById("weight_filter").innerText
+var gen = document.getElementById("gen_filter").innerText
+
+
 function pokedex_table(pokedex){
     d3.select("tbody")
         .selectAll("tr")
@@ -9,7 +13,7 @@ function pokedex_table(pokedex){
             <td id="poketablerow">${d.name}</td>
             <td id="poketablerow" style="font-weight:normal;"><img src="${d.type1img}" id="typeimg_pokedex"><br>${d.type1}</td>
             <td id="poketablerow" style="font-weight:normal;"><img src="${d.type2img}" alt="" id="typeimg_pokedex"><br>${d.type2}</td>
-            <td id="poketablerow">${d.total}</td>
+            <td id="poketablerow"><u>${d.total}</u></td>
             <td id="poketablerow">${d.hp}</td>
             <td id="poketablerow">${d.attack}</td>
             <td id="poketablerow">${d.defense}</td>
