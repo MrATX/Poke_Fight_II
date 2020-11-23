@@ -2,6 +2,16 @@
     background-color: black;
 }
 
+#navolink{
+    color:white;
+}
+
+#filterbtns{
+    background-color:burlywood;
+    text-align:center;
+    font-size:xx-large;
+}
+
 .container-fluid{
     width:100%;
     justify-content:center;
@@ -30,12 +40,14 @@
     color:white;
 }
 
-table,td{
+table td{
     text-align: center;
     color:teal;
 }
 th{
-    color: rebeccapurple;
+    color: maroon;
+    background-color:burlywood;
+    text-align:center;
 }
 
 #poke_row{
@@ -44,6 +56,22 @@ th{
 
 #checked_row{
     background-color: chartreuse;
+}
+
+/* Table Styling */
+.tablewrapper thead th{
+    position:sticky;
+    top:0;
+}
+
+.thead th{
+    background-color:black;
+}
+
+.tablewrapper{
+    overflow-y:auto;
+    overflow-x:auto;
+    height:666px;
 }
 
 tr{
@@ -60,6 +88,61 @@ tr{
 #p1tablejumbo{
     justify-content:center;
 }
+
+#typeimg{
+    width:100px;
+}
+
+#typeimg_pokedex{
+    width:66px;
+}
+
+#typesheader{
+    color:black;
+}
+
+#poketablerow {
+    vertical-align:middle;
+    font-weight:bold;
+    font-size:large;
+    color:black;
+  }
+
+  #typesrow {
+    vertical-align:middle;
+    font-weight:bold;
+    font-size:x-large;
+    color:black;
+  }
+
+  #pokeimg{
+      width:166px;
+  }
+
+  #no_dmg,#quarter_dmg, #half_dmg, #single_dmg, #double_dmg, #quadruple_dmg{
+    vertical-align:middle;
+    font-weight:bold;
+    font-size:x-large;
+    color:black;
+  }
+
+#no_dmg{
+    background-color:red;
+}
+#quarter_dmg{
+    background-color:orange;
+}
+#half_dmg{
+    background-color:yellow;
+}
+#double_dmg{
+    background-color:lightgreen;
+}
+#quadruple_dmg{
+    background-color:lightblue;
+}
+
+
 
 /* SET TO SPECIFIC ID FOR ROSTER SELECT TABLE */
 /* #roster_table{

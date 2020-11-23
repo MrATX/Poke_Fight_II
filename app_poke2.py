@@ -23,10 +23,15 @@ def info_menu():
         "info_menu.html",
     )
 @poke2.route("/pokedex")
-def servePokdex():
+def servePokedex():
     return render_template(
         "pokedex.html",
         pokedex = pokedex,
+    )
+@poke2.route("/types")
+def types():
+    return render_template(
+        "types.html",
     )
 # Match Routes --------------------------------------------------
 @poke2.route("/match_setup",methods=['GET','POST'])
