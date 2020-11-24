@@ -43,7 +43,7 @@ function pokedex_table_filtered(pokedex){
     var str_min = weight_class_vars[weight_class][0]
     var str_max = weight_class_vars[weight_class][1]
     if(gen==="all"){
-        var gen_var = [1,2,3,4,5,6]
+        var gen_var = [1,2,3,4,5,6,7,8]
     }
     if(gen!="all"){
         var gen_var = gen
