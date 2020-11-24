@@ -2,6 +2,14 @@ var nplayers = document.getElementById("nplayers").innerText
 var npoke = document.getElementById("npoke").innerText
 var weight_class = document.getElementById("weight_class").innerText
 var gen = document.getElementById("gen").innerText
+if(nplayers==="1"){
+    document.getElementById("p1continue").innerText = "Begin Match"
+    document.getElementsByClassName("p1rosterprompt").innerText = "iPwn"
+}
+else{
+    document.getElementById("p1continue").innerText = "Continue"
+    document.getElementsByClassName("p1rosterprompt").innerText = "CONTINUE"
+}
 
 function poke_filter(pokedex){
     var pokedex = pokedex[0]["pokedex"]
@@ -48,20 +56,20 @@ function poke_filter(pokedex){
     .data(data)
     .enter()
     .append("tr")
-    .html(d => `<td><input type="checkbox" value="${d.tableindex}" name="roster_check" onchange="limit_checks(name,value)"></td>
-        <td><img src='${d.img_url}' width="150px"></td>
-        <td style="font-weight:bold;">${d.name}</td>
-        <td>${d.type1}</td>
-        <td>${d.type2}</td>
-        <td>${d.total}</td>
-        <td>${d.hp}</td>
-        <td>${d.attack}</td>
-        <td>${d.defense}</td>
-        <td>${d.spatk}</td>
-        <td>${d.spdef}</td>
-        <td>${d.speed}</td>
-        <td>${d.generation}</td>
-        <td>${d.legendary}</td>`)
+    .html(d => `<td id="poketablerow"><input type="checkbox" value="${d.tableindex}" name="roster_check" onchange="limit_checks(name,value)"></td>
+        <td id="poketablerow"><img src='${d.img_url}' id="pokeimg"></td>
+        <td id="poketablerow">${d.name}</td>
+        <td id="poketablerow" style="font-weight:normal;"><img src="${d.type1img}" id="typeimg_pokedex"><br>${d.type1}</td>
+        <td id="poketablerow" style="font-weight:normal;"><img src="${d.type2img}" alt="" id="typeimg_pokedex"><br>${d.type2}</td>
+        <td id="poketablerow"><u>${d.total}</u></td>
+        <td id="poketablerow">${d.hp}</td>
+        <td id="poketablerow">${d.attack}</td>
+        <td id="poketablerow">${d.defense}</td>
+        <td id="poketablerow">${d.spatk}</td>
+        <td id="poketablerow">${d.spdef}</td>
+        <td id="poketablerow">${d.speed}</td>
+        <td id="poketablerow">${d.generation}</td>
+        <td id="poketablerow">${d.legendary}`)
 }
 
 function roster_table(){

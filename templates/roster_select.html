@@ -31,28 +31,33 @@
           
         </div>
         <div class="jumbotron" id="p1tablejumbo" style="display:none;">
-          <h1 id="jumbotitle">Choose {{npoke}} Pokemon then click 'Continue'</h1>
-          <table class="table" id="p1table" style="width:100%;">
-              <thead>
-                  <tr>
-                  <th></th>  
-                  <th></th>
-                  <th>Name</th>
-                  <th>Type 1</th>
-                  <th>Type 2</th>
-                  <th>Total</th>
-                  <th>HP</th>
-                  <th>Attack</th>
-                  <th>Defense</th>
-                  <th>Special Attack</th>
-                  <th>Special Defense</th>
-                  <th>Speed</th>
-                  <th>Generation</th>
-                  <th>Legendary</th>
-                  </tr>
-              </thead>
-              <tbody></tbody>
-          </table>
+          <h1 id="jumbotitle" class="p1rosterprompt">Select {{npoke}} Pokemon, then click the button to proceed</h1><br>
+          <row id="buttons" style="background-color:burlywood;">
+            <button id="p1continue"></button>
+          </row>
+          <div class="tablewrapper">
+            <table class="table" id="roster_table" style="width:100%;">
+                <thead>
+                    <tr>
+                    <th></th>  
+                    <th></th>
+                    <th></th>
+                    <th>Type 1</th>
+                    <th>Type 2</th>
+                    <th>Total</th>
+                    <th>HP</th>
+                    <th>ATK</th>
+                    <th>DEF</th>
+                    <th>SP ATK</th>
+                    <th>SP DEF</th>
+                    <th>SPD</th>
+                    <th>GENERATION</th>
+                    <th>LEGENDARY</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
