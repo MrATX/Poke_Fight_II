@@ -22,12 +22,16 @@ function types_table(combat_vars){
             <td id="${d.Ice.id}">${d.Ice.coeff}</td>
             <td id="${d.Dragon.id}">${d.Dragon.coeff}</td>
             <td id="${d.Dark.id}">${d.Dark.coeff}</td>
-            <td id="${d.Fairy.id}">${d.Fairy.coeff}`)
+            <td id="${d.Fairy.id}">${d.Fairy.coeff}</td>`)
 }
 
 d3.json("combat_vars").then(combat_vars=>
     types_table(combat_vars),
     )
+
+var type1_sel = document.getElementById("weight_filter").value
+var type1_sel_text = document.getElementById("weight_filter").innerText
+console.log(type1_sel,type1_sel_text)
 
 function openCity(evt, cityName) {
     // Declare all variables
