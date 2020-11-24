@@ -1,3 +1,5 @@
+// Function ran with each clicking of a Radio input
+// Assigns selections to global variables for use in next function
 function radios_val(name,value,id){
     var radios = document.getElementsByName(name);
     for(var i=0, length=radios.length; i<length; i++){
@@ -22,7 +24,9 @@ function radios_val(name,value,id){
         }
     }
 }
-
+// Function attached to Continue button
+// Checks to make sure all required options are selected
+// Continues to roster_select once input requriments are met
 function beginmatch(){
     if(typeof nplayers_sel !=='undefined' &&
         typeof npoke_sel !=='undefined' &&
@@ -36,6 +40,7 @@ function beginmatch(){
                 console.log('iPwn');
             }
     }
+    // Prompt alert message and exit function if required option(s) are missing
     else{
         alert("Select # of Players, # of Pokemon, Pokemon Weight Class, and Pokemon Generation to continue")   
     }

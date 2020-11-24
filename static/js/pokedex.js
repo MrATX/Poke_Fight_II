@@ -1,3 +1,4 @@
+// Base function rendering table with given list of Pokemon
 function pokedex_table(pokedex){
     d3.select("tbody")
         .selectAll("tr")
@@ -19,19 +20,18 @@ function pokedex_table(pokedex){
             <td id="poketablerow">${d.generation}</td>
             <td id="poketablerow">${d.legendary}`)
 }
-
-function pokedex_filter(){
-    d3.json("pokedex_data").then(pokedex=>
-        pokedex_table_filtered(pokedex)
-        )
-}
-
-function pokedex_table_filtered(pokedex){
+// Middle Function generating list of Pokemon based on chosen filters
+function pokedex_filter(pokedex){
+    // Grab table body and clear rows
     tbody = d3.select("tbody");
     tbody.html("")
+    // Grab Variables from Filters (default for both is All) 
     var weight_class = document.getElementById("weight_filter").value
     var gen = document.getElementById("gen_filter").value
+    // Route into data dictionary
     var pokedex = pokedex[0]["pokedex"]
+    // Setup Class Ranges
+    // THESE SHOULD BE PUT INTO MONGO FOR COMBAT VARIABLES
     let weight_class_vars = {
         "feather":[0,250],
         "light":[250,350],
@@ -40,6 +40,7 @@ function pokedex_table_filtered(pokedex){
         "legendary":[0,1000],
         "all":[0,1000]
     }
+    // Establish filter variables; STR range, Generation, Legendary
     var str_min = weight_class_vars[weight_class][0]
     var str_max = weight_class_vars[weight_class][1]
     if(gen==="all"){
@@ -55,8 +56,10 @@ function pokedex_table_filtered(pokedex){
     if(weight_class==="legendary"){
         legend_var = ["Legendary"]
     }
-    var match_roster = []
+    var pokedex_filtered = []
+    // Create dummy variable to generate row indexes
     var k = 0
+    // Loop through Pokedex, get Pokemon meeting filter criteria and push to array
     pokedex.forEach(pokemon=>{
         if(
             pokemon.total >= str_min &&
@@ -66,12 +69,18 @@ function pokedex_table_filtered(pokedex){
         ){
             pokemon.tableindex = k
             k = k + 1
-            match_roster.push(pokemon)
+            pokedex_filtered.push(pokemon)
         }
     })
-    pokedex_table(match_roster)
+    // Pass filtered array of Pokemon to base function to render table
+    pokedex_table(pokedex_filtered)
 }
-
-d3.json("pokedex_data").then(pokedex=>
-    pokedex_table(pokedex[0]["pokedex"])
-    )
+// Top function calling data to pass through middle and base functions
+// Attached to filter button on HTML page
+function render_pokedex(){
+    d3.json("pokedex_data").then(pokedex=>
+        pokedex_filter(pokedex)
+        )
+}
+// Call functions to render Pokdex on page load
+render_pokedex()

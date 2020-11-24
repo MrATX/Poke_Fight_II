@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Poke Fight II</title>
-
+  <!-- Boostrap & Local CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="static/css/style.css">
-
     <!--NAVBAR--------------------------------------------------------------------->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/" style="color:gold;">Poke Fight II</a>
@@ -32,15 +31,16 @@
       </div>
     </nav>
   <!--NAVBAR END------------------------------------------------------------------->
-
-
+<!-- Close Head -->
 </head>
 
-<body id="body">
 
+<body id="body">
+<!-- Filters & Table for Master Pokedex -->  
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
+      <!-- Filters for Weight Class & Generation -->
       <div clas="row" id="filterbtns">
         <label for="weight">Weight Class</label>
         <select id="weight_filter" name="weight">
@@ -63,8 +63,10 @@
           <option value="7">7th Gen - Sun & Moon</option>
           <option value="8">8th Gen - Sword & Shield</option>
         </select>
-        <button id="playbtn" onclick="pokedex_filter()">Filter</button>
+        <!-- Filter Button -->
+        <button id="playbtn" onclick="render_pokedex()">Filter</button>
       </div>
+      <!-- Table Proper -->
       <div class="tablewrapper">
         <table class="table" id="roster_table" style="width:100%;">
             <thead>
@@ -90,14 +92,18 @@
       </div>
     </div>
   </div>
+<!-- Close Main Container -->
 </div>
 
-
+<!-- Web Dependencies -->
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+<!-- Local JS -->
 <script src="../static/js/pokedex.js"></script>
-
+<!-- Close Body -->
 </body>
 
+
+<!-- Close HTML -->
 </html>
