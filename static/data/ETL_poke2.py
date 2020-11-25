@@ -101,6 +101,28 @@ for i in range(len(types)):
     wip_dict_type = {}
 combat_vars_dict = {}
 combat_vars_dict["type_matchups"]=(type_coeffs)
+# Pokemon Types
+types_dict = [
+    "Normal",
+    "Fighting",
+    "Flying",
+    "Poison",
+    "Ground",
+    "Rock",
+    "Bug",
+    "Ghost",
+    "Steel",
+    "Fire",
+    "Water",
+    "Grass",
+    "Electric",
+    "Psychic",
+    "Ice",
+    "Dragon",
+    "Dark",
+    "Fairy"
+]
+combat_vars_dict["types"]=(types_dict)
 # Weight Classes
 weight_classes_dict = {
     "light":[0,300],
@@ -176,28 +198,6 @@ radios = {
     "generation":generation_radios
 }
 match_vars_dict["radios"]=(radios)
-# Pokemon Types
-types = [
-    "Normal",
-    "Fighting",
-    "Flying",
-    "Poison",
-    "Ground",
-    "Rock",
-    "Bug",
-    "Ghost",
-    "Steel",
-    "Fire",
-    "Water",
-    "Grass",
-    "Electric",
-    "Psychic",
-    "Ice",
-    "Dragon",
-    "Dark",
-    "Fairy"
-]
-match_vars_dict["types"]=(types)
 # Table Headers
 pokedex_headers = [
     "#","","","","","TOTAL","HP",

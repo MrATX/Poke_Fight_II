@@ -5,7 +5,7 @@
   <title>Poke Fight II</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/style_redo.css">
 
     <!--NAVBAR--------------------------------------------------------------------->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,104 +41,47 @@
 <div class="container-fluid">
    <!-- Tab links -->
   <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'single_type')">Single Type Matchups</button>
-    <button class="tablinks" onclick="openCity(event, 'dual_type')">Dual Type Matchups</button>
+    <button class="tablinks" id="singletype_tab" onclick="openCity(event, 'single_type')">Single Type Matchups</button>
+    <button class="tablinks" id="dualtype_tab" onclick="openCity(event, 'dual_type')">Dual Type Matchups</button>
   </div>
 
   <!-- Single Type Table -->
   <div id="single_type" class="tabcontent">
-    <div class="row">
-      <div class="col-md-12">
-        <div clas="row" id="filterbtns">
-          Left Type is Attacker; Top is Defender; Number is Damage Coeffecient for Attack
-        </div>
-        <div class="tablewrapper">
-          <table class="table" id="single_type_table" style="width:100%;">
-              <thead id="single_type_head">
-                  <tr>
-                  <th></th>
-                  <th id="typesheader"><img src="static/images/type_imgs/normal.png" id="typeimg">Normal</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/fighting.png" id="typeimg">Fighting</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/flying.png" id="typeimg">Flying</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/poison.png" id="typeimg">Poison</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/ground.png" id="typeimg">Ground</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/rock.png" id="typeimg">Rock</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/bug.png" id="typeimg">Bug</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/ghost.png" id="typeimg">Ghost</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/steel.png" id="typeimg">Steel</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/fire.png" id="typeimg">Fire</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/water.png" id="typeimg">Water</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/grass.png" id="typeimg">Grass</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/electric.png" id="typeimg">Electric</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/psychic.png" id="typeimg">Psychic</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/ice.png" id="typeimg">Ice</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/dragon.png" id="typeimg">Dragon</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/dark.png" id="typeimg">Dark</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/fairy.png" id="typeimg">Fairy</th>
-                  </tr>
-              </thead>
-              <tbody id="single_type_body"></tbody>
-          </table>
-        </div>
-      </div>
+    <div class="typechart_text">
+      (Left Type is Attacker; Top is Defender; Number is Damage Coeffecient for Attack; Black squares have Damage Coeffecients of 1)
+    </div>
+    <div class="tablewrapper">
+      <table class="single_type_table" style="width:100%;">
+          <thead class="single_type_header"></thead>
+          <tbody class="single_type_body"></tbody>
+      </table>
     </div>
   </div>
   <!-- Dual Type Table -->
   <div id="dual_type" class="tabcontent">
-    <div class="row">
-      <div class="col-md-12">
-        <div clas="row" id="filterbtns">
-          Left Type is Attacker; Top is Defender; Number is Damage Coeffecient for Attack
-        </div>
-        <hr>
-        <div clas="row" id="filterbtns">
-          <label for="weight">Select Type 1</label>
-          <select id="weight_filter" name="weight">
-            <option value="normal">Normal</option>
-            <!-- ADD THE OTHER TYPES HERE -->
-          </select>
-        </div>
-        <div class="tablewrapper">
-          <table class="table" id="dual_type_table" style="width:100%;">
-              <thead>
-                  <tr>
-                  <th></th>
-                  <th id="typesheader"><img src="static/images/type_imgs/normal.png" id="typeimg">Normal</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/fighting.png" id="typeimg">Fighting</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/flying.png" id="typeimg">Flying</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/poison.png" id="typeimg">Poison</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/ground.png" id="typeimg">Ground</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/rock.png" id="typeimg">Rock</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/bug.png" id="typeimg">Bug</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/ghost.png" id="typeimg">Ghost</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/steel.png" id="typeimg">Steel</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/fire.png" id="typeimg">Fire</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/water.png" id="typeimg">Water</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/grass.png" id="typeimg">Grass</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/electric.png" id="typeimg">Electric</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/psychic.png" id="typeimg">Psychic</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/ice.png" id="typeimg">Ice</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/dragon.png" id="typeimg">Dragon</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/dark.png" id="typeimg">Dark</th>
-                  <th id="typesheader"><img src="static/images/type_imgs/fairy.png" id="typeimg">Fairy</th>
-                  </tr>
-              </thead>
-              <tbody id="dual_type_body"></tbody>
-          </table>
-        </div>
-      </div>
+    <div class="typechart_text">
+      (Left Type is Attacker; Top is Defender; Number is Damage Coeffecient for Attack; Black squares have Damage Coeffecients of 1)
+      <br>
+      <label class="type1sel_label" for="type1">Select Type 1</label>
+      <select class="typetable_type1sel" name="type1" onchange="dual_types_filter_change()"></select>
+    </div>
+    <div class="tablewrapper">
+      <table class="dual_type_table" style="width:100%;">
+          <thead class="dual_type_header"></thead>
+          <tbody class="dual_type_body"></tbody>
+      </table>
     </div>
   </div>
 <!-- Close Container -->
 </div>
-
-
+<!-- Web Depenencies -->
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+<!-- Local JS -->
 <script src="../static/js/types.js"></script>
 <script src="../static/js/types_highlight.js"></script>
-
+<!-- Close Body -->
 </body>
-
+<!-- Close HTML -->
 </html>

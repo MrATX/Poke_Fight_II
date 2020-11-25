@@ -1,33 +1,165 @@
-function types_table(combat_vars){
-    d3.select("#single_type_body")
-        .selectAll("tr")
-        .data(combat_vars[0].type_matchups)
-        .enter()
+function single_types_table(combat_vars){
+    d3.select(".single_type_header")
         .append("tr")
-        .html(d => `<td id="typesrow" style="position:sticky;left:0;background-color:burlywood;"><img src="static/images/type_imgs/${d.type}.png" id="typeimg"><br>${d.type}</td>
-            <td id="${d.Normal.id}">${d.Normal.coeff}</td>
-            <td id="${d.Fighting.id}">${d.Fighting.coeff}</td>
-            <td id="${d.Flying.id}">${d.Flying.coeff}</td>
-            <td id="${d.Poison.id}">${d.Poison.coeff}</td>
-            <td id="${d.Ground.id}">${d.Ground.coeff}</td>
-            <td id="${d.Rock.id}">${d.Rock.coeff}</td>
-            <td id="${d.Bug.id}">${d.Bug.coeff}</td>
-            <td id="${d.Ghost.id}">${d.Ghost.coeff}</td>
-            <td id="${d.Steel.id}">${d.Steel.coeff}</td>
-            <td id="${d.Fire.id}">${d.Fire.coeff}</td>
-            <td id="${d.Water.id}">${d.Water.coeff}</td>
-            <td id="${d.Grass.id}">${d.Grass.coeff}</td>
-            <td id="${d.Electric.id}">${d.Electric.coeff}</td>
-            <td id="${d.Psychic.id}">${d.Psychic.coeff}</td>
-            <td id="${d.Ice.id}">${d.Ice.coeff}</td>
-            <td id="${d.Dragon.id}">${d.Dragon.coeff}</td>
-            <td id="${d.Dark.id}">${d.Dark.coeff}</td>
-            <td id="${d.Fairy.id}">${d.Fairy.coeff}</td>`)
+        .append("th")
+        .attr("class","typetable_row0")
+    for(var i=0,length=combat_vars[0].types.length;i<length;i++){
+        var atk_type = combat_vars[0].types[i]
+        var row_id = atk_type + "_singlerow"
+        var img_url = "static/images/type_imgs/" + atk_type.toLowerCase() + ".png"
+        d3.select(".single_type_header")
+            .select("tr")
+            .append("th")
+            .attr("class","typetable_row0")
+            .html(`<img class="typetable_typeimg" src=${img_url}><br>${atk_type}`)
+        d3.select(".single_type_header")
+            .select("tr")
+            .enter()
+            .append("p")
+            .text(atk_type)
+        d3.select(".single_type_body")
+            .append("tr")
+            .attr("id",row_id)
+        for(var j=0,length=combat_vars[0].types.length;j<length;j++){
+            var def_type = combat_vars[0].types[j]
+            if(j===0){
+                d3.select("#"+String(row_id))
+                    .append("td")
+                    .attr("class","typetable_col0")
+                    .append("img")
+                    .attr("class","typetable_typeimg")
+                    .attr("src",img_url)
+                d3.select("#"+String(row_id))
+                    .select("td")
+                    .append("p")
+                    .text(atk_type)
+                d3.select("#"+String(row_id))
+                    .append("td")
+                    .attr("id",combat_vars[0].type_matchups[i][def_type].id)
+                    .attr("valign","middle")
+                    .text(combat_vars[0].type_matchups[i][def_type].coeff)
+            }
+            else{
+                d3.select("#"+String(row_id))
+                    .append("td")
+                    .attr("id",combat_vars[0].type_matchups[i][def_type].id)
+                    .attr("valign","middle")
+                    .text(combat_vars[0].type_matchups[i][def_type].coeff)
+            }
+
+        }
+    }
 }
 
+function dual_type_filters(combat_vars){
+    for(var i=0,length=combat_vars[0].types.length;i<length;i++){
+        d3.select(".typetable_type1sel")
+            .append("option")
+            .attr("value",combat_vars[0].types[i])
+            .text(combat_vars[0].types[i])
+    }   
+}
+
+function dual_types_table(combat_vars,filter){
+    var filter_img_url = "static/images/type_imgs/" + filter.toLowerCase() + ".png"
+    d3.select(".dual_type_header")
+        .append("tr")
+        .append("th")
+        .attr("class","typetable_row0")
+    for(var i=0,length=combat_vars[0].types.length;i<length;i++){
+        var atk_type = combat_vars[0].types[i]
+        var row_id = atk_type + "_dualrow"
+        var img_url = "static/images/type_imgs/" + atk_type.toLowerCase() + ".png"
+        d3.select(".dual_type_header")
+            .select("tr")
+            .append("th")
+            .attr("class","typetable_row0")
+            .html(`<img class="typetable_typeimg" src=${filter_img_url}><br>${filter}<br>
+                    <img class="typetable_typeimg" src=${img_url}><br>${atk_type}`)
+        d3.select(".dual_type_header")
+            .select("tr")
+            .enter()
+            .append("p")
+            .text(atk_type)
+        d3.select(".dual_type_body")
+            .append("tr")
+            .attr("id",row_id)
+        for(var j=0,length=combat_vars[0].types.length;j<length;j++){
+            var def_type = combat_vars[0].types[j]
+            var cell_value = combat_vars[0].type_matchups[i][def_type].coeff * combat_vars[0].type_matchups[i][filter].coeff
+            var dmg_ranges = {
+                0.0:{"id":"no_dmg",
+                    "text":"Ineffective"},
+                    // And so on... (Maybe build in a loop?)
+                    // Either way add to ETL to have in Mongo and
+                    // update connection to it here
+                0.25:"quarter_dmg",
+                0.50:"half_dmg",
+                1.00:"reg_dmg",
+                2.00:"double_dmg",
+                4.00:"quadruple_dmg"
+            }
+            var td_id = dmg_ranges[cell_value]
+            if(j===0){
+                d3.select("#"+String(row_id))
+                    .append("td")
+                    .attr("class","typetable_col0")
+                    .append("img")
+                    .attr("class","typetable_typeimg")
+                    .attr("src",img_url)
+                d3.select("#"+String(row_id))
+                    .select("td")
+                    .append("p")
+                    .text(atk_type)
+                d3.select("#"+String(row_id))
+                    .append("td")
+                    .attr("id",td_id)
+                    // .attr("id",combat_vars[0].type_matchups[i][def_type].id)
+                    .attr("valign","middle")
+                    .text(cell_value)
+            }
+            else{
+                d3.select("#"+String(row_id))
+                    .append("td")
+                    .attr("id",td_id)
+                    .attr("valign","middle")
+                    .text(cell_value)
+            }
+
+        }
+    }
+}
+
+function update_dual_types_table(filter){
+    d3.json("combat_vars").then(combat_vars=>
+        dual_types_table(combat_vars,filter)
+        )
+}
+
+function dual_types_filter_change(){
+    var filter = document.getElementsByClassName("typetable_type1sel")[0].value
+    d3.select(".dual_type_header").html("")
+    d3.select(".dual_type_body").html("")
+    update_dual_types_table(filter)
+}
+
+document.getElementById("singletype_tab").click()
+
 d3.json("combat_vars").then(combat_vars=>
-    types_table(combat_vars),
+    single_types_table(combat_vars)
     )
+d3.json("combat_vars").then(combat_vars=>
+    dual_type_filters(combat_vars)
+    )
+d3.json("combat_vars").then(combat_vars=>
+    dual_types_table(combat_vars,"Normal")
+    )
+
+
+function logtest(){
+    console.log(document.getElementsByClassName("typetable_type1sel")[0].value);
+}
+console.log(document.getElementsByClassName("typetable_type1sel")[0].value);
 
 var type1_sel = document.getElementById("weight_filter").value
 var type1_sel_text = document.getElementById("weight_filter").innerText

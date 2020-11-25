@@ -1,4 +1,128 @@
-/* Radios Styling------------------------------------------------------------------ */
+#body{
+    background-color:black;
+}
+#navolink{
+    color:white;
+}
+/* TYPE CHARTS --------------------------------------------------------------------- */
+/* TAB STUFFS ----------------------------- */
+ /* Style the tab */
+ .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    justify-content:center;
+    text-align:center;
+  }
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color:teal;
+  }
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color:teal;
+    font-size:larger;
+    font-weight:bolder;
+    color:white;
+  }
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    /* background-color:burlywood; */
+  } 
+.tablinks{
+    font-size:large;
+    text-align:center;
+    width:50%;
+}
+/* Table Stuffs */
+.typetable_type1sel{
+    font-size:larger;
+}
+.type1sel_label{
+    color:white;
+}
+.typechart_text{
+    text-align:center;
+    color:burlywood;
+    border:1px solid teal;
+}
+.tablewrapper{
+    overflow-y:auto;
+    overflow-x:auto;
+    height:666px;
+    position:sticky;
+    top:0;
+}
+thead{
+    position:sticky;
+    top:0;
+}
+.typetable_col0{
+    position:sticky;
+    left:0;
+}
+.typetable_col0,.typetable_row0{
+    text-align:center;
+    color:white;
+    font-weight:bold;
+    position:sticky;
+    background-color:black;
+}
+tbody,thead{
+    vertical-align:middle;
+}
+.typetable_data{
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    color:maroon;
+    font-weight:bold;
+}
+#no_dmg,#quarter_dmg, #half_dmg, #single_dmg, #double_dmg, #quadruple_dmg{
+    vertical-align:middle;
+    text-align:center;
+    font-weight:bold;
+    font-size:large;
+    color:black;
+  }
+
+#no_dmg{
+    background-color:red;
+}
+#quarter_dmg{
+    background-color:orange;
+}
+#half_dmg{
+    background-color:yellow;
+}
+#double_dmg{
+    background-color:lightgreen;
+}
+#quadruple_dmg{
+    background-color:lightblue;
+}
+.typetable_typeimg{
+    width:66px;
+}
+/* END TYPE CHARTS ------------------------------------------------------------------ */
+
+
+/* MATCH SETUP--------------------------------------------------------------------- */
+/* Radios Styling */
 #radios_container{
     width:85%;
     justify-content:center;
@@ -15,4 +139,4 @@
     margin-right:15px;
     font-size:larger;
 }
-/* END Radios Styling------------------------------------------------------------------ */
+/* END MATCH SETUP------------------------------------------------------------------ */
