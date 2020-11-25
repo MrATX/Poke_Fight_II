@@ -101,7 +101,17 @@ for i in range(len(types)):
     wip_dict_type = {}
 combat_vars_dict = {}
 combat_vars_dict["type_matchups"]=(type_coeffs)
+# Weight Classes
+weight_classes_dict = {
+    "light":[0,300],
+    "middle":[300,500],
+    "heavy":[500,1000],
+    "legendary":[0,1000],
+    "all":[0,1000]
+}
+combat_vars_dict["weight_classes"]=(weight_classes_dict)
 ### Match Option Variables ---------------------------------
+match_vars_dict = {}
 # Radios
 # nplayers
 nplayers_radio_values = ["1","2"]
@@ -165,8 +175,36 @@ radios = {
     "weight_class":weight_class_radios,
     "generation":generation_radios
 }
-radios_dict = {}
-radios_dict["radios"]=(radios)
+match_vars_dict["radios"]=(radios)
+# Pokemon Types
+types = [
+    "Normal",
+    "Fighting",
+    "Flying",
+    "Poison",
+    "Ground",
+    "Rock",
+    "Bug",
+    "Ghost",
+    "Steel",
+    "Fire",
+    "Water",
+    "Grass",
+    "Electric",
+    "Psychic",
+    "Ice",
+    "Dragon",
+    "Dark",
+    "Fairy"
+]
+match_vars_dict["types"]=(types)
+# Table Headers
+pokedex_headers = [
+    "#","","","","","TOTAL","HP",
+    "ATK","DEF","SP ATK","SP DEF",
+    "SPD","GENERATION","LEGENDARY"
+]
+match_vars_dict["pokedex_headers"]=(pokedex_headers)
 # MongoDB stuffs ----------------------------------------
 # Establish DB Connection (Local for meow)
 conn = 'mongodb://localhost:27017'
@@ -185,4 +223,4 @@ combat_vars.insert_one(combat_vars_dict)
 # Match Options Variables
 match_vars = db.match_vars
 match_vars.drop()
-match_vars.insert_one(radios_dict)
+match_vars.insert_one(match_vars_dict)

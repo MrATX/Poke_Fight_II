@@ -35,7 +35,16 @@
 </head>
 
 
-<body id="body">
+<body>
+<!-- Filter Buttons -->
+<filter_buttons></filter_buttons>
+<!-- Table Proper -->
+<div class="tablewrapper">
+    <table class="table" id="roster_table" style="width:100%;">
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+</div>
 <!-- Filters & Table for Master Pokedex -->  
 <div class="container-fluid">
   <div class="row">
@@ -65,30 +74,6 @@
         </select>
         <!-- Filter Button -->
         <button id="playbtn" onclick="render_pokedex()">Filter</button>
-      </div>
-      <!-- Table Proper -->
-      <div class="tablewrapper">
-        <table class="table" id="roster_table" style="width:100%;">
-            <thead>
-                <!-- <tr>
-                <th>#</th>  
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>TOTAL</th>
-                <th>HP</th>
-                <th>ATK</th>
-                <th>DEF</th>
-                <th>SP ATK</th>
-                <th>SP DEF</th>
-                <th>SPD</th>
-                <th>GENERATION</th>
-                <th>LEGENDARY</th>
-                </tr> -->
-            </thead>
-            <tbody></tbody>
-        </table>
       </div>
     </div>
   </div>
