@@ -3,40 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <title>Poke Fight II</title>
+  <!-- Bootstrap & Local CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="static/css/style.css">
-
-
+<!-- Close Header -->
 </head>
 
+
 <body id="body">
-
-  <h1 id="nplayers" style="display:none;">{{nplayers}}</h1>
-  <h1 id="npoke" style="display:none;">{{npoke}}</h1>
-  <h1 id="weight_class" style="display:none;">{{weight_class}}</h1>
-  <h1 id="gen" style="display:none;">{{gen}}</h1>
-
+  <!-- Hidden Variables to pass Match Setup choices to JS -->
+  <div class="row" style="background-color:burlywood;margin-left:25px;">
+    <h1 id="nplayers" style="display:inline;">{{nplayers}}</h1>
+    <h1 id="npoke" style="display:inline;">{{npoke}}</h1>
+    <h1 id="weight_class" style="display:inline;">{{weight_class}}</h1>
+    <h1 id="gen" style="display:inline;">{{gen}}</h1>
+  </div>
+  <!-- Hidden Containers for Player Names and Roster Selections -->
+  <div class="row" style="background-color:burlywood;margin-left:25px;">
+    <form method='POST' action='/match_active'>
+      <div id="p1name" style="display:inline;"></div>
+      <div id="p1roster" style="display:inline;"></div>
+      <div id="p2name" style="display:inline;"></div>
+      <div id="p2roster" style="display:inline;"></div>
+    </form>
+  </div>
+  <!-- Player 1 Name Input & Roster Selection -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
+        <!-- P1 Name Input -->
         <div class="jumbotron" id="p1jumbo" style="width:100%;">
-          <h2 id="jumbotitle">Player 1, enter your name!</h2>
+          <h2 id="jumbotitle" class="playernameprompt"></h2>
           <hr>
           <div class="row" id="buttons" style="background-color:burlywood;">
-            <input type="text" id="p1name">
+            <input type="text" id="p1name_input">
           </div>
           <div class="row" id="buttons" style="background-color:burlywood;">
-            <button onclick="roster_table()">Continue</button>
+            <button onclick="p1_name_proceed()">Continue</button>
           </div>
-          
         </div>
-        <div class="jumbotron" id="p1tablejumbo" style="display:none;">
+        <!-- Roster Selection Header -->
+        <div class="jumbotron" id="jumbotitle" style="display:table;">
           <h1 id="jumbotitle" class="p1rosterprompt">Select {{npoke}} Pokemon, then click the button to proceed</h1><br>
           <row id="buttons" style="background-color:burlywood;">
-            <button id="p1continue"></button>
+            <button id="p1continue" onclick="p1_roster_proceed()"></button>
           </row>
+          <!-- Roster Selection Table -->
           <div class="tablewrapper">
-            <table class="table" id="roster_table" style="width:100%;">
+            <table class="table" style="width:100%;">
                 <thead>
                     <tr>
                     <th></th>  
@@ -62,13 +76,14 @@
       </div>
     </div>
   </div>
-
-  <script src="../static/js/roster_select.js"></script>
+  <!-- Web Dependencies -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://d3js.org/d3.v6.min.js"></script>
-
-  
-
+  <!-- Local JS -->
+  <script src="../static/js/roster_select.js"></script>
+<!-- Close Body -->
 </body>
 
+
+<!-- Close HTML -->
 </html>

@@ -3,14 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Poke Fight II</title>
+  <!-- Bootstrap & Local CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="static/css/style.css">
-
-
+  <link rel="stylesheet" href="static/css/style_redo.css">
+<!-- Close Header -->
 </head>
 
-<body id="body">
 
+<body>
+  <!-- RADIOS -------------------------------------------->
+  <!-- Radios for Selecting Match Parameters -->
+  <div class="container-fluid" id="radios_container">
+    <nplayers></nplayers>
+    <npoke></npoke>
+    <weight_class></weight_class>
+    <generation></generation>
+  </div>
+  <!-- RADIOS -------------------------------------------->
+  <!-- Clear Radios & Load P1 Name Input -->
+  <button onclick="clearradios()">Clear Radios</button>
+
+
+
+
+
+  <!-- Web Dependencies -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <!-- Local JS -->
+  <script src="../static/js/match_active.js"></script>
+<!-- Close Body -->
 </body>
-
+<!-- Close HTML -->
 </html>

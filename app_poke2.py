@@ -10,6 +10,7 @@ poke2.config["MONGO_URI"]="mongodb://localhost:27017/pokefight2"
 mongo=PyMongo(poke2)
 pokedex = mongo.db.pokedex
 combat_vars = mongo.db.combat_vars
+match_vars = mongo.db.match_vars
 # Frontend App Routes --------------------------------------------------
 # Main Menu routes --------------------------------------------------
 @poke2.route("/")
@@ -27,6 +28,11 @@ def servePokedex():
     return render_template(
         "pokedex.html",
         pokedex = pokedex,
+    )
+@poke2.route("/pokedex2")
+def servePokedex2():
+    return render_template(
+        "pokedex2.html",
     )
 @poke2.route("/types")
 def types():
@@ -73,6 +79,10 @@ def servePokemon():
 @poke2.route("/combat_vars")
 def serveCombatvars():
     return jsonify(list(combat_vars.find({ },
+   { '_id': 0})))
+@poke2.route("/match_vars")
+def serveMatchvars():
+    return jsonify(list(match_vars.find({ },
    { '_id': 0})))
 # Run App --------------------------------------------------
 if __name__=="__main__":

@@ -1,0 +1,18 @@
+/* Radios Styling------------------------------------------------------------------ */
+#radios_container{
+    width:85%;
+    justify-content:center;
+    text-align:center;
+}
+#prompt_jumbo{
+    background-color:maroon;
+}
+.radio_prompt{
+    color:black;
+}
+.radio{
+    color:teal;
+    margin-right:15px;
+    font-size:larger;
+}
+/* END Radios Styling------------------------------------------------------------------ */

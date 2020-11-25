@@ -1,3 +1,16 @@
+var test_array = [1,2,3]
+
+d3.select("testez")
+    .append("p")
+test_array.forEach(i=>{
+    d3.select("testerz")
+        .append()
+        .html(`<input type="radio" name="nplayers" value="1" id="One Player"> ${i}`)
+})
+
+
+
+
 // Function ran with each clicking of a Radio input
 // Assigns selections to global variables for use in next function
 function radios_val(name,value,id){

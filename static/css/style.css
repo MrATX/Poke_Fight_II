@@ -6,6 +6,12 @@
     color:white;
 }
 
+.input{
+    justify-content:center;
+    text-align:center;
+    align-content:center;
+}
+
 #filterbtns{
     background-color:burlywood;
     text-align:center;
@@ -13,14 +19,25 @@
 }
 
 .container-fluid{
-    width:100%;
+    width:90%;
     justify-content:center;
 }
 
-.jumbotron{
+.radio_jumbo{
+    color:teal;
+    text-align:center;
+    justify-content:center;
+    align-content:center;
+}
+
+#radios_container{
     background-color: burlywood;
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+.row{
+    background-color:burlywood;
 }
 
 #jumbotitle,#jumbopara{
@@ -74,9 +91,9 @@ th{
     height:666px;
 }
 
-tr{
+/* tr{
     background-color:burlywood;
-}
+} */
 
 #p1name,#p2name{
     height:50px;

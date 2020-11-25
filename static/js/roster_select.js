@@ -1,7 +1,11 @@
+// Grab Match Setup variables from HTML
 var nplayers = document.getElementById("nplayers").innerText
 var npoke = document.getElementById("npoke").innerText
 var weight_class = document.getElementById("weight_class").innerText
 var gen = document.getElementById("gen").innerText
+// Populate P1 name prompt text
+document.getElementsByClassName("playernameprompt")[0].textContent = "Player 1, please input your name!"
+// Populate P1 proceed button text based on number of players
 if(nplayers==="1"){
     document.getElementById("p1continue").innerText = "Begin Match"
     document.getElementsByClassName("p1rosterprompt").innerText = "iPwn"
@@ -10,7 +14,17 @@ else{
     document.getElementById("p1continue").innerText = "Continue"
     document.getElementsByClassName("p1rosterprompt").innerText = "CONTINUE"
 }
-
+// Function for when Player 1 clicks the proceed button after inputting name
+function p1_name_proceed(){
+    var p1name = document.getElementById("p1name_input").value
+    console.log(p1name)
+    document.getElementById("p1name").innerText =  p1name
+}
+// Function for when Player 1 clicks the proceed button after selecting roster
+function p1_roster_proceed(){
+    var p1roster_selections = document.querySelector('.messageCheckbox:checked').value;
+    console.log(p1roster_selections)
+}
 function poke_filter(pokedex){
     var pokedex = pokedex[0]["pokedex"]
     let weight_class_vars = {

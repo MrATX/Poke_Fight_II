@@ -57,7 +57,7 @@ for i in range(len(pokemon)):
     wip_dict_poke = {}
 pokedex_dict["pokedex"] = (wip_list_gen)
 wip_list_gen = []
-### Combat Vars ---------------------------------
+### Combat Variables ---------------------------------
 # Read Data
 type_matchups = pd.read_csv("type_matchups.csv").set_index("TYPE")
 # Create Variables
@@ -101,6 +101,72 @@ for i in range(len(types)):
     wip_dict_type = {}
 combat_vars_dict = {}
 combat_vars_dict["type_matchups"]=(type_coeffs)
+### Match Option Variables ---------------------------------
+# Radios
+# nplayers
+nplayers_radio_values = ["1","2"]
+nplayers_radio_ids = ["One Player","Two Player"]
+nplayers_radio_text = ["One Player","Two Player"]
+nplayers_ = [nplayers_radio_values,nplayers_radio_ids,nplayers_radio_text]
+nplayers_radios = {
+    "name":"nplayers",
+    "prompt":"Choose Number of Players",
+    "values":nplayers_radio_values,
+    "ids":nplayers_radio_ids,
+    "text":nplayers_radio_text
+}
+# npoke
+npoke_radio_values = ["2","3","4","5","6"]
+npoke_radio_ids = ["two","three","four","five","six"]
+npoke_radio_text = ["2","3","4","5","6"]
+npoke_radios = {
+    "name":"npoke",
+    "prompt":"Choose Number of Pokemon",
+    "values":npoke_radio_values,
+    "ids":npoke_radio_ids,
+    "text":npoke_radio_text
+}
+# weight_class
+weight_class_radio_values = ["light","middle","heavy","legendary","all"]
+weight_class_radio_ids = ["Lightweight","Middleweight","Heavyweight","Legendary",""]
+weight_class_radio_text = ["Lightweight","Middleweight","Heavyweight","Legendary","All Classes"]
+weight_class_radios = {
+    "name":"weight_class",
+    "prompt":"Choose Pokemon Weight Class",
+    "values":weight_class_radio_values,
+    "ids":weight_class_radio_ids,
+    "text":weight_class_radio_text
+}
+# generation
+generation_radio_values = ["1","2","3","4","5","6","7","8","all"]
+generation_radio_ids = ["1st","2nd","3rd","4th","5th","6th","7th","8th","any"]
+generation_radio_text = [
+    "Gen I - Red & Blue",
+    "Gen II - Silver & Gold",
+    "Gen III - Ruby & Sapphire",
+    "Gen IV - Diamond & Pearl",
+    "Gen V - Black & White",
+    "Gen VI - X & Y",
+    "Gen VII - Sun & Moon",
+    "Gen VIII - Sword & Shield",
+    "All Generations"
+]
+generation_radios = {
+    "name":"generation",
+    "prompt":"Choose Pokemon Generation",
+    "values":generation_radio_values,
+    "ids":generation_radio_ids,
+    "text":generation_radio_text
+}
+# Combine Radio Dictionaries
+radios = {
+    "nplayers":nplayers_radios,
+    "npoke":npoke_radios,
+    "weight_class":weight_class_radios,
+    "generation":generation_radios
+}
+radios_dict = {}
+radios_dict["radios"]=(radios)
 # MongoDB stuffs ----------------------------------------
 # Establish DB Connection (Local for meow)
 conn = 'mongodb://localhost:27017'
@@ -116,3 +182,7 @@ pokedex.insert_one(pokedex_dict)
 combat_vars = db.combat_vars
 combat_vars.drop()
 combat_vars.insert_one(combat_vars_dict)
+# Match Options Variables
+match_vars = db.match_vars
+match_vars.drop()
+match_vars.insert_one(radios_dict)
