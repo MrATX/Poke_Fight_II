@@ -26,13 +26,13 @@ def info_menu():
 @poke2.route("/pokedex")
 def servePokedex():
     return render_template(
-        "pokedex.html",
+        "pokedex2.html",
         pokedex = pokedex,
     )
 @poke2.route("/pokedex2")
 def servePokedex2():
     return render_template(
-        "pokedex2.html",
+        "pokedex.html",
     )
 @poke2.route("/types")
 def types():

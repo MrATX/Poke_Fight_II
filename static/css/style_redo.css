@@ -60,7 +60,7 @@
     color:burlywood;
     border:1px solid teal;
 }
-.tablewrapper{
+.typetable_wrapper{
     overflow-y:auto;
     overflow-x:auto;
     height:666px;
@@ -99,7 +99,6 @@ tbody,thead{
     font-size:large;
     color:black;
   }
-
 #no_dmg{
     background-color:red;
 }
@@ -120,6 +119,42 @@ tbody,thead{
 }
 /* END TYPE CHARTS ------------------------------------------------------------------ */
 
+/* POKEDEX --------------------------------------------------------------------- */
+.pokedex{
+    width:100%;
+}
+.pokedex_typeimg{
+    width:50px;
+    align-items:center;
+}
+.pokedex_header{
+    background-color:burlywood;
+    text-align:center;
+    color:teal;
+    font-size:larger;
+}
+.pokedex_row{
+    align-items:center;
+}
+.pokedex_sprite{
+    width:150px;
+}
+.pokedex_name{
+    text-align:center;
+    color:white;
+    font-weight:bold;
+    font-size:larger;
+}
+.pokedex_type{
+    color:white;
+}
+.pokedex_stat{
+    text-align:center;
+    color:white;
+    font-weight:bold;
+    font-size:large;
+}
+/* END POKEDEX ------------------------------------------------------------------ */
 
 /* MATCH SETUP--------------------------------------------------------------------- */
 /* Radios Styling */

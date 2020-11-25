@@ -5,78 +5,47 @@
   <title>Poke Fight II</title>
   <!-- Boostrap & Local CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="static/css/style.css">
-    <!--NAVBAR--------------------------------------------------------------------->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/" style="color:gold;">Poke Fight II</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/" id="navolink">Play</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/pokedex" id="navolink"><u>Pokedex</u></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/types" id="navolink">Types</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/info_menu" id="navolink">Info</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  <!--NAVBAR END------------------------------------------------------------------->
+  <link rel="stylesheet" href="static/css/style_redo.css">
+  <!--NAVBAR--------------------------------------------------------------------->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/" style="color:gold;">Poke Fight II</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/" id="navolink">Play</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pokedex" id="navolink"><u>Pokedex</u></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/types" id="navolink">Types</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/info_menu" id="navolink">Info</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<!--NAVBAR END------------------------------------------------------------------->
 <!-- Close Head -->
 </head>
 
 
-<body>
-<!-- Filter Buttons -->
-<filter_buttons></filter_buttons>
-<!-- Table Proper -->
-<div class="tablewrapper">
-    <table class="table" id="roster_table" style="width:100%;">
-        <thead></thead>
-        <tbody></tbody>
-    </table>
-</div>
-<!-- Filters & Table for Master Pokedex -->  
+<body id="body">
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <!-- Filters for Weight Class & Generation -->
-      <div clas="row" id="filterbtns">
-        <label for="weight">Weight Class</label>
-        <select id="weight_filter" name="weight">
-          <option value="all">All Classes</option>
-          <option value="feather">Featherweight</option>
-          <option value="light">Lightweight</option>
-          <option value="middle">Middleweight</option>
-          <option value="heavy">Heavyweight</option>
-          <option value="legendary">Legendary</option>
-        </select>
-        <label for="gen">Generation</label>
-        <select id="gen_filter" name="gen">
-          <option value="all">All Generations</option>
-          <option value="1">1st Gen - Red & Blue</option>
-          <option value="2">2nd Gen - Silver & Gold</option>
-          <option value="3">3rd Gen - Ruby & Sapphire</option>
-          <option value="4">4th Gen - Diamond & Pearl</option>
-          <option value="5">5th Gen - Black & White</option>
-          <option value="6">6th Gen - X & Y</option>
-          <option value="7">7th Gen - Sun & Moon</option>
-          <option value="8">8th Gen - Sword & Shield</option>
-        </select>
-        <!-- Filter Button -->
-        <button id="playbtn" onclick="render_pokedex()">Filter</button>
-      </div>
-    </div>
+  <!-- Filter Buttons -->
+  <filter_buttons></filter_buttons>
+  <!-- Table Proper -->
+  <div class="pokedex_wrapper">
+      <table class="pokedex">
+          <thead class="pokedex_header"></thead>
+          <tbody class="pokedex_body"></tbody>
+      </table>
   </div>
+</div>
 <!-- Close Main Container -->
 </div>
 

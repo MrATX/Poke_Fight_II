@@ -1,3 +1,4 @@
+// Create Single Type Matchup Table
 function single_types_table(combat_vars){
     d3.select(".single_type_header")
         .append("tr")
@@ -50,7 +51,7 @@ function single_types_table(combat_vars){
         }
     }
 }
-
+// Populate dropdown list of types for Dual Types Chart
 function dual_type_filters(combat_vars){
     for(var i=0,length=combat_vars[0].types.length;i<length;i++){
         d3.select(".typetable_type1sel")
@@ -59,7 +60,7 @@ function dual_type_filters(combat_vars){
             .text(combat_vars[0].types[i])
     }   
 }
-
+// Create Dual Type Matchups Table
 function dual_types_table(combat_vars,filter){
     var filter_img_url = "static/images/type_imgs/" + filter.toLowerCase() + ".png"
     d3.select(".dual_type_header")
@@ -88,11 +89,7 @@ function dual_types_table(combat_vars,filter){
             var def_type = combat_vars[0].types[j]
             var cell_value = combat_vars[0].type_matchups[i][def_type].coeff * combat_vars[0].type_matchups[i][filter].coeff
             var dmg_ranges = {
-                0.0:{"id":"no_dmg",
-                    "text":"Ineffective"},
-                    // And so on... (Maybe build in a loop?)
-                    // Either way add to ETL to have in Mongo and
-                    // update connection to it here
+                0.00:"no_dmg",
                 0.25:"quarter_dmg",
                 0.50:"half_dmg",
                 1.00:"reg_dmg",
@@ -114,7 +111,6 @@ function dual_types_table(combat_vars,filter){
                 d3.select("#"+String(row_id))
                     .append("td")
                     .attr("id",td_id)
-                    // .attr("id",combat_vars[0].type_matchups[i][def_type].id)
                     .attr("valign","middle")
                     .text(cell_value)
             }
@@ -129,13 +125,13 @@ function dual_types_table(combat_vars,filter){
         }
     }
 }
-
+// Middle function to pull in data 
 function update_dual_types_table(filter){
     d3.json("combat_vars").then(combat_vars=>
         dual_types_table(combat_vars,filter)
         )
 }
-
+// Outer function connected to Dual Type Table Dropdown
 function dual_types_filter_change(){
     var filter = document.getElementsByClassName("typetable_type1sel")[0].value
     d3.select(".dual_type_header").html("")
@@ -185,3 +181,14 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
     }     
+// Create Tables, Populate Dropdown, Select Single Type Tab
+d3.json("combat_vars").then(combat_vars=>
+    single_types_table(combat_vars)
+    )
+d3.json("combat_vars").then(combat_vars=>
+    dual_type_filters(combat_vars)
+    )
+d3.json("combat_vars").then(combat_vars=>
+    dual_types_table(combat_vars,"Normal")
+    )
+document.getElementById("singletype_tab").click()

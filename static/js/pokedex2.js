@@ -1,19 +1,3 @@
-var headers = [
-    "#",
-    "",
-    "",
-    "",
-    "",
-    "TOTAL",
-    "HP",
-    "ATK",
-    "DEF",
-    "SP ATK",
-    "SP DEF",
-    "SPD",
-    "GENERATION",
-    "LEGENDARY"
-]
 // Base function rendering table with given list of Pokemon
 function pokedex_table(pokedex,headers){
     for(var i=0,length=headers.length;i<length;i++){
@@ -27,29 +11,32 @@ function pokedex_table(pokedex,headers){
         .data(pokedex)
         .enter()
         .append("tr")
-        .html(d => `<td id="poketablerow">${d.num}</td>
-            <td id="poketablerow"><img src='${d.img_url}' id="pokeimg"></td>
-            <td id="poketablerow">${d.name}</td>
-            <td id="poketablerow" style="font-weight:normal;"><img src="${d.type1img}" id="typeimg_pokedex"><br>${d.type1}</td>
-            <td id="poketablerow" style="font-weight:normal;"><img src="${d.type2img}" alt="" id="typeimg_pokedex"><br>${d.type2}</td>
-            <td id="poketablerow"><u>${d.total}</u></td>
-            <td id="poketablerow">${d.hp}</td>
-            <td id="poketablerow">${d.attack}</td>
-            <td id="poketablerow">${d.defense}</td>
-            <td id="poketablerow">${d.spatk}</td>
-            <td id="poketablerow">${d.spdef}</td>
-            <td id="poketablerow">${d.speed}</td>
-            <td id="poketablerow">${d.generation}</td>
-            <td id="poketablerow">${d.legendary}`)
+        .attr("class","pokedex_row")
+        .html(d => `<td class="pokedex_stat">${d.num}</td>
+            <td><img src='${d.img_url}' class="pokedex_sprite"></td>
+            <td class="pokedex_name">${d.name}</td>
+            <td class="pokedex_type"><img src="${d.type1img}" class="pokedex_typeimg"><br>${d.type1}</td>
+            <td class="pokedex_type"><img src="${d.type2img}" alt="" class="pokedex_typeimg"><br>${d.type2}</td>
+            <td class="pokedex_stat"><u>${d.total}</u></td>
+            <td class="pokedex_stat">${d.hp}</td>
+            <td class="pokedex_stat">${d.attack}</td>
+            <td class="pokedex_stat">${d.defense}</td>
+            <td class="pokedex_stat">${d.spatk}</td>
+            <td class="pokedex_stat">${d.spdef}</td>
+            <td class="pokedex_stat">${d.speed}</td>
+            <td class="pokedex_stat">${d.generation}</td>
+            <td class="pokedex_stat">${d.legendary}`)
 }
 // Middle Function generating list of Pokemon based on chosen filters
-function pokedex_filter(pokedex){
+function pokedex_filter(pokedex,headers){
     // Grab table body and clear rows
     tbody = d3.select("tbody");
     tbody.html("")
     // Grab Variables from Filters (default for both is All) 
-    var weight_class = document.getElementById("weight_filter").value
-    var gen = document.getElementById("gen_filter").value
+    // var weight_class = document.getElementById("weight_filter").value
+    // var gen = document.getElementById("gen_filter").value
+    var weight_class = "all"
+    var gen = "all"
     // Route into data dictionary
     var pokedex = pokedex[0]["pokedex"]
     // Setup Class Ranges
@@ -94,6 +81,8 @@ function pokedex_filter(pokedex){
             pokedex_filtered.push(pokemon)
         }
     })
+    // Grab Headers Array
+    headers = headers[0].pokedex_headers
     // Pass filtered array of Pokemon to base function to render table
     pokedex_table(pokedex_filtered,headers)
 }
@@ -101,7 +90,9 @@ function pokedex_filter(pokedex){
 // Attached to filter button on HTML page
 function render_pokedex(){
     d3.json("pokedex_data").then(pokedex=>
-        pokedex_filter(pokedex)
+        d3.json("match_vars").then(match_vars=>
+            pokedex_filter(pokedex,match_vars)
+            )
         )
 }
 // Call functions to render Pokdex on page load
