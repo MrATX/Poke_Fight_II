@@ -120,6 +120,19 @@ tbody,thead{
 /* END TYPE CHARTS ------------------------------------------------------------------ */
 
 /* POKEDEX --------------------------------------------------------------------- */
+#pokedex_filter{
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
+.type_filter_button{
+    justify-content:center;
+    text-align:center;
+}
+.typefilter_typeimg{
+    width:50px;
+    margin-right:15px;
+}
 .pokedex{
     width:100%;
 }

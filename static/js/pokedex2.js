@@ -95,5 +95,34 @@ function render_pokedex(){
             )
         )
 }
-// Call functions to render Pokdex on page load
+// Render Filters
+// Type 1
+function render_type_filters(combat_vars,type_no){
+    types = combat_vars[0].types
+    selection = "type"+type_no+"_filter"
+    d3.select(selection)
+        .append("div")
+        .attr("class","row")
+        .attr("id","pokedex_filter")
+    for(var i=0,length=types.length;i<length;i++){
+        var img_id = types[i]+"_type"+type_no+"_filter"
+        var img_url = "static/images/type_imgs/" + types[i] + ".png"
+        d3.select(selection)
+            .select(".row")
+            .append("img")
+            .attr("id",img_id)
+            .attr("class","typefilter_typeimg")
+            .attr("src",img_url)
+    }
+}
+// Type 2
+// Weight Class
+// Generation
+// Call functions to render Filters & Pokdex on page load
 render_pokedex()
+d3.json("combat_vars").then(combat_vars=>
+    render_type_filters(combat_vars,"1")
+    )
+d3.json("combat_vars").then(combat_vars=>
+    render_type_filters(combat_vars,"2")
+    )
