@@ -37,12 +37,17 @@
 <body id="body">
 <div class="container-fluid">
   <!-- Filter Buttons -->
-  <filter_buttons>
+  <filter_buttons style="display:none;">
     <type1_filter class="pokedex_filter"></type1_filter>
     <type2_filter class="pokedex_filter"></type2_filter>
     <weight_class_filter class="pokedex_filter"></weight_class_filter>
     <generation_filter class="pokedex_filter"></generation_filter>
+    <div class="row" id="pokedex_filter">
+      <button id="filter_button_main" onclick="grab_checkbox_vars()">Filter Pokedex</button>
+    </div>
   </filter_buttons>
+  <button id="showfilters" onclick="show_filters()">Show Filters</button>
+  <button id="hidefilters" onclick="hide_filters()" style="display:none;">Hide Filters</button>
   <!-- Table Proper -->
   <div class="pokedex_wrapper">
       <table class="pokedex">

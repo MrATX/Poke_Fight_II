@@ -1,3 +1,9 @@
+div{
+    text-align:center;
+    justify-content:center;
+    align-items:center;
+    vertical-align:middle;
+}
 #body{
     background-color:black;
 }
@@ -120,10 +126,35 @@ tbody,thead{
 /* END TYPE CHARTS ------------------------------------------------------------------ */
 
 /* POKEDEX --------------------------------------------------------------------- */
+.pokedex_filter{
+    justify-content:center;
+    text-align:center;
+    color:black;
+}
 #pokedex_filter{
     justify-content:center;
     text-align:center;
-    color:white;
+    border:1px solid teal;
+    background-color:burlywood;
+}
+#filter_title{
+    display:table-cell;
+    margin-right:10px;
+    font-weight:bold;
+    color: maroon;
+}
+#filter_button_main{
+    margin:20px;
+    font-size:larger;
+}
+.pokedex_filter_label{
+    font-size:large;
+}
+.checkbox{
+    margin-right:15px;
+    margin-left:15px;
+}
+.checkmark{
 }
 .type_filter_button{
     justify-content:center;
@@ -143,7 +174,7 @@ tbody,thead{
 .pokedex_header{
     background-color:burlywood;
     text-align:center;
-    color:teal;
+    color:black;
     font-size:larger;
 }
 .pokedex_row{
