@@ -1,11 +1,22 @@
 import pandas as pd
 import pymongo
 ### Pokedex ---------------------------
+# Setup Weight Classes
+weight_class_keys = ["light","middle","cruiser","heavy","legendary","all"]
+weight_classes_dict = {
+    "light":[0,300],
+    "middle":[300,400],
+    "cruiser":[400,500],
+    "heavy":[500,1000],
+    "legendary":[0,1000],
+    "all":[0,1000]
+}
 # Read & Clean Data
 pokemon = pd.read_csv("Pokemon.csv")
 pokemon = pokemon.loc[pokemon["Mega"]=="No"].reset_index()
 pokemon = pokemon.iloc[:,1:]
 pokemon = pokemon.drop(columns=["Mega"])
+pokemon["weight_class"] = "hold"
 pokemon["img_url"] = "hold"
 pokemon["tableindex"] = "hold"
 pokemon["type1img"] = "hold"
@@ -13,14 +24,24 @@ pokemon["type2img"] = "hold"
 totalpoke = pokemon.index.nunique()
 pokemon = pokemon.fillna(" - ")
 for i in range(0,totalpoke):
-    pokemon.iloc[i,13] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
+    pokemon.iloc[i,14] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
     if pokemon.iloc[i,12] == "Yes":
         pokemon.iloc[i,12] = "Legendary"
     else:
         pokemon.iloc[i,12] = " - "
 # Create Variables
+# Setup Weight Classes
+weight_class_keys = ["light","middle","cruiser","heavy"]
+weight_classes_dict = {
+    "light":[0,300],
+    "middle":[300,400],
+    "cruiser":[400,500],
+    "heavy":[500,1000],
+    "legendary":[0,1000],
+    "all":[0,1000]
+}
 gen_list = pokemon.loc[:,"Generation"].unique()
-pokedex_fields = ["num","name","type1","type2","total","hp","attack","defense","spatk","spdef","speed","generation","legendary","img_url","tableindex","type1img","type2img"]
+pokedex_fields = ["num","name","type1","type2","total","hp","attack","defense","spatk","spdef","speed","generation","legendary","weight_class","img_url","tableindex","type1img","type2img"]
 type_imgs = {
     "Bug":"static/images/type_imgs/bug.png",
     "Dark":"static/images/type_imgs/dark.png",
@@ -47,8 +68,13 @@ wip_list_gen = []
 wip_dict_poke = {}
 for i in range(len(pokemon)):
     for j in range(len(pokedex_fields)):
-        pokemon.iloc[i,15] = type_imgs[pokemon.iloc[i,2]]
-        pokemon.iloc[i,16] = type_imgs[pokemon.iloc[i,3]]
+        pokemon.iloc[i,16] = type_imgs[pokemon.iloc[i,2]]
+        pokemon.iloc[i,17] = type_imgs[pokemon.iloc[i,3]]
+        for k in weight_class_keys:
+            if pokemon.iloc[i,12] == "Legendary":
+                pokemon.iloc[i,13] = "legendary"
+            if pokemon.iloc[i,4] >= weight_classes_dict[k][0] and pokemon.iloc[i,4] < weight_classes_dict[k][1] and pokemon.iloc[i,12] == " - ":
+                    pokemon.iloc[i,13] = k
         if type(pokemon.iloc[i,j])==str:
             wip_dict_poke[pokedex_fields[j]]=(pokemon.iloc[i,j])
         else:
@@ -64,6 +90,8 @@ type_matchups = pd.read_csv("type_matchups.csv").set_index("TYPE")
 type_coeffs = []
 wip_dict_type = {}
 types = []
+combat_vars_dict = {}
+combat_vars_dict["weight_classes"]=(weight_classes_dict)
 for i in type_matchups:
     if i != "TYPE":
         types.append(i)
@@ -82,7 +110,6 @@ for i in range(len(types)):
         coeff_id = coeff_values[type_matchups.loc[types[i],types[j]]]["id"]
         coeff_text = coeff_values[type_matchups.loc[types[i],types[j]]]["text"]
         if type(type_matchups.loc[types[i],types[j]])==str:
-            # wip_dict_type[types[j]]=(type_matchups.loc[types[i],types[j]])
             coeff_id = coeff_values[types[i],types[j]]["id"]
             coeff_text = coeff_values[types[i],types[j]]["text"]
             wip_dict_type[types[j]] = {
@@ -91,7 +118,6 @@ for i in range(len(types)):
                 "text":coeff_text
             }
         else:
-            # wip_dict_type[types[j]]=(type_matchups.loc[types[i],types[j]].item())
             wip_dict_type[types[j]] = {
                 "coeff":type_matchups.loc[types[i],types[j]].item(),
                 "id":coeff_id,
@@ -99,7 +125,6 @@ for i in range(len(types)):
             }
     type_coeffs.append(wip_dict_type)
     wip_dict_type = {}
-combat_vars_dict = {}
 combat_vars_dict["type_matchups"]=(type_coeffs)
 # Pokemon Types
 types_dict = [
@@ -123,15 +148,6 @@ types_dict = [
     "Fairy"
 ]
 combat_vars_dict["types"]=(types_dict)
-# Weight Classes
-weight_classes_dict = {
-    "light":[0,300],
-    "middle":[300,500],
-    "heavy":[500,1000],
-    "legendary":[0,1000],
-    "all":[0,1000]
-}
-combat_vars_dict["weight_classes"]=(weight_classes_dict)
 ### Match Option Variables ---------------------------------
 match_vars_dict = {}
 # Radios
@@ -159,9 +175,9 @@ npoke_radios = {
     "text":npoke_radio_text
 }
 # weight_class
-weight_class_radio_values = ["light","middle","heavy","legendary","all"]
-weight_class_radio_ids = ["Lightweight","Middleweight","Heavyweight","Legendary",""]
-weight_class_radio_text = ["Lightweight","Middleweight","Heavyweight","Legendary","All Classes"]
+weight_class_radio_values = ["light","middle","cruiser","heavy","legendary","all"]
+weight_class_radio_ids = ["Lightweight","Middleweight","Cruiserweight","Heavyweight","Legendary",""]
+weight_class_radio_text = ["Lightweight","Middleweight","Cruiserweight","Heavyweight","Legendary","All Classes"]
 weight_class_radios = {
     "name":"weight_class",
     "prompt":"Choose Pokemon Weight Class",

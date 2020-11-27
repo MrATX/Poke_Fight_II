@@ -27,53 +27,39 @@ function pokedex_table(pokedex,headers){
             <td class="pokedex_stat">${d.legendary}`)
 }
 // Middle Function generating list of Pokemon based on chosen filters
-function pokedex_filter(pokedex,headers){
-    // Grab table body and clear rows
+function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter,genfilter){
+    // Grab table body & header, and clear rows
+    theader = d3.select("thead");
+    theader.html("")
     tbody = d3.select("tbody");
     tbody.html("")
-    // Grab Variables from Filters (default for both is All) 
-    // var weight_class = document.getElementById("weight_filter").value
-    // var gen = document.getElementById("gen_filter").value
-    var weight_class = "all"
-    var gen = "all"
+    // Check Filter Variables
+    if(t1filter[0] === undefined){
+        var t1filter = types
+    }
+    if(t2filter[0] === undefined){
+        var t2filter = types
+        t2filter.push(" - ")
+    }
+    if(classfilter[0] === undefined || classfilter.includes("all")){
+        var classfilter = ["light","middle","cruiser","heavy","legendary"]
+    }
+    if(genfilter[0] === undefined || genfilter.includes("all")){
+        var genfilter = [1,2,3,4,5,6,7,8]
+    }
     // Route into data dictionary
     var pokedex = pokedex[0]["pokedex"]
-    // Setup Class Ranges
-    // THESE SHOULD BE PUT INTO MONGO FOR COMBAT VARIABLES
-    let weight_class_vars = {
-        "feather":[0,250],
-        "light":[250,350],
-        "middle":[350,500],
-        "heavy":[500,1000],
-        "legendary":[0,1000],
-        "all":[0,1000]
-    }
-    // Establish filter variables; STR range, Generation, Legendary
-    var str_min = weight_class_vars[weight_class][0]
-    var str_max = weight_class_vars[weight_class][1]
-    if(gen==="all"){
-        var gen_var = [1,2,3,4,5,6,7,8]
-    }
-    if(gen!="all"){
-        var gen_var = gen
-    }
-    var legend_var = [" - "]
-    if(weight_class==="all"){
-        legend_var = ["Legendary"," - "]
-    }
-    if(weight_class==="legendary"){
-        legend_var = ["Legendary"]
-    }
+    // Create Array for Filtered Pokemon
     var pokedex_filtered = []
     // Create dummy variable to generate row indexes
     var k = 0
     // Loop through Pokedex, get Pokemon meeting filter criteria and push to array
     pokedex.forEach(pokemon=>{
         if(
-            pokemon.total >= str_min &&
-            pokemon.total < str_max &&
-            gen_var.includes(pokemon.generation) &&
-            legend_var.includes(pokemon.legendary)
+            t1filter.includes(pokemon.type1) &&
+            t2filter.includes(pokemon.type2) &&
+            classfilter.includes(pokemon.weight_class) &&
+            genfilter.includes(pokemon.generation)
         ){
             pokemon.tableindex = k
             k = k + 1
@@ -82,15 +68,23 @@ function pokedex_filter(pokedex,headers){
     })
     // Grab Headers Array
     headers = headers[0].pokedex_headers
+    // Grab Types Array
+    types = combat_vars[0].types
     // Pass filtered array of Pokemon to base function to render table
     pokedex_table(pokedex_filtered,headers)
 }
 // Top function calling data to pass through middle and base functions
 // Attached to filter button on HTML page
 function render_pokedex(){
+    var t1filter = []
+    var t2filter = []
+    var classfilter = []
+    var genfilter = []
     d3.json("pokedex_data").then(pokedex=>
         d3.json("match_vars").then(match_vars=>
-            pokedex_filter(pokedex,match_vars)
+            d3.json("combat_vars").then(combat_vars=>
+                pokedex_filter(pokedex,match_vars,combat_vars,t1filter,t2filter,classfilter,genfilter)    
+                )
             )
         )
 }
@@ -108,15 +102,41 @@ function render_type_filters(combat_vars,type_no){
         .attr("class","container-fluid")
         .attr("id","filter_title")
         .text(title)
+    if(type_no==="2"){
+        d3.select(selection)
+            .select(".row")
+            .append("img")
+            .attr("name","type2")
+            .attr("id","type2none")
+            .attr("class","typefilter_typeimg")
+            .attr("onclick","click_typeimg(id)")
+            .attr("title"," - ")
+            .attr("src","img_url")
+            .attr("alt","NONE")
+    }
     for(var i=0,length=types.length;i<length;i++){
+        var img_name = "type"+type_no
         var img_id = types[i]+"_type"+type_no+"_filter"
         var img_url = "static/images/type_imgs/" + types[i] + ".png"
         d3.select(selection)
             .select(".row")
             .append("img")
+            .attr("name",img_name)
             .attr("id",img_id)
             .attr("class","typefilter_typeimg")
+            .attr("onclick","click_typeimg(id)")
+            .attr("title",types[i])
             .attr("src",img_url)
+    }
+}
+// Type Filter Highlight Function
+function click_typeimg(id){
+    var img_sel = document.getElementById(id)
+    if(img_sel.className==="typefilter_typeimg"){
+        img_sel.className = "typefilter_typeimg_checked"
+    }
+    else{
+        img_sel.className = "typefilter_typeimg"
     }
 }
 // Weight Class
@@ -138,21 +158,8 @@ function render_weight_class_filter(match_vars){
             .select(".row")
             .append("span")
             .attr("class","checkmark")
-            .html(`<input id="${checkbox_id}" class="checkbox" type="checkbox" name="weight_class" value="${checkbox_value}>
+            .html(`<input id="${checkbox_id}" class="checkbox" type="checkbox" name="weight_class" value="${checkbox_value}">
                     <label class="checkbox_label">${checkbox_text}</label>`)
-
-
-        //     .append("input")
-        //     .attr("id",checkbox_id)
-        //     .attr("class","checkbox")
-        //     .attr("type","checkbox")
-        //     .attr("name","weight_class")
-        //     .attr("value",checkbox_value)
-        // d3.select("weight_class_filter")
-        //     .select(".row")
-        //     .append("label")
-        //     .attr("class","pokedex_filter_label")
-        //     .text(checkbox_text)
     }
 }
 // Generation
@@ -172,17 +179,21 @@ function render_generation_filter(match_vars){
         var checkbox_value = generations.values[i]
         d3.select("generation_filter")
             .select(".row")
-            .append("input")
-            .attr("id",checkbox_id)
-            .attr("class","checkbox")
-            .attr("type","checkbox")
-            .attr("name","generation")
-            .attr("value",checkbox_value)
-        d3.select("generation_filter")
-            .select(".row")
-            .append("label")
-            .attr("class","pokedex_filter_label")
-            .text(checkbox_text)
+            .append("span")
+            .attr("class","checkmark")
+            .html(`<input id="${checkbox_id}" class="checkbox" type="checkbox" name="generation" value="${checkbox_value}">
+            <label class="checkbox_label">${checkbox_text}</label>`)
+        //     .append("input")
+        //     .attr("id",checkbox_id)
+        //     .attr("class","checkbox")
+        //     .attr("type","checkbox")
+        //     .attr("name","generation")
+        //     .attr("value",checkbox_value)
+        // d3.select("generation_filter")
+        //     .select(".row")
+        //     .append("label")
+        //     .attr("class","pokedex_filter_label")
+        //     .text(checkbox_text)
     }
 }
 //Show & Hide functions for filters
@@ -202,23 +213,58 @@ function hide_filters(){
     d3.select("#hidefilters")
         .style("display","none")
 }
-//Variable Grabbing
-function grab_checkbox_vars(){
-    var weight_class_filter_list = []
-    var generation_filter_list = []
+// Clear Filters Function
+function clear_filters(){
+    d3.selectAll(".checkbox").property("checked",false)
+    d3.selectAll(".typefilter_typeimg_checked").attr("class","typefilter_typeimg")
+}
+// Base function to render filtered Pokedex
+function render_filtered_pokedex(t1filter,t2filter,classfilter,genfilter){
+    d3.json("pokedex_data").then(pokedex=>
+        d3.json("match_vars").then(match_vars=>
+            d3.json("combat_vars").then(combat_vars=>
+                pokedex_filter(pokedex,match_vars,combat_vars,t1filter,t2filter,classfilter,genfilter)    
+                )
+            )
+        )
+}
+// Middle function to grab variables and render filtered Pokedex
+function grab_filter_vars(t1filter,t2filter,classfilter,genfilter){
     var checks = document.getElementsByClassName("checkbox")
     for(var i=0,length=checks.length;i<length;i++){
         if(checks[i].checked===true){
             if(checks[i].name === "weight_class"){
-                weight_class_filter_list.push(checks[i].value)
+                classfilter.push(checks[i].value)
             }
             if(checks[i].name === "generation"){
-                generation_filter_list.push(checks[i].value)
+                if(checks[i].value==="all"){
+                    genfilter.push(checks[i].value)
+                }
+                else{
+                    genfilter.push(parseInt(checks[i].value))
+                }
             }
         }
     }
-    console.log(weight_class_filter_list)
-    console.log(generation_filter_list)
+    var typesel = document.getElementsByClassName("typefilter_typeimg_checked")
+    for(var i=0,length=typesel.length;i<length;i++){
+            if(typesel[i].name==="type1"){
+                t1filter.push(typesel[i].title)
+            }
+            if(typesel[i].name==="type2"){
+                t2filter.push(typesel[i].title)
+            }
+    }
+    console.log(t1filter,t2filter,classfilter,genfilter)
+    render_filtered_pokedex(t1filter,t2filter,classfilter,genfilter)
+}
+// Outer function to clear arrays then grab vars & render filtered Pokedex
+function filtered_pokedex(){
+    var t1filter = []
+    var t2filter = []
+    var classfilter = []
+    var genfilter = []
+    grab_filter_vars(t1filter,t2filter,classfilter,genfilter)
 }
 // Call functions to render Filters & Pokdex on page load
 render_pokedex()
