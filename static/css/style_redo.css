@@ -98,27 +98,31 @@ tbody,thead{
     color:maroon;
     font-weight:bold;
 }
-#no_dmg,#quarter_dmg, #half_dmg, #single_dmg, #double_dmg, #quadruple_dmg{
+#single_dmg{
+    color:black;
+}
+#no_dmg,#quarter_dmg, #half_dmg, #double_dmg, #quadruple_dmg{
     vertical-align:middle;
     text-align:center;
     font-weight:bold;
     font-size:large;
-    color:black;
+    color:white;
+    border:1px solid black;
   }
 #no_dmg{
-    background-color:red;
+    background-color:rgb(255,0,0,0.5);
 }
 #quarter_dmg{
-    background-color:orange;
+    background-color:rgb(255,165,0,0.5);
 }
 #half_dmg{
-    background-color:yellow;
+    background-color:rgb(255,255,0,0.5);
 }
 #double_dmg{
-    background-color:lightgreen;
+    background-color:rgb(0,255,0,0.5);
 }
 #quadruple_dmg{
-    background-color:lightblue;
+    background-color:rgb(0,0,255,0.5);
 }
 .typetable_typeimg{
     width:66px;
