@@ -55,6 +55,7 @@ function beginmatch(){
     }
     // Prompt alert message and exit function if required option(s) are missing
     else{
+        console.log(nplayers_sel,npoke_sel,weight_class_sel,gen_sel)
         alert("Select # of Players, # of Pokemon, Pokemon Weight Class, and Pokemon Generation to continue")   
     }
 }

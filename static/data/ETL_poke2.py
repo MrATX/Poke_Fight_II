@@ -153,7 +153,7 @@ match_vars_dict = {}
 # Radios
 # nplayers
 nplayers_radio_values = ["1","2"]
-nplayers_radio_ids = ["One Player","Two Player"]
+nplayers_radio_ids = ["oneplayerradio","twoplayerradio"]
 nplayers_radio_text = ["One Player","Two Player"]
 nplayers_ = [nplayers_radio_values,nplayers_radio_ids,nplayers_radio_text]
 nplayers_radios = {

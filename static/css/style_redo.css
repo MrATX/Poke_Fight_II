@@ -4,11 +4,23 @@ div{
     align-items:center;
     vertical-align:middle;
 }
+.navbar-brand{
+    cursor:pointer;
+}
+.jumbotron{
+    background-color:burlywood;
+    color:teal;
+}
 #body{
     background-color:black;
 }
 #navolink{
     color:white;
+}
+button{
+    background-color:teal;
+    color:white;
+    font-weight:bold;
 }
 /* TYPE CHARTS --------------------------------------------------------------------- */
 /* TAB STUFFS ----------------------------- */
@@ -66,7 +78,7 @@ div{
     color:burlywood;
     border:1px solid teal;
 }
-.typetable_wrapper{
+.typetable_wrapper,.rosterselect_wrapper{
     overflow-y:auto;
     overflow-x:auto;
     height:666px;
@@ -216,20 +228,25 @@ tbody,thead{
 
 /* MATCH SETUP--------------------------------------------------------------------- */
 /* Radios Styling */
-#radios_container{
+#radios_container,#nameinput_container,#rosterselect_container{
     width:85%;
-    justify-content:center;
-    text-align:center;
+    margin-top:20px;
 }
 #prompt_jumbo{
     background-color:maroon;
 }
 .radio_prompt{
-    color:black;
+    color:teal;
 }
 .radio{
-    color:teal;
+    color:black;
     margin-right:15px;
     font-size:larger;
+}
+/* Name Input Styling */
+.nameinput{
+    width:85%;
+    font-size:xx-large;
+    text-align:center;
 }
 /* END MATCH SETUP------------------------------------------------------------------ */
