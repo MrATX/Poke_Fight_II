@@ -176,7 +176,7 @@ npoke_radios = {
 }
 # weight_class
 weight_class_radio_values = ["light","middle","cruiser","heavy","legendary","all"]
-weight_class_radio_ids = ["Lightweight","Middleweight","Cruiserweight","Heavyweight","Legendary",""]
+weight_class_radio_ids = ["Lightweight","Middleweight","Cruiserweight","Heavyweight","Legendary","allclasses"]
 weight_class_radio_text = ["Lightweight","Middleweight","Cruiserweight","Heavyweight","Legendary","All Classes"]
 weight_class_radios = {
     "name":"weight_class",

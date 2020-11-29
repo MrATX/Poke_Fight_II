@@ -205,6 +205,11 @@ tbody,thead{
 }
 .pokedex_row{
     align-items:center;
+    background-color:none;
+}
+.pokedex_row_checked{
+    align-items:center;
+    background-color:salmon;
 }
 .pokedex_sprite{
     width:150px;
@@ -231,6 +236,9 @@ tbody,thead{
 #radios_container,#nameinput_container,#rosterselect_container{
     width:85%;
     margin-top:20px;
+}
+#rosterselect_container{
+    width:100%;
 }
 #prompt_jumbo{
     background-color:maroon;

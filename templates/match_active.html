@@ -36,14 +36,14 @@
 
 <body id="body">
   <!-- Hidden Variable Storage -->
-  <div id="nplayers_div"></div>
-  <div id="npoke_div"></div>
-  <div id="weight_class_div"></div>
-  <div id="generation_div"></div>
-  <div id="p1_name_div"></div>
-  <div id="p1_roster_div"></div>
-  <div id="p2_name_div"></div>
-  <div id="p2_roster_div"></div>
+  <div id="nplayers_div" style="display:none;"></div>
+  <div id="npoke_div" style="display:none;"></div>
+  <div id="weight_class_div" style="display:none;"></div>
+  <div id="generation_div" style="display:none;"></div>
+  <div id="p1_name_div" style="display:none;"></div>
+  <div id="p1_roster_div" style="display:none;"></div>
+  <div id="p2_name_div" style="display:none;"></div>
+  <div id="p2_roster_div" style="display:none;"></div>
   <!-- RADIOS -------------------------------------------->
   <!-- Radios for Selecting Match Parameters -->
   <div class="container-fluid" id="radios_container">
@@ -51,7 +51,7 @@
     <npoke_radiosdiv></npoke_radiosdiv>
     <weight_class_radiosdiv></weight_class_radiosdiv>
     <generation_radiosdiv></generation_radiosdiv>
-    <button onclick="clearradios()">Clear Radios</button>
+    <button onclick="xfer_matchvars2nameinput()">Continue</button>
   </div>
   <!-- Clear Radios & Load P1 Name Input -->
   <div class="row">
@@ -71,9 +71,9 @@
   <!-- <div class="container-fluid" id="rosterselect_container">
     <rosterselect></rosterselect>
   </div> -->
-  <div class="container-fluid">
+  <div class="container-fluid" id="rosterselect_container"  style="display:none;">
     <!-- Filter Buttons -->
-    <filter_buttons style="display:none;">
+    <!-- <filter_buttons style="display:none;">
       <type1_filter class="pokedex_filter"></type1_filter>
       <type2_filter class="pokedex_filter"></type2_filter>
       <weight_class_filter class="pokedex_filter"></weight_class_filter>
@@ -86,7 +86,7 @@
       </div>
     </filter_buttons>
     <button id="showfilters" onclick="show_filters()">Show Filters</button>
-    <button id="hidefilters" onclick="hide_filters()" style="display:none;">Hide Filters</button>
+    <button id="hidefilters" onclick="hide_filters()" style="display:none;">Hide Filters</button> -->
     <!-- Table Proper -->
     <div class="rosterselect_wrapper">
         <table class="pokedex">

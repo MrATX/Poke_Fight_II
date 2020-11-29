@@ -102,6 +102,7 @@ function roster_table(){
     }
 }
 
+
 function limit_checks(name,row_index){
     var checks = document.getElementsByName(name)
     var k = 0;
