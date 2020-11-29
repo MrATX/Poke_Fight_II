@@ -5,113 +5,92 @@
   <title>Poke Fight II</title>
   <!-- Bootstrap & Local CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="static/css/style.css">
-<!-- Close Head -->
+  <link rel="stylesheet" href="static/css/style_redo.css">
+    <!--NAVBAR--------------------------------------------------------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" onclick="leave_match()" style="color:gold;">Poke Fight II</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" id="navolink"><u>Play</u></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pokedex" id="navolink" target="_blank">Pokedex</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/types" id="navolink" target="_blank">Types</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/info_menu" id="navolink" target="_blank">Info</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  <!--NAVBAR END------------------------------------------------------------------->
+<!-- Close Header -->
 </head>
 
-<testerz></testerz>
 
-<body>
-<!-- Radios for selecting match variables -->
-<div class="container-fluid">
-    <!-- Will Post all selected values to next page (roster_select) -->
-    <form method='POST' action='/roster_select'>
-        <!-- Number of Players -->
-        <div class="jumbotron">
-            <div class="row">
-                <!-- <div class="col-md-12"> -->
-                    <h1 id="jumbotitle">
-                        # of Players
-                    </h1>
-                    <p id="jumbopara">
-                    <input type="radio" name="nplayers" value="1" id="One Player" onchange="radios_val('nplayers',value,id)"> One Player
-                    <input type="radio" name="nplayers" value="2" id="Two Player" onchange="radios_val('nplayers',value,id)"> Two Player
-                    </p>
-                <!-- </div> -->
-            </div>
-        </div>
-        <hr>
-        <!-- Number of Pokemon -->
-        <div class="jumbotron">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 id="jumbotitle">
-                        # of Pokemon
-                    </h1>
-                    <p id="jumbopara">
-                    <input type="radio" name="npoke" value="2" id="two" onchange="radios_val('npoke',value,id)"> 2
-                    <input type="radio" name="npoke" value="3" id="three" onchange="radios_val('npoke',value,id)"> 3
-                    <input type="radio" name="npoke" value="4" id="four" onchange="radios_val('npoke',value,id)"> 4
-                    <input type="radio" name="npoke" value="5" id="five" onchange="radios_val('npoke',value,id)"> 5
-                    <input type="radio" name="npoke" value="6" id="six" onchange="radios_val('npoke',value,id)"> 6
-                    </p>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <!-- Pokemon Weight Class -->
-        <div class="jumbotron">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 id="jumbotitle">
-                        Pokemon Weight Class
-                    </h1>
-                    <p id="jumbopara">
-                    <input type="radio" name="weight_class" value="feather" id=" Featherweight" onchange="radios_val('weight_class',value,id)"> Featherweight<br>
-                    <input type="radio" name="weight_class" value="light" id=" Lightweight" onchange="radios_val('weight_class',value,id)"> Lightweight<br>
-                    <input type="radio" name="weight_class" value="middle" id=" Middleweight" onchange="radios_val('weight_class',value,id)"> Middleweight<br>
-                    <input type="radio" name="weight_class" value="heavy" id=" Heavyweight" onchange="radios_val('weight_class',value,id)"> Heavyweight<br>
-                    <input type="radio" name="weight_class" value="legendary" id=" Legendary" onchange="radios_val('weight_class',value,id)"> Legendary<br>
-                    <input type="radio" name="weight_class" value="all" id="" onchange="radios_val('weight_class',value,id)"> All Pokemon
-                    </p>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <!-- Pokemon Generation -->
-        <div class="jumbotron">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 id="jumbotitle">
-                        Pokemon Generation
-                    </h1>
-                    <p id="jumbopara">
-                    <input type="radio" name="gen" value="1" id="1st" onchange="radios_val('gen',value,id)"> 1st Gen - Red & Blue<br>
-                    <input type="radio" name="gen" value="2" id="2nd" onchange="radios_val('gen',value,id)"> 2nd Gen - Silver & Gold<br>
-                    <input type="radio" name="gen" value="3" id="3rd" onchange="radios_val('gen',value,id)"> 3rd Gen - Ruby & Sapphire<br>
-                    <input type="radio" name="gen" value="4" id="4th" onchange="radios_val('gen',value,id)"> 4th Gen - Diamond & Pearl<br>
-                    <input type="radio" name="gen" value="5" id="5th" onchange="radios_val('gen',value,id)"> 5th Gen - Black & White<br>
-                    <input type="radio" name="gen" value="6" id="6th" onchange="radios_val('gen',value,id)"> 6th Gen - X & Y<br>
-                    <input type="radio" name="gen" value="7" id="7th" onchange="radios_val('gen',value,id)"> 7th Gen - Sun & Moon<br>
-                    <input type="radio" name="gen" value="8" id="8th" onchange="radios_val('gen',value,id)"> 8th Gen - Sword & Shield<br>
-                    <input type="radio" name="gen" value="all" id="any" onchange="radios_val('gen',value,id)"> All Generations
-                    </p>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <!-- Hidden Submit Button; Clicked by function tied to following button -->
-        <!-- POSTs options selected as variables into the next page (roster_select) -->
-        <div class="row" id="buttons">
-            <button id="setup_button" type="submit" value="Submit" style="display:none;"></button>
-        </div>
-        </form>
-        <!-- Submit button to control data entry before POST -->
-        <div class="row" id="buttons">
-            <button id="playbtn" onclick="beginmatch()">Continue</button>
-        </div>
-        <hr>
-        <hr>
-<!-- Close Main Container -->
-</div>
-<!-- Web Dependencies -->
-<script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="https://d3js.org/d3.v6.min.js"></script>
-<!-- Local JS -->
-<script src="../static/js/match_setup.js"></script>
+<body id="body">
+  <!-- Hidden Variable Storage -->
+  <div id="nplayers_div" style="display:none;"></div>
+  <div id="npoke_div" style="display:none;"></div>
+  <div id="weight_class_div" style="display:none;"></div>
+  <div id="generation_div" style="display:none;"></div>
+  <div id="p1_name_div" style="display:none;"></div>
+  <div id="p1_roster_div" style="display:none;"></div>
+  <div id="p2_name_div" style="display:none;"></div>
+  <div id="p2_roster_div" style="display:none;"></div>
+  <!-- RADIOS -------------------------------------------->
+  <!-- Radios for Selecting Match Parameters -->
+  <div class="container-fluid" id="radios_container">
+    <nplayers_radiosdiv></nplayers_radiosdiv>
+    <npoke_radiosdiv></npoke_radiosdiv>
+    <weight_class_radiosdiv></weight_class_radiosdiv>
+    <generation_radiosdiv></generation_radiosdiv>
+    <button onclick="xfer_matchvars2nameinput()">Continue</button>
+  </div>
+  <!-- Clear Radios & Load P1 Name Input -->
+  <div class="row">
+
+  </div>
+  <!-- END RADIOS -------------------------------------------->
+
+
+  <!-- NAME INPUT -------------------------------------------->
+  <div class="container-fluid" id="nameinput_container">
+    <nameinput></nameinput>
+  </div>
+  <!-- END NAME INPUT -------------------------------------------->
+
+
+  <!-- ROSTER SELECT -------------------------------------------->
+  <div class="container-fluid" id="rosterselect_container"  style="display:none;">
+    <rosterselectprompt></rosterselectprompt>
+    <!-- Table Proper -->
+    <div class="rosterselect_wrapper">
+        <table class="pokedex">
+            <thead class="pokedex_header"></thead>
+            <tbody class="pokedex_body"></tbody>
+        </table>
+    </div>
+  </div>
+  </div>
+  <!-- END ROSTER SELECT -------------------------------------------->
+
+
+
+
+
+  <!-- Web Dependencies -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <!-- Local JS -->
+  <script src="../static/js/match_setup.js"></script>
 <!-- Close Body -->
 </body>
-
-
 <!-- Close HTML -->
 </html>

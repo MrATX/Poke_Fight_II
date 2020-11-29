@@ -26,13 +26,8 @@ def info_menu():
 @poke2.route("/pokedex")
 def servePokedex():
     return render_template(
-        "pokedex2.html",
-        pokedex = pokedex,
-    )
-@poke2.route("/pokedex2")
-def servePokedex2():
-    return render_template(
         "pokedex.html",
+        pokedex = pokedex,
     )
 @poke2.route("/types")
 def types():
@@ -44,6 +39,7 @@ def types():
 def match_setup():
     return render_template(
         "match_setup.html",
+        pokedex = pokedex,
     )
 @poke2.route("/roster_select",methods=['GET','POST'])
 def roster_select():
