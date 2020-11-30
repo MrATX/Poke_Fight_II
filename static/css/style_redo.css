@@ -213,6 +213,10 @@ tbody,thead{
     background-color:salmon;
 }
 .pokedex_sprite{
+    transform:scale(1.66,1.66);
+}
+td{
+    height:200px;
 }
 .pokedex_name{
     text-align:center;
