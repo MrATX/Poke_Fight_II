@@ -13,9 +13,9 @@ weight_classes_dict = {
 }
 # Read & Clean Data
 pokemon = pd.read_csv("Pokemon.csv")
-pokemon = pokemon.loc[pokemon["Mega"]=="No"].reset_index()
-pokemon = pokemon.iloc[:,1:]
-pokemon = pokemon.drop(columns=["Mega"])
+# pokemon = pokemon.loc[pokemon["Mega"]=="No"].reset_index()
+# pokemon = pokemon.iloc[:,1:]
+# pokemon = pokemon.drop(columns=["Mega"])
 pokemon["weight_class"] = "hold"
 pokemon["img_url"] = "hold"
 pokemon["tableindex"] = "hold"
@@ -24,7 +24,9 @@ pokemon["type2img"] = "hold"
 totalpoke = pokemon.index.nunique()
 pokemon = pokemon.fillna(" - ")
 for i in range(0,totalpoke):
-    pokemon.iloc[i,14] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
+    pokemon_name = pokemon.iloc[i,1].lower()
+    pokemon.iloc[i,16] = f"https://projectpokemon.org/images/normal-sprite/{pokemon.iloc[i,14]}.gif"
+    # pokemon.iloc[i,14] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
     if pokemon.iloc[i,12] == "Yes":
         pokemon.iloc[i,12] = "Legendary"
     else:
@@ -41,7 +43,7 @@ weight_classes_dict = {
     "all":[0,1000]
 }
 gen_list = pokemon.loc[:,"Generation"].unique()
-pokedex_fields = ["num","name","type1","type2","total","hp","attack","defense","spatk","spdef","speed","generation","legendary","weight_class","img_url","tableindex","type1img","type2img"]
+pokedex_fields = ["num","name","type1","type2","total","hp","attack","defense","spatk","spdef","speed","generation","legendary","mega","altname","weight_class","img_url","tableindex","type1img","type2img"]
 type_imgs = {
     "Bug":"static/images/type_imgs/bug.png",
     "Dark":"static/images/type_imgs/dark.png",
@@ -68,13 +70,13 @@ wip_list_gen = []
 wip_dict_poke = {}
 for i in range(len(pokemon)):
     for j in range(len(pokedex_fields)):
-        pokemon.iloc[i,16] = type_imgs[pokemon.iloc[i,2]]
-        pokemon.iloc[i,17] = type_imgs[pokemon.iloc[i,3]]
+        pokemon.iloc[i,18] = type_imgs[pokemon.iloc[i,2]]
+        pokemon.iloc[i,19] = type_imgs[pokemon.iloc[i,3]]
         for k in weight_class_keys:
             if pokemon.iloc[i,12] == "Legendary":
-                pokemon.iloc[i,13] = "legendary"
+                pokemon.iloc[i,15] = "legendary"
             if pokemon.iloc[i,4] >= weight_classes_dict[k][0] and pokemon.iloc[i,4] < weight_classes_dict[k][1] and pokemon.iloc[i,12] == " - ":
-                    pokemon.iloc[i,13] = k
+                    pokemon.iloc[i,15] = k
         if type(pokemon.iloc[i,j])==str:
             wip_dict_poke[pokedex_fields[j]]=(pokemon.iloc[i,j])
         else:
