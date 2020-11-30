@@ -23,13 +23,17 @@ pokemon["type1img"] = "hold"
 pokemon["type2img"] = "hold"
 totalpoke = pokemon.index.nunique()
 pokemon = pokemon.fillna(" - ")
+image_exceptions = ["slowbro-galar","sirfetchd","kubfu","urshifu","urshifu-rapid-strike","zarude"]
 for i in range(0,totalpoke):
-    pokemon_name = pokemon.iloc[i,1].lower()
-    pokemon.iloc[i,16] = f"https://projectpokemon.org/images/normal-sprite/{pokemon.iloc[i,14]}.gif"
+    if pokemon.iloc[i,14] in image_exceptions:
+        pokemon.iloc[i,16] = f"https://projectpokemon.org/images/sprites-models/swsh-normal-sprites/{pokemon.iloc[i,14]}.gif"
+    if pokemon.iloc[i,14] not in image_exceptions:
+        pokemon.iloc[i,16] = f"https://projectpokemon.org/images/normal-sprite/{pokemon.iloc[i,14]}.gif"
+    # Previously used static images; missing images for expanded Pokedex, should still work fine for most Pokemon though
     # pokemon.iloc[i,14] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
     if pokemon.iloc[i,12] == "Yes":
         pokemon.iloc[i,12] = "Legendary"
-    else:
+    if pokemon.iloc[i,12] == "No":
         pokemon.iloc[i,12] = " - "
 # Create Variables
 # Setup Weight Classes

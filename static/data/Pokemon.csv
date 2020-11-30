@@ -849,7 +849,7 @@
 719,Diancie,Rock,Fairy,600,50,100,150,100,150,50,6,Yes,No,diancie
 719,Mega Diancie,Rock,Fairy,700,50,160,110,160,110,110,6,Yes,Yes,diancie-mega
 720,Hoopa,Psychic,Ghost,600,80,110,60,150,130,70,6,Yes,No,hoopa
-720,Hoopa,Psychic,Dark,680,80,160,60,170,130,80,6,Yes,No,hoopa
+720,Hoopa - Unbound,Psychic,Dark,680,80,160,60,170,130,80,6,Yes,No,hoopa-unbound
 721,Volcanion,Fire,Water,600,80,110,120,130,90,70,6,Yes,No,volcanion
 722,Rowlet,Grass,Flying,320,68,55,55,50,50,42,7,No,No,rowlet
 723,Dartrix,Grass,Flying,420,78,75,75,70,70,52,7,No,No,dartrix
@@ -871,18 +871,18 @@
 739,Crabrawler,Fighting,,338,47,82,57,42,47,63,7,No,No,crabrawler
 740,Crabominable,Fighting,Ice,478,97,132,77,62,67,43,7,No,No,crabominable
 741,Oricorio,Fire,Flying,476,75,70,70,98,70,93,7,No,No,oricorio
-741,Oricorio,Electric,Flying,476,75,70,70,98,70,93,7,No,No,oricorio
-741,Oricorio,Psychic,Flying,476,75,70,70,98,70,93,7,No,No,oricorio
-741,Oricorio,Ghost,Flying,476,75,70,70,98,70,93,7,No,No,oricorio
+741,Oricorio - Pom Pom,Electric,Flying,476,75,70,70,98,70,93,7,No,No,oricorio-pompom
+741,Oricorio - Pau,Psychic,Flying,476,75,70,70,98,70,93,7,No,No,oricorio-pau
+741,Oricorio - Sensu,Ghost,Flying,476,75,70,70,98,70,93,7,No,No,oricorio-sensu
 742,Cutiefly,Bug,Fairy,304,40,45,40,55,40,84,7,No,No,cutiefly
 743,Ribombee,Bug,Fairy,464,60,55,60,95,70,124,7,No,No,ribombee
 744,Rockruff,Rock,,280,45,65,40,30,40,60,7,No,No,rockruff
-744,Rockruff,Rock,,280,45,65,40,30,40,60,7,No,No,rockruff
+744,Rockruff - Own Tempo,Rock,,280,45,65,40,30,40,60,7,No,No,rockruff
 745,Lycanroc,Rock,,487,75,115,65,55,65,112,7,No,No,lycanroc
-745,Lycanroc,Rock,,487,85,115,75,55,75,82,7,No,No,lycanroc
-745,Lycanroc,Rock,,487,75,117,65,55,65,110,7,No,No,lycanroc
+745,Lycanroc - Midnight,Rock,,487,85,115,75,55,75,82,7,No,No,lycanroc-midnight
+745,Lycanroc - Dusk,Rock,,487,75,117,65,55,65,110,7,No,No,lycanroc-dusk
 746,Wishiwashi,Water,,175,45,20,20,25,25,40,7,No,No,wishiwashi
-746,Wishiwashi,Water,,620,45,140,130,140,135,30,7,No,No,wishiwashi
+746,Wishiwashi - School,Water,,620,45,140,130,140,135,30,7,No,No,wishiwashi-school
 747,Mareanie,Poison,Water,305,50,53,62,43,52,45,7,No,No,mareanie
 748,Toxapex,Poison,Water,495,50,63,152,53,142,35,7,No,No,toxapex
 749,Mudbray,Ground,,385,70,100,70,45,55,45,7,No,No,mudbray
@@ -908,10 +908,10 @@
 769,Sandygast,Ghost,Ground,320,55,55,80,70,45,15,7,No,No,sandygast
 770,Palossand,Ghost,Ground,480,85,75,110,100,75,35,7,No,No,palossand
 771,Pyukumuku,Water,,410,55,60,130,30,130,5,7,No,No,pyukumuku
-772,Type: Null,Normal,,534,95,95,95,95,95,59,7,Yes,No,type: null
+772,Type: Null,Normal,,534,95,95,95,95,95,59,7,Yes,No,typenull
 773,Silvally,Normal,,570,95,95,95,95,95,95,7,Yes,No,silvally
 774,Minior,Rock,Flying,440,60,60,100,60,100,60,7,No,No,minior
-774,Minior,Rock,Flying,500,60,100,60,100,60,120,7,No,No,minior
+774,Minior - Core,Rock,Flying,500,60,100,60,100,60,120,7,No,No,minior-red
 775,Komala,Normal,,480,65,115,65,75,95,65,7,No,No,komala
 776,Turtonator,Fire,Dragon,485,60,78,135,91,85,36,7,No,No,turtonator
 777,Togedemaru,Electric,Steel,435,65,98,63,40,73,96,7,No,No,togedemaru
@@ -922,10 +922,10 @@
 782,Jangmo-o,Dragon,,300,45,55,65,45,45,45,7,No,No,jangmo-o
 783,Hakamo-o,Dragon,Fighting,420,55,75,90,65,70,65,7,No,No,hakamo-o
 784,Kommo-o,Dragon,Fighting,600,75,110,125,100,105,85,7,No,No,kommo-o
-785,Tapu Koko,Electric,Fairy,570,70,115,85,95,75,130,7,Yes,No,tapu koko
-786,Tapu Lele,Psychic,Fairy,570,70,85,75,130,115,95,7,Yes,No,tapu lele
-787,Tapu Bulu,Grass,Fairy,570,70,130,115,85,95,75,7,Yes,No,tapu bulu
-788,Tapu Fini,Water,Fairy,570,70,75,115,95,130,85,7,Yes,No,tapu fini
+785,Tapu Koko,Electric,Fairy,570,70,115,85,95,75,130,7,Yes,No,tapukoko
+786,Tapu Lele,Psychic,Fairy,570,70,85,75,130,115,95,7,Yes,No,tapulele
+787,Tapu Bulu,Grass,Fairy,570,70,130,115,85,95,75,7,Yes,No,tapubulu
+788,Tapu Fini,Water,Fairy,570,70,75,115,95,130,85,7,Yes,No,tapufini
 789,Cosmog,Psychic,,200,43,29,31,29,31,37,7,Yes,No,cosmog
 790,Cosmoem,Psychic,,400,43,29,131,29,131,37,7,Yes,No,cosmoem
 791,Solgaleo,Psychic,Steel,680,137,137,107,113,89,97,7,Yes,No,solgaleo
@@ -938,9 +938,9 @@
 798,Kartana,Grass,Steel,570,59,181,131,59,31,109,7,Yes,No,kartana
 799,Guzzlord,Dark,Dragon,570,223,101,53,97,53,43,7,Yes,No,guzzlord
 800,Necrozma,Psychic,,600,97,107,101,127,89,79,7,Yes,No,necrozma
-800,Necrozma,Psychic,Steel,680,97,157,127,113,109,77,7,Yes,No,necrozma
-800,Necrozma,Psychic,Ghost,680,97,113,109,157,127,77,7,Yes,No,necrozma
-800,Necrozma,Psychic,Dragon,754,97,167,97,167,97,129,7,Yes,No,necrozma
+800,Necrozma - Dusk Mane,Psychic,Steel,680,97,157,127,113,109,77,7,Yes,No,necrozma-dusk-mane
+800,Necrozma - Dawn Wings,Psychic,Ghost,680,97,113,109,157,127,77,7,Yes,No,necrozma-dawn-wings
+800,Necrozma - Ultra,Psychic,Dragon,754,97,167,97,167,97,129,7,Yes,No,necrozma-ultra
 801,Magearna,Steel,Fairy,600,80,95,115,130,115,65,7,Yes,No,magearna
 802,Marshadow,Fighting,Ghost,600,90,125,80,90,90,125,7,Yes,No,marshadow
 803,Poipole,Poison,,420,67,73,67,73,67,73,7,Yes,No,poipole
@@ -962,8 +962,8 @@
 819,Skwovet,Normal,,260,70,55,40,35,35,25,8,No,No,skwovet
 820,Greedent,Normal,,420,120,95,55,55,75,20,8,No,No,greedent
 821,Rookidee,Flying,,275,38,47,65,33,35,57,8,No,No,rookidee
-822,Convisquire,Flying,,365,68,67,55,43,55,77,8,No,No,convisquire
-823,Conviknight,Flying,Steel,495,98,87,105,53,85,67,8,No,No,conviknight
+822,Corvisquire,Flying,,365,68,67,55,43,55,77,8,No,No,corvisquire
+823,Corviknight,Flying,Steel,495,98,87,105,53,85,67,8,No,No,corviknight
 824,Blipbug,Bug,,180,25,20,20,25,45,45,8,No,No,blipbug
 825,Dottler,Bug,Psychic,335,50,35,80,50,90,30,8,No,No,dottler
 826,Orbeetle,Bug,Psychic,505,60,45,110,80,120,90,8,No,No,orbeetle
@@ -1006,8 +1006,8 @@
 862,Obstagoon,Dark,Normal,520,93,90,101,60,81,95,8,No,No,obstagoon
 863,Perrserker,Steel,,440,70,110,100,50,60,50,8,No,No,perrserker
 864,Cursola,Ghost,,510,60,95,50,145,130,30,8,No,No,cursola
-865,Sirfetch'd,Fighting,,507,62,135,95,68,82,65,8,No,No,sirfetch'd
-866,Mr. Rime,Ice,Psychic,520,80,85,75,110,100,70,8,No,No,mr. rime
+865,Sirfetch'd,Fighting,,507,62,135,95,68,82,65,8,No,No,sirfetchd
+866,Mr. Rime,Ice,Psychic,520,80,85,75,110,100,70,8,No,No,mr.rime
 867,Runerigus,Ground,Ghost,483,58,95,145,50,105,30,8,No,No,runerigus
 868,Milcery,Fairy,,270,45,40,40,50,61,34,8,No,No,milcery
 869,Alcremie,Fairy,,495,65,60,75,110,121,64,8,No,No,alcremie
@@ -1016,10 +1016,10 @@
 872,Snom,Ice,Bug,185,30,25,35,45,30,20,8,No,No,snom
 873,Frosmoth,Ice,Bug,475,70,65,60,125,90,65,8,No,No,frosmoth
 874,Stonjourner,Rock,,470,100,125,135,20,20,70,8,No,No,stonjourner
-875,Eiscue,Ice,,470,75,80,110,65,90,50,8,No,No,eiscue
-875,Eiscue,Ice,,470,75,80,70,65,50,130,8,No,No,eiscue
-876,Indeedee M,Psychic,Normal,475,60,65,55,105,95,95,8,No,No,indeedee m
-876,Indeedee F,Psychic,Normal,475,70,55,65,95,105,85,8,No,No,indeedee f
+875,Eiscue - Ice Face,Ice,,470,75,80,110,65,90,50,8,No,No,eiscue
+875,Eiscue - Noice Face,Ice,,470,75,80,70,65,50,130,8,No,No,eiscue-noice-face
+876,Indeedee M,Psychic,Normal,475,60,65,55,105,95,95,8,No,No,indeedee
+876,Indeedee F,Psychic,Normal,475,70,55,65,95,105,85,8,No,No,indeedee-f
 877,Morpeko,Electric,Dark,436,58,95,58,70,58,97,8,No,No,morpeko
 878,Cufant,Steel,,330,72,80,49,40,49,40,8,No,No,cufant
 879,Copperajah,Steel,,500,122,130,69,80,69,30,8,No,No,copperajah
@@ -1032,11 +1032,11 @@
 886,Drakloak,Dragon,Ghost,410,68,80,50,60,50,102,8,No,No,drakloak
 887,Dragapult,Dragon,Ghost,600,88,120,75,100,75,142,8,No,No,dragapult
 888,Zacian,Fairy,,670,92,130,115,80,115,138,8,Yes,No,zacian
-888,Zacian,Fairy,Steel,720,92,170,115,80,115,148,8,Yes,No,zacian
-889,Zamazanta,Fighting,,670,92,130,115,80,115,138,8,Yes,No,zamazanta
-889,Zamazanta,Fighting,Steel,720,92,130,145,80,145,128,8,Yes,No,zamazanta
+888,Zacian - Crowned Sword,Fairy,Steel,720,92,170,115,80,115,148,8,Yes,No,zacian-crowned-sword
+889,Zamazenta,Fighting,,670,92,130,115,80,115,138,8,Yes,No,zamazenta
+889,Zamazenta - Crowned Shield,Fighting,Steel,720,92,130,145,80,145,128,8,Yes,No,zamazenta-crowned-shield
 890,Eternatus,Poison,Dragon,690,140,85,95,145,95,130,8,Yes,No,eternatus
 891,Kubfu,Fighting,,385,60,90,60,53,50,72,8,Yes,No,kubfu
 892,Urshifu,Fighting,Dark,550,100,130,100,63,60,97,8,Yes,No,urshifu
-892,Urshifu,Fighting,Water,550,100,130,100,63,60,97,8,Yes,No,urshifu
+892,Urshifu - Rapid Strike,Fighting,Water,550,100,130,100,63,60,97,8,Yes,No,urshifu-rapid-strike
 893,Zarude,Dark,Grass,600,105,120,105,70,95,105,8,Yes,No,zarude
