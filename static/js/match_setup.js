@@ -145,11 +145,13 @@ function nameinputbox(player_no){
 }
 // XFER Name Input to Roster Select
 function xfer_name2roster(player_no){
-    name = d3.select(".nameinput")["_groups"][0][0].value
-    rosterselectprompttext = name+", select "+npoke+" Pokemon"
+    var name = d3.select(".nameinput")["_groups"][0][0].value
+    var rosterselectprompttext = name+", select "+npoke+" Pokemon"
     var buttontext = "Begin Match"
+    var buttonfunction = "xfer_player2match("+player_no+")"
     if(nplayers==="2" && player_no===1){
         buttontext = "Continue"
+        buttonfunction = "xfer_p12p2()"
     }
     if(name!==""){
         var player_div = "#p"+player_no+"_name_div"
@@ -168,6 +170,7 @@ function xfer_name2roster(player_no){
         d3.select("rosterselectprompt")
             .select(".jumbotron")
             .append("button")
+            .attr("onclick",buttonfunction)
             .text(buttontext)
         d3.select("#rosterselect_container")["_groups"][0][0].style.display = "block"
         d3.select("nameinput").html("")
@@ -184,6 +187,44 @@ function xfer_name2roster(player_no){
 // WIPWIPWIP
 
 // ROSTER SELECT ---------------------------------------------------------
+// Xfer P1 to P2
+function xfer_p12p2(){
+    var k = 0
+    var checks = document.getElementsByName("roster_check")
+    for(var i=0, length=checks.length; i<length; i++){
+        if(checks[i].checked===true){
+            k = k + 1
+        }
+    }
+    if(String(k) !== npoke){
+        var alerttext = "Please select "+npoke+" Pokemon before continuing"
+        alert(alerttext)
+    }
+    if(String(k) === npoke){
+        if(confirm("Are these the Pokemon you would like to take into battle?")){
+            var names = document.getElementsByClassName("pokedex_name")
+            for(var i=0, length=checks.length; i<length; i++){
+                if(checks[i].checked===true){
+                    d3.select("#p1_roster_div")
+                        .append("p")
+                        .attr("id","p1pokemon")
+                        .text(names[i].innerText)
+                }
+            }
+            d3.select("rosterselectprompt").html("")
+            d3.select(".pokedex_header").html("")
+            d3.select(".pokedex_body").html("")
+            nameinputbox(2)
+        }
+    }
+}
+// Xfer player to match
+function xfer_player2match(player_no){
+    console.log("xfer_player2match")
+}
+
+
+
 // Base function rendering table with given list of Pokemon
 function pokedex_table(pokedex,headers){
     for(var i=0,length=headers.length;i<length;i++){
