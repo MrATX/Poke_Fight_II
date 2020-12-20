@@ -220,6 +220,41 @@ function xfer_p12p2(){
 }
 // Xfer player to match
 function xfer_player2match(player_no){
+    if(player_no === 1){
+        var player_div = "#p1_roster_div"
+        var player_poke_id = "p1pokemon"
+    }
+    if(player_no === 2){
+        var player_div = "#p2_roster_div"
+        var player_poke_id = "p2pokemon"
+    }
+    var k = 0
+    var checks = document.getElementsByName("roster_check")
+    for(var i=0, length=checks.length; i<length; i++){
+        if(checks[i].checked===true){
+            k = k + 1
+        }
+    }
+    if(String(k) !== npoke){
+        var alerttext = "Please select "+npoke+" Pokemon before continuing"
+        alert(alerttext)
+    }
+    if(String(k) === npoke){
+        if(confirm("Are these the Pokemon you would like to take into battle?")){
+            var names = document.getElementsByClassName("pokedex_name")
+            for(var i=0, length=checks.length; i<length; i++){
+                if(checks[i].checked===true){
+                    d3.select(player_div)
+                        .append("p")
+                        .attr("id",player_poke_id)
+                        .text(names[i].innerText)
+                }
+            }
+            d3.select("rosterselectprompt").html("")
+            d3.select(".pokedex_header").html("")
+            d3.select(".pokedex_body").html("")
+        }
+    }
     console.log("xfer_player2match")
 }
 
@@ -228,6 +263,7 @@ function xfer_player2match(player_no){
 // Base function rendering table with given list of Pokemon
 function pokedex_table(pokedex,headers){
     for(var i=0,length=headers.length;i<length;i++){
+        var click_fun = "click_tr("+pokedex[i].tableindex+")"
         d3.select("thead")
             .append("th")
             .text(headers[i])
@@ -238,6 +274,7 @@ function pokedex_table(pokedex,headers){
         .enter()
         .append("tr")
         .attr("class","pokedex_row")
+        .attr("onclick",d=>`click_tr(${d.tableindex})`)
         .html(d => `<td id="poketablerow"><input type="checkbox" value="${d.tableindex}" name="roster_check" onchange="limit_checks(name,value)"></td>
             <td><img src='${d.img_url}' class="pokedex_sprite"></td>
             <td class="pokedex_name">${d.name}</td>
@@ -343,5 +380,12 @@ function limit_checks(name,row_index){
         checks[row_index].checked = false
         poke_row[cur_row].className = "pokedex_row"
     }
+}
+// Table rows click to check checkboxes
+function click_tr(row_index){
+    var rowid = String(row_index)
+    var checks = document.getElementsByName("roster_check")
+    console.log(checks[rowid])
+    checks[rowid].click()
 }
 // END ROSTER SELECT ---------------------------------------------------------
