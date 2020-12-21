@@ -40,10 +40,15 @@
   <div id="npoke_div" style="display:none;"></div>
   <div id="weight_class_div" style="display:none;"></div>
   <div id="generation_div" style="display:none;"></div>
-  <div id="p1_name_div" style="display:none;"></div>
+  <!-- Open POST form to pass data to match_active -->
+  <form method='POST' action='/match_active'>
+  <input id="p1_name_div" name="p1_name" value="hold" style="display:none;">
+  <!-- <input id="p1_roster_div" value="hold" style="display:none;"> -->
   <div id="p1_roster_div" style="display:none;"></div>
-  <div id="p2_name_div" style="display:none;"></div>
-  <div id="p2_roster_div" style="display:none;"></div>
+  <div id="p2_name_div" name="p2_name" style="display:none;"></div>
+  <div id="p2_roster_div" name="p2_roster" style="display:none;"></div>
+  <button id="ghost_submit" type="submit" value="Submit" style="display:none;"></button>
+  </form>
   <!-- RADIOS -------------------------------------------->
   <!-- Radios for Selecting Match Parameters -->
   <div class="container-fluid" id="radios_container">
@@ -54,9 +59,9 @@
     <button onclick="xfer_matchvars2nameinput()">Continue</button>
   </div>
   <!-- Clear Radios & Load P1 Name Input -->
-  <div class="row">
+  <!-- <div class="row">
 
-  </div>
+  </div> -->
   <!-- END RADIOS -------------------------------------------->
 
 

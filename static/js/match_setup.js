@@ -156,10 +156,10 @@ function xfer_name2roster(player_no){
     if(name!==""){
         var player_div = "#p"+player_no+"_name_div"
         if(player_no===1){
-            d3.select(player_div).text(name)
+            d3.select(player_div).attr("value",name)
         }
         if(player_no===2){
-            d3.select(player_div).text(name)
+            d3.select(player_div).attr("value",name)
         }
         d3.select("rosterselectprompt")
             .append("div")
@@ -205,10 +205,10 @@ function xfer_p12p2(){
             var names = document.getElementsByClassName("pokedex_name")
             for(var i=0, length=checks.length; i<length; i++){
                 if(checks[i].checked===true){
+                    var input_div = "<input value="+names[i].innerText+" name='p1pokemon'>";
                     d3.select("#p1_roster_div")
-                        .append("p")
-                        .attr("id","p1pokemon")
-                        .text(names[i].innerText)
+                        .append("div")
+                        .html(input_div)
                 }
             }
             d3.select("rosterselectprompt").html("")
@@ -245,8 +245,9 @@ function xfer_player2match(player_no){
             for(var i=0, length=checks.length; i<length; i++){
                 if(checks[i].checked===true){
                     d3.select(player_div)
-                        .append("p")
-                        .attr("id",player_poke_id)
+                        .append("input")
+                        .attr("name",player_poke_id)
+                        .attr("value",names[i].innerText)
                         .text(names[i].innerText)
                 }
             }
@@ -255,7 +256,7 @@ function xfer_player2match(player_no){
             d3.select(".pokedex_body").html("")
         }
     }
-    console.log("xfer_player2match")
+    document.getElementById("ghost_submit").click()
 }
 
 
@@ -263,7 +264,6 @@ function xfer_player2match(player_no){
 // Base function rendering table with given list of Pokemon
 function pokedex_table(pokedex,headers){
     for(var i=0,length=headers.length;i<length;i++){
-        var click_fun = "click_tr("+pokedex[i].tableindex+")"
         d3.select("thead")
             .append("th")
             .text(headers[i])

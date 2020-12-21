@@ -58,10 +58,18 @@ def roster_select():
         )
 @poke2.route("/match_active",methods=['GET','POST'])
 def match_active():
-    return render_template(
-        'match_active.html',
-        pokedex = pokedex,
-    )
+    if request.method == 'POST':
+        p1_name = request.form['p1_name']
+        # p1_roster = request.form['p1_roster']
+        # p2_name = request.form['p2_name']
+        # p2_roster = request.form['p2_roster']
+        return render_template(
+            'match_active.html',
+            p1_name = p1_name,
+            # p1_roster = p1_roster,
+            # p2_name = p2_name,
+            # p2_roster = p2_roster,
+        )
 @poke2.route("/match_over")
 def match_over():
     return render_template(

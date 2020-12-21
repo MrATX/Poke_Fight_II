@@ -1,21 +1,8 @@
 import pandas as pd
 import pymongo
 ### Pokedex ---------------------------
-# Setup Weight Classes
-weight_class_keys = ["light","middle","cruiser","heavy","legendary","all"]
-weight_classes_dict = {
-    "light":[0,300],
-    "middle":[300,400],
-    "cruiser":[400,500],
-    "heavy":[500,1000],
-    "legendary":[0,1000],
-    "all":[0,1000]
-}
 # Read & Clean Data
 pokemon = pd.read_csv("Pokemon.csv")
-# pokemon = pokemon.loc[pokemon["Mega"]=="No"].reset_index()
-# pokemon = pokemon.iloc[:,1:]
-# pokemon = pokemon.drop(columns=["Mega"])
 pokemon["weight_class"] = "hold"
 pokemon["img_url"] = "hold"
 pokemon["tableindex"] = "hold"
@@ -37,13 +24,14 @@ for i in range(0,totalpoke):
         pokemon.iloc[i,12] = " - "
 # Create Variables
 # Setup Weight Classes
-weight_class_keys = ["light","middle","cruiser","heavy"]
+weight_class_keys = ["feather","light","welter","middle","cruiser","heavy"]
 weight_classes_dict = {
-    "light":[0,300],
-    "middle":[300,400],
-    "cruiser":[400,500],
-    "heavy":[500,1000],
-    "legendary":[0,1000],
+    "feather":[0,300],
+    "light":[300,400],
+    "welter":[400,500],
+    "middle":[500,600],
+    "cruiser":[600,700],
+    "heavy":[700,800],
     "all":[0,1000]
 }
 gen_list = pokemon.loc[:,"Generation"].unique()
@@ -77,9 +65,7 @@ for i in range(len(pokemon)):
         pokemon.iloc[i,18] = type_imgs[pokemon.iloc[i,2]]
         pokemon.iloc[i,19] = type_imgs[pokemon.iloc[i,3]]
         for k in weight_class_keys:
-            if pokemon.iloc[i,12] == "Legendary":
-                pokemon.iloc[i,15] = "legendary"
-            if pokemon.iloc[i,4] >= weight_classes_dict[k][0] and pokemon.iloc[i,4] < weight_classes_dict[k][1] and pokemon.iloc[i,12] == " - ":
+            if pokemon.iloc[i,4] >= weight_classes_dict[k][0] and pokemon.iloc[i,4] < weight_classes_dict[k][1]:
                     pokemon.iloc[i,15] = k
         if type(pokemon.iloc[i,j])==str:
             wip_dict_poke[pokedex_fields[j]]=(pokemon.iloc[i,j])
@@ -181,9 +167,9 @@ npoke_radios = {
     "text":npoke_radio_text
 }
 # weight_class
-weight_class_radio_values = ["light","middle","cruiser","heavy","legendary","all"]
-weight_class_radio_ids = ["Lightweight","Middleweight","Cruiserweight","Heavyweight","Legendary","allclasses"]
-weight_class_radio_text = ["Lightweight","Middleweight","Cruiserweight","Heavyweight","Legendary","All Classes"]
+weight_class_radio_values = ["feather","light","welter","middle","cruiser","heavy","all"]
+weight_class_radio_ids = ["Featherweight","Lightweight","Welterweight","Middleweight","Cruiserweight","Heavyweight","allclasses"]
+weight_class_radio_text = ["Featherweight","Lightweight","Welterweight","Middleweight","Cruiserweight","Heavyweight","All Classes"]
 weight_class_radios = {
     "name":"weight_class",
     "prompt":"Choose Pokemon Weight Class",
