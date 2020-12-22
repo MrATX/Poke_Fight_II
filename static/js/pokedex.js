@@ -42,7 +42,7 @@ function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilte
         t2filter.push(" - ")
     }
     if(classfilter[0] === undefined || classfilter.includes("all")){
-        var classfilter = ["light","middle","cruiser","heavy","legendary"]
+        var classfilter = ["feather","light","welter","middle","cruiser","heavy"]
     }
     if(genfilter[0] === undefined || genfilter.includes("all")){
         var genfilter = [1,2,3,4,5,6,7,8]
