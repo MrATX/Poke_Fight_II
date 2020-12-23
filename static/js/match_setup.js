@@ -105,10 +105,10 @@ function xfer_matchvars2nameinput(){
         var matchconfirm_text = "Begin a " + nplayers_text + " match with " +
         npoke_text +" "+ weight_class_text + " from " + gen_text + " generation?"
         if(confirm(matchconfirm_text)){
-            d3.select("#nplayers_div").text(nplayers)
-            d3.select("#npoke_div").text(npoke)
-            d3.select("#weight_class_div").text(weight_class)
-            d3.select("#generation_div").text(generation)
+            d3.select("#nplayers_div").attr("value",nplayers)
+            d3.select("#npoke_div").attr("value",npoke)
+            d3.select("#weight_class_div").attr("value",weight_class)
+            d3.select("#generation_div").attr("value",generation)
             d3.select("#radios_container").html("")
             nameinputbox(1)
         }
@@ -190,6 +190,7 @@ function xfer_name2roster(player_no){
 // Xfer P1 to P2
 function xfer_p12p2(){
     var k = 0
+    var j = 0
     var checks = document.getElementsByName("roster_check")
     for(var i=0, length=checks.length; i<length; i++){
         if(checks[i].checked===true){
@@ -205,10 +206,17 @@ function xfer_p12p2(){
             var names = document.getElementsByClassName("pokedex_name")
             for(var i=0, length=checks.length; i<length; i++){
                 if(checks[i].checked===true){
-                    var input_div = "<input value="+names[i].innerText+" name='p1pokemon'>";
-                    d3.select("#p1_roster_div")
-                        .append("div")
-                        .html(input_div)
+                    j = j + 1
+                    roster_id = "p1pokemon" + String(j)
+                    var input_div = "<input value="+names[i].innerText+" name='"+roster_id+"'>";
+                    // d3.select("#p1_roster_div")
+                    //     .append("div")
+                    //     .html(input_div)
+                        d3.select("#p1_roster_div")
+                            .append("input")
+                            .attr("name",roster_id)
+                            .attr("value",names[i].innerText)
+                            .text(names[i].innerText)
                 }
             }
             d3.select("rosterselectprompt").html("")
@@ -229,6 +237,7 @@ function xfer_player2match(player_no){
         var player_poke_id = "p2pokemon"
     }
     var k = 0
+    var j = 0
     var checks = document.getElementsByName("roster_check")
     for(var i=0, length=checks.length; i<length; i++){
         if(checks[i].checked===true){
@@ -244,9 +253,11 @@ function xfer_player2match(player_no){
             var names = document.getElementsByClassName("pokedex_name")
             for(var i=0, length=checks.length; i<length; i++){
                 if(checks[i].checked===true){
+                    j = j + 1
+                    roster_id = player_poke_id + String(j)
                     d3.select(player_div)
                         .append("input")
-                        .attr("name",player_poke_id)
+                        .attr("name",roster_id)
                         .attr("value",names[i].innerText)
                         .text(names[i].innerText)
                 }
@@ -254,9 +265,9 @@ function xfer_player2match(player_no){
             d3.select("rosterselectprompt").html("")
             d3.select(".pokedex_header").html("")
             d3.select(".pokedex_body").html("")
+            document.getElementById("ghost_submit").click()
         }
     }
-    document.getElementById("ghost_submit").click()
 }
 
 

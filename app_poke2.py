@@ -59,16 +59,25 @@ def roster_select():
 @poke2.route("/match_active",methods=['GET','POST'])
 def match_active():
     if request.method == 'POST':
+        npoke = request.form['npoke']
         p1_name = request.form['p1_name']
-        # p1_roster = request.form['p1_roster']
-        # p2_name = request.form['p2_name']
-        # p2_roster = request.form['p2_roster']
+        p1_roster = []
+        for i in range(int(npoke)):
+            pokename = f"p1pokemon{i+1}"
+            wip = request.form[pokename]
+            p1_roster.append(wip)
+        p2_name = request.form['p2_name']
+        p2_roster = []
+        for i in range(int(npoke)):
+            pokename = f"p2pokemon{i+1}"
+            wip = request.form[pokename]
+            p2_roster.append(wip)
         return render_template(
             'match_active.html',
             p1_name = p1_name,
-            # p1_roster = p1_roster,
-            # p2_name = p2_name,
-            # p2_roster = p2_roster,
+            p1_roster = p1_roster,
+            p2_name = p2_name,
+            p2_roster = p2_roster,
         )
 @poke2.route("/match_over")
 def match_over():

@@ -35,17 +35,16 @@
 
 
 <body id="body">
-  <!-- Hidden Variable Storage -->
-  <div id="nplayers_div" style="display:none;"></div>
-  <div id="npoke_div" style="display:none;"></div>
-  <div id="weight_class_div" style="display:none;"></div>
-  <div id="generation_div" style="display:none;"></div>
   <!-- Open POST form to pass data to match_active -->
   <form method='POST' action='/match_active'>
-  <input id="p1_name_div" name="p1_name" value="hold" style="display:none;">
-  <!-- <input id="p1_roster_div" value="hold" style="display:none;"> -->
+  <!-- Hidden Variable Storage -->
+  <input id="nplayers_div" style="display:none;">
+  <input id="npoke_div" name="npoke" style="display:none;">
+  <input id="weight_class_div" style="display:none;">
+  <input id="generation_div" style="display:none;">
+  <input id="p1_name_div" name="p1_name" style="display:none;">
   <div id="p1_roster_div" style="display:none;"></div>
-  <div id="p2_name_div" name="p2_name" style="display:none;"></div>
+  <input id="p2_name_div" name="p2_name" style="display:none;">
   <div id="p2_roster_div" name="p2_roster" style="display:none;"></div>
   <button id="ghost_submit" type="submit" value="Submit" style="display:none;"></button>
   </form>
