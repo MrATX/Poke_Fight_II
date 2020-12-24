@@ -182,10 +182,6 @@ function xfer_name2roster(player_no){
 }
 // END NAME INPUT ---------------------------------------------------------
 
-// WIPWIPWIP
-// nameinputbox(1)
-// WIPWIPWIP
-
 // ROSTER SELECT ---------------------------------------------------------
 // Xfer P1 to P2
 function xfer_p12p2(){
@@ -203,20 +199,15 @@ function xfer_p12p2(){
     }
     if(String(k) === npoke){
         if(confirm("Are these the Pokemon you would like to take into battle?")){
-            var names = document.getElementsByClassName("pokedex_name")
+            var ids = document.getElementsByClassName("pokedex_id")
             for(var i=0, length=checks.length; i<length; i++){
                 if(checks[i].checked===true){
                     j = j + 1
                     roster_id = "p1pokemon" + String(j)
-                    var input_div = "<input value="+names[i].innerText+" name='"+roster_id+"'>";
-                    // d3.select("#p1_roster_div")
-                    //     .append("div")
-                    //     .html(input_div)
                         d3.select("#p1_roster_div")
                             .append("input")
                             .attr("name",roster_id)
-                            .attr("value",names[i].innerText)
-                            .text(names[i].innerText)
+                            .attr("value",ids[i].innerText)
                 }
             }
             d3.select("rosterselectprompt").html("")
@@ -250,7 +241,7 @@ function xfer_player2match(player_no){
     }
     if(String(k) === npoke){
         if(confirm("Are these the Pokemon you would like to take into battle?")){
-            var names = document.getElementsByClassName("pokedex_name")
+            var ids = document.getElementsByClassName("pokedex_id")
             for(var i=0, length=checks.length; i<length; i++){
                 if(checks[i].checked===true){
                     j = j + 1
@@ -258,14 +249,13 @@ function xfer_player2match(player_no){
                     d3.select(player_div)
                         .append("input")
                         .attr("name",roster_id)
-                        .attr("value",names[i].innerText)
-                        .text(names[i].innerText)
+                        .attr("value",ids[i].innerText)
                 }
             }
             d3.select("rosterselectprompt").html("")
             d3.select(".pokedex_header").html("")
             d3.select(".pokedex_body").html("")
-            document.getElementById("ghost_submit").click()
+            //document.getElementById("ghost_submit").click()
         }
     }
 }
@@ -299,7 +289,8 @@ function pokedex_table(pokedex,headers){
             <td class="pokedex_stat">${d.spdef}</td>
             <td class="pokedex_stat">${d.speed}</td>
             <td class="pokedex_stat">${d.generation}</td>
-            <td class="pokedex_stat">${d.legendary}`)
+            <td class="pokedex_stat">${d.legendary}
+            <td class="pokedex_id">${d.id}`)
 }
 // Middle Function generating list of Pokemon based on chosen filters
 function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter,genfilter){

@@ -22,6 +22,9 @@ for i in range(0,totalpoke):
         pokemon.iloc[i,12] = "Legendary"
     if pokemon.iloc[i,12] == "No":
         pokemon.iloc[i,12] = " - "
+pokemon = pokemon.reset_index()
+pokemon["id"] = pokemon["index"]
+pokemon = pokemon.drop(columns="index")
 # Create Variables
 # Setup Weight Classes
 weight_class_keys = ["feather","light","welter","middle","cruiser","heavy"]
@@ -35,7 +38,7 @@ weight_classes_dict = {
     "all":[0,1000]
 }
 gen_list = pokemon.loc[:,"Generation"].unique()
-pokedex_fields = ["num","name","type1","type2","total","hp","attack","defense","spatk","spdef","speed","generation","legendary","mega","altname","weight_class","img_url","tableindex","type1img","type2img"]
+pokedex_fields = ["num","name","type1","type2","total","hp","attack","defense","spatk","spdef","speed","generation","legendary","mega","altname","weight_class","img_url","tableindex","type1img","type2img","id"]
 type_imgs = {
     "Bug":"static/images/type_imgs/bug.png",
     "Dark":"static/images/type_imgs/dark.png",
