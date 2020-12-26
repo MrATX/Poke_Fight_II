@@ -34,97 +34,45 @@
 </head>
 
 <body>
+  <!-- Place hidden variables from match setup to grab with JS -->
+  <!-- <div class="hidden_vars">
+    <div id="npoke">{{npoke}}</div>
+    <div id="p1name">{{p1_name}}</div>
+    {% for i in p1_roster %}
+    <div name="p1roster">{{i}}</div>
+    {% endfor %}
+    <div id="p2name">{{p2_name}}</div>
+    {% for i in p2_roster %}
+    <div name="p2roster">{{i}}</div>
+    {% endfor %}
+  </div> -->
 
   <div id="p1rosterdiv"></div>
-  <div class="p2rosterdiv"></div>
-  <div class="container-fluid">
-    <div class="row">
-      <h1>JDUB's Pokemon Roster</h1>
+  <div id="p2rosterdiv"></div>
+  <div id="battleinterface"></div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2" id="p1spritebox">
+      <img src="https://projectpokemon.org/images/normal-sprite/umbreon.gif"><br>
     </div>
-    <div class="row">
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
+    <div class="col-md-6" id="battlelog"></div>
+    <div class="col-md-2" id="p2spritebox"><img src="https://projectpokemon.org/images/normal-sprite/yveltal.gif"></div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+      <button>Regular Attack Element 1</button>
+      <button>Regular Attack Element 2</button>
+      <button>Special Attack Element 1</button>
+      <button>Special Attack Element 2</button>
+      <hr>
+      <button>Swap Pokemon</button>
     </div>
-    <div class="row">
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/venusaur.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/blastoise.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/charizard.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/meganium.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/typhlosion.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/feraligatr.gif">
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <h1>iPwn's Pokemon Roster</h1>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-      <div class="col-md-2">
-        <img class="pokeball" src="static/images/pokeball.png">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/articuno.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/zapdos.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/moltres.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/raikou.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/entei.gif">
-      </div>
-      <div class="col-md-2">
-        <img class="activesprite" src="https://projectpokemon.org/images/normal-sprite/suicune.gif">
-      </div>
-    </div>
+    <div class="col-md-6"></div>
+    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
   </div>
 
 <!-- Web Dependencies -->

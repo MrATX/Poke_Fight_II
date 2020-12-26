@@ -74,6 +74,7 @@ def roster_select():
 #             p2_roster.append(wip)
 #         return render_template(
 #             'match_active.html',
+#             npoke = npoke,
 #             p1_name = p1_name,
 #             p1_roster = p1_roster,
 #             p2_name = p2_name,

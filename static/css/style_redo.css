@@ -271,4 +271,16 @@ td{
 .activesprite{
     margin-right:15px;
 }
+.hidden_vars{
+    display:none;
+}
+#p1spritebox{
+    transform:scaleX(-1);
+}
+#p1spritebox, #p2spritebox, #battlelog{
+    border:1px solid black;
+    height:250px;
+    align-items:center;
+    display: flex;
+}
 /* END MATCH ACTIVE------------------------------------------------------------------ */

@@ -255,7 +255,7 @@ function xfer_player2match(player_no){
             d3.select("rosterselectprompt").html("")
             d3.select(".pokedex_header").html("")
             d3.select(".pokedex_body").html("")
-            //document.getElementById("ghost_submit").click()
+            document.getElementById("ghost_submit").click()
         }
     }
 }
