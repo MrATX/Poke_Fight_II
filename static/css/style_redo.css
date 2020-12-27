@@ -274,13 +274,13 @@ td{
 .hidden_vars{
     display:none;
 }
-#p1spritebox{
+#p1battlesprite{
     transform:scaleX(-1);
 }
 #p1spritebox, #p2spritebox, #battlelog{
     border:1px solid black;
-    height:250px;
+    /* height:250px;
     align-items:center;
-    display: flex;
+    display: flex; */
 }
 /* END MATCH ACTIVE------------------------------------------------------------------ */
