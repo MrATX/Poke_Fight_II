@@ -268,19 +268,28 @@ td{
     width:100px;
     margin-right:15px;
 }
-.activesprite{
+.p1rostersprite,.p2rostersprite{
     margin-right:15px;
 }
 .hidden_vars{
     display:none;
 }
+.p1rostersprite{
+    transform:scaleX(-1);
+}
 #p1battlesprite{
     transform:scaleX(-1);
 }
-#p1spritebox, #p2spritebox, #battlelog{
-    border:1px solid black;
-    /* height:250px;
+#p1battlesprite,#p2battlesprite{
+}
+#p1spritebox, #p2spritebox{
+    border:5px solid purple;
+    height:725px;
+    display:inline-flex;
     align-items:center;
-    display: flex; */
+}
+#battlelog{
+    border:5px solid purple;
+    height:725px;
 }
 /* END MATCH ACTIVE------------------------------------------------------------------ */

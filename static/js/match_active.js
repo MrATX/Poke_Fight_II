@@ -9,7 +9,7 @@ function leave_match(){
 // WIPWIPWIP VARIABLES - Manual
 var npoke = "6"
 var p1name = "JDUB"
-var p1roster = ["172","237","238","558","559","820"]
+var p1roster = ["170","237","238","558","559","820"]
 var p2name = "iPwn"
 var p2roster = ["182","183","184","296","297","843"]
 // WIPWIPWIP VARIABLES
@@ -73,15 +73,17 @@ function render_player_roster(data,playerno){
         console.log(p2roster[i])
         if(playerno===1){
             var spriteurl = data[0].pokedex[parseInt(p1roster[i])].img_url
+            var spriteclass = "p1rostersprite"
         }
         if(playerno===2){
             var spriteurl = data[0].pokedex[parseInt(p2roster[i])].img_url
+            var spriteclass = "p2rostersprite"
         }
         d3.select(sprites_row_grab)
             .append("div")
             .attr("class","col-md-2")
             .append("img")
-            .attr("class","activesprite")
+            .attr("class",spriteclass)
             .attr("src",spriteurl)
     }
 }
