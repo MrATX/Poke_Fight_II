@@ -292,4 +292,10 @@ td{
     border:5px solid purple;
     height:725px;
 }
+#p1battlename{
+    transform:rotate(-90deg);
+}
+#p2battlename{
+    transform:rotate(90deg);
+}
 /* END MATCH ACTIVE------------------------------------------------------------------ */
