@@ -1,8 +1,11 @@
-div{
+div,#p1rosterdiv,#p2rosterdiv{
     text-align:center;
     justify-content:center;
     align-items:center;
     vertical-align:middle;
+}
+.col-md-2{
+    text-align:center;
 }
 .navbar-brand{
     cursor:pointer;
@@ -264,6 +267,9 @@ td{
 /* END MATCH SETUP------------------------------------------------------------------ */
 
 /* MATCH ACTIVE--------------------------------------------------------------------- */
+#p1rosterdiv{
+    text-align:right
+}
 .pokeball{
     width:100px;
     margin-right:15px;
@@ -284,18 +290,21 @@ td{
 }
 #p1spritebox, #p2spritebox{
     border:5px solid purple;
-    height:725px;
+    height:750px;
     display:inline-flex;
     align-items:center;
 }
 #battlelog{
     border:5px solid purple;
-    height:725px;
+    height:750px;
 }
 #p1battlename{
     transform:rotate(-90deg);
 }
 #p2battlename{
     transform:rotate(90deg);
+}
+#battletype{
+    width:50px;
 }
 /* END MATCH ACTIVE------------------------------------------------------------------ */
