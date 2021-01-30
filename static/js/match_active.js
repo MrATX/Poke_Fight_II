@@ -11,9 +11,15 @@ var npoke = "6"
 var p1name = "JDUB"
 var p1roster = ["170","237","238","558","559","820"]
 var p1active = "238"
+var p1rosterHP = []
+var wip_p1rosterHP = {}
+var p1rosterATKS = []
 var p2name = "iPwn"
 var p2roster = ["182","183","184","296","297","843"]
 var p2active = "843"
+var p2rosterHP = []
+var wip_p2rosterHP = {}
+var p2rosterATKS = []
 // WIPWIPWIP VARIABLES
 
 
@@ -36,13 +42,34 @@ var p2active = "843"
 // }
 
 // Create dictionaries for Pokemon HP for each roster to save HP changes
-function generate_rosterhparrays(data){
+function generate_rosterhparrays(data,p1rosterHP,p2rosterHP){
     for(i in p1roster){
         p1rosterHP[p1roster[i]] = data[0].pokedex[parseInt(p1roster[i])].hp
         p2rosterHP[p2roster[i]] = data[0].pokedex[parseInt(p2roster[i])].hp
     }
 }
-
+// Create dictionaries for Pokemon Attack Counts to save uses
+function generate_atkcountarrays(data,playerno,roster){
+    var wiprosteratks = {}
+    for(i in roster){
+        if(data[0].pokedex[parseInt(roster[i])].type2===" - "){
+            wiprosteratks[roster[i]] = [30,"NA",10,"NA"]
+        }
+        else{
+            wiprosteratks[roster[i]] = [15,15,5,5]
+        }
+    }
+    if(playerno===1){
+        for(i in wiprosteratks){
+            p1rosterATKS[i] = wiprosteratks[i]
+        }
+    }
+    if(playerno===2){
+        for(i in wiprosteratks){
+            p2rosterATKS[i] = wiprosteratks[i]
+        }
+    }
+}
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
 function render_player_roster(data,playerno){
     var roster_div = "#p"+playerno+"rosterdiv"
@@ -118,12 +145,12 @@ function render_player_roster(data,playerno){
         if(playerno===1){
             var rosterindex = p1roster[i]
             var rosterpokename = data[0].pokedex[parseInt(p1roster[i])].name
-            var rosterpokeHP = "HP - "+data[0].pokedex[parseInt(p1roster[i])].hp+" / "+p1rosterHP[p1roster[i]]
+            var rosterpokeHP = "HP - "+p1rosterHP[p1roster[i]]+" / "+data[0].pokedex[parseInt(p1roster[i])].hp
         }
         if(playerno===2){
             var rosterindex = p2roster[i]
             var rosterpokename = data[0].pokedex[parseInt(p2roster[i])].name
-            var rosterpokeHP = "HP - "+data[0].pokedex[parseInt(p2roster[i])].hp+" / "+p2rosterHP[p2roster[i]]
+            var rosterpokeHP = "HP - "+p2rosterHP[p2roster[i]]+" / "+data[0].pokedex[parseInt(p2roster[i])].hp
         }
         d3.select(text_row_grab)
             .append("div")
@@ -150,33 +177,29 @@ function render_battle_interface(data,p1active,p2active){
         .append("img")
         .attr("src",data[0].pokedex[parseInt(p1active)].img_url)
         .attr("id","p1battlesprite")
-    var rosterpokeHP = "HP - "+data[0].pokedex[parseInt(p1active)].hp+" / "+p1rosterHP[p1active]
+    var rosterpokeHP = "HP - "+p1rosterHP[p1active]+" / "+data[0].pokedex[parseInt(p1active)].hp
     d3.select("#p1battlecard")
         .append("div")
         .html(`${data[0].pokedex[parseInt(p1active)].name}
                 <br>${rosterpokeHP}<br>
                 <img id='battletype' src='${data[0].pokedex[parseInt(p1active)].type1img}'>
                 <img id='battletype' src='${data[0].pokedex[parseInt(p1active)].type2img}' alt=' - '>`)
-        .text(activepokeHP)
     d3.select("#p1battlecard")
         .append("span")
         .attr("id","p1buttons")
 }
-
-// Call function to create roster HP arrays
-var p1rosterHP = {}
-var p2rosterHP = {}
-d3.json("/pokedex_data").then(data=>
-    generate_rosterhparrays(data),
-    )
-// call functions to render rosters
-d3.json("/pokedex_data").then(data=>
-    render_player_roster(data,1)
-    )
-d3.json("/pokedex_data").then(data=>
-    render_player_roster(data,2)
-    )
-// Call function to render Battle Interface
-d3.json("/pokedex_data").then(data=>
+// Aggregate function to ensure array generation first
+function sigma_battle_interface(data){
+    generate_rosterhparrays(data,p1rosterHP,p2rosterHP),
+    p1rosterHP["238"] = 85,
+    p2rosterHP["843"] = 100,
+    generate_atkcountarrays(data,1,p1roster),
+    generate_atkcountarrays(data,2,p2roster),
+    render_player_roster(data,1),
+    render_player_roster(data,2),
     render_battle_interface(data,p1active,p2active)
+}
+// Call Aggregate Function to render Rosters & Battle interface
+d3.json("/pokedex_data").then(data=>
+    sigma_battle_interface(data)
     )
