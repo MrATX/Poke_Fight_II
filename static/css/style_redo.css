@@ -288,7 +288,7 @@ td{
 }
 #p1battlesprite,#p2battlesprite{
 }
-#p1spritebox, #p2spritebox{
+#p1battlemain, #p2battlemain{
     border:5px solid purple;
     height:750px;
     display:inline-flex;
@@ -298,6 +298,9 @@ td{
     border:5px solid purple;
     height:750px;
 }
+#battlelogtitle{
+    border-bottom:2px solid teal;
+}
 #p1battlename{
     transform:rotate(-90deg);
 }
@@ -306,5 +309,19 @@ td{
 }
 #battletype{
     width:50px;
+}
+#buttonimg{
+    width:60%;
+}
+#p1active_ATKtype1,
+#p1active_ATKtype2,
+#p1active_SPATKtype1,
+#p1active_SPATKtype2,
+#p2active_ATKtype1,
+#p2active_ATKtype2,
+#p2active_SPATKtype1,
+#p2active_SPATKtype2{
+    width:50%;
+    background-color:burlywood;
 }
 /* END MATCH ACTIVE------------------------------------------------------------------ */

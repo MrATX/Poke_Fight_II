@@ -10,6 +10,7 @@ function leave_match(){
 var npoke = "6"
 var p1name = "JDUB"
 var p1roster = ["170","237","238","558","559","820"]
+// 820
 var p1active = "238"
 var p1rosterHP = []
 var wip_p1rosterHP = {}
@@ -87,6 +88,8 @@ function render_player_roster(data,playerno){
         var roster_div = "#p2rosterdiv"
         var rosternametext = p2name+"'s Pokemon Roster"
     }
+    // Clear Roster div
+    d3.select(roster_div).html("")
     // Create rows for Player Name, Pokeballs, Sprites, & Text
     d3.select(roster_div)
         .append("div")
@@ -118,13 +121,11 @@ function render_player_roster(data,playerno){
     for(var i=0,length=parseInt(npoke);i<length;i++){
         if(playerno===1){
             var col_key = "p1col"+String(i)
-            var col_grab = "#"+col_key
             var spriteurl = data[0].pokedex[parseInt(p1roster[i])].img_url
             var spriteclass = "p1rostersprite"
         }
         if(playerno===2){
             var col_key = "p2col"+String(i)
-            var col_grab = "#"+col_key
             var spriteurl = data[0].pokedex[parseInt(p2roster[i])].img_url
             var spriteclass = "p2rostersprite"
         }
@@ -135,10 +136,6 @@ function render_player_roster(data,playerno){
             .append("img")
             .attr("class",spriteclass)
             .attr("src",spriteurl)
-        // d3.select(col_grab)
-        //     .append("div")
-        //     .html(`<img id='battletype' src='${data[0].pokedex[parseInt(p1active)].type1img}'>
-        //     <img id='battletype' src='${data[0].pokedex[parseInt(p1active)].type2img}' alt=' - '>`)
     }
     // Add Pokemon names and HP
     for(var i=0,length=parseInt(npoke);i<length;i++){
@@ -163,15 +160,39 @@ function render_player_roster(data,playerno){
 }
 
 // Create Battle Interface
-function render_battle_interface(data,p1active,p2active){
+function render_battle_interface(data){
+    // P1 Name column
     d3.select("#battleinterface")
         .append("div")
         .attr("class","col-md-1")
         .html(`<h2 id='p1battlename'>${p1name}</h2>`)
+    // Main P1 Battle Interface
     d3.select("#battleinterface")
         .append("div")
         .attr("class","col-md-2")
-        .attr("id","p1spritebox")
+        .attr("id","p1battlemain")
+    // Battle Log
+    d3.select("#battleinterface")
+        .append("div")
+        .attr("class","col-md-6")
+        .attr("id","battlelog")
+        .append("h3")
+        .attr("id","battlelogtitle")
+        .text("BATTLE LOG")
+    // Main P2 Battle Interface
+    d3.select("#battleinterface")
+        .append("div")
+        .attr("class","col-md-2")
+        .attr("id","p2battlemain")
+    // P1 Name column
+    d3.select("#battleinterface")
+        .append("div")
+        .attr("class","col-md-1")
+        .html(`<h2 id='p2battlename'>${p2name}</h2>`)
+
+
+    // Branch off as seperate function; one each per player !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    d3.select("#p1battlemain")
         .append("span")
         .attr("id","p1battlecard")
         .append("img")
@@ -180,13 +201,114 @@ function render_battle_interface(data,p1active,p2active){
     var rosterpokeHP = "HP - "+p1rosterHP[p1active]+" / "+data[0].pokedex[parseInt(p1active)].hp
     d3.select("#p1battlecard")
         .append("div")
+        // CREATE ID SO YOU CAN GRAB THIS TO EDIT HP WHEN DAMAGE IS TAKEN !!!!!!!!!!!!!!!!!
+        // OR SPLIT THE HP TEXT INTO ITS OWN IDed DIV TO CHANGE SINGULARLY WHEN DAMAGE IS TAKEN !!!!!!!!!!!
         .html(`${data[0].pokedex[parseInt(p1active)].name}
                 <br>${rosterpokeHP}<br>
                 <img id='battletype' src='${data[0].pokedex[parseInt(p1active)].type1img}'>
                 <img id='battletype' src='${data[0].pokedex[parseInt(p1active)].type2img}' alt=' - '>`)
+    // P1 Buttons; Attack(s), SP Attack(s), Swap Pokemon
+    d3.select("#p1battlecard")
+        .append("hr")
     d3.select("#p1battlecard")
         .append("span")
         .attr("id","p1buttons")
+        .append("h2")
+        .text("ATTACK")
+    // Single Type Pokemon --------------------------
+    if(data[0].pokedex[parseInt(p1active)].type2===" - "){
+        var p1active_type1img = data[0].pokedex[parseInt(p1active)].type1img
+        var p1active_type1ATKcount = p1rosterATKS[p1active][0] + " / 30"
+        var p1active_type1SPATKcount = p1rosterATKS[p1active][2] + " / 10"
+        // Regular Attack
+        d3.select("#p1buttons")
+            .append("button")
+            .attr("id","p1active_ATKtype1")
+            .append("img")
+            .attr("id","buttonimg")
+            .attr("src",p1active_type1img)
+        d3.select("#p1active_ATKtype1")
+            .append("p")
+            .text(p1active_type1ATKcount)
+        // Special Attack
+        d3.select("#p1buttons")
+            .append("hr")
+        d3.select("#p1buttons")
+            .append("h2")
+            .text("SPECIAL ATTACK")
+        d3.select("#p1buttons")
+            .append("button")
+            .attr("id","p1active_SPATKtype1")
+            .append("img")
+            .attr("id","buttonimg")
+            .attr("src",p1active_type1img)
+        d3.select("#p1active_SPATKtype1")
+            .append("p")
+            .text(p1active_type1SPATKcount)
+    }
+    // Dual Type Pokemon --------------------------
+    if(data[0].pokedex[parseInt(p1active)].type2!==" - "){
+        var p1active_type1img = data[0].pokedex[parseInt(p1active)].type1img
+        var p1active_type2img = data[0].pokedex[parseInt(p1active)].type2img
+        var p1active_type1ATKcount = p1rosterATKS[p1active][0] + " / 15"
+        var p1active_type2ATKcount = p1rosterATKS[p1active][1] + " / 15"
+        var p1active_type1SPATKcount = p1rosterATKS[p1active][2] + " / 5"
+        var p1active_type2SPATKcount = p1rosterATKS[p1active][3] + " / 5"
+        // Regular Attacks
+        d3.select("#p1buttons")
+            .append("button")
+            .attr("id","p1active_ATKtype1")
+            .append("img")
+            .attr("id","buttonimg")
+            .attr("src",p1active_type1img)
+        d3.select("#p1active_ATKtype1")
+            .append("p")
+            .text(p1active_type1ATKcount)
+        d3.select("#p1buttons")
+            .append("button")
+            .attr("id","p1active_ATKtype2")
+            .append("img")
+            .attr("id","buttonimg")
+            .attr("src",p1active_type2img)
+        d3.select("#p1active_ATKtype2")
+            .append("p")
+            .text(p1active_type2ATKcount)
+        // Special Attacks
+        d3.select("#p1buttons")
+            .append("hr")
+        d3.select("#p1buttons")
+            .append("h2")
+            .text("SPECIAL ATTACK")
+        d3.select("#p1buttons")
+            .append("button")
+            .attr("id","p1active_SPATKtype1")
+            .append("img")
+            .attr("id","buttonimg")
+            .attr("src",p1active_type1img)
+        d3.select("#p1active_SPATKtype1")
+            .append("p")
+            .text(p1active_type1SPATKcount)
+        d3.select("#p1buttons")
+            .append("button")
+            .attr("id","p1active_SPATKtype2")
+            .append("img")
+            .attr("id","buttonimg")
+            .attr("src",p1active_type2img)
+        d3.select("#p1active_SPATKtype2")
+            .append("p")
+            .text(p1active_type2SPATKcount)
+    }
+    // Add Swap Pokemon button at end
+    d3.select("#p1buttons")
+        .append("hr")
+    d3.select("#p1buttons")
+        .append("button")
+        .attr("id","p1pokeswap")
+        .text("Swap Pokemon")
+}
+// Populate P1 Battle Card
+function p1battlecard(data){
+
 }
 // Aggregate function to ensure array generation first
 function sigma_battle_interface(data){
@@ -197,7 +319,7 @@ function sigma_battle_interface(data){
     generate_atkcountarrays(data,2,p2roster),
     render_player_roster(data,1),
     render_player_roster(data,2),
-    render_battle_interface(data,p1active,p2active)
+    render_battle_interface(data)
 }
 // Call Aggregate Function to render Rosters & Battle interface
 d3.json("/pokedex_data").then(data=>
