@@ -267,8 +267,12 @@ td{
 /* END MATCH SETUP------------------------------------------------------------------ */
 
 /* MATCH ACTIVE--------------------------------------------------------------------- */
-#p1rosterdiv{
-    text-align:right
+#p1rosterdiv,#p2rosterdiv{
+    text-align:right;
+    color:white;
+}
+#battleinterface{
+    color:white;
 }
 .pokeball{
     width:100px;
@@ -276,6 +280,8 @@ td{
 }
 .p1rostersprite,.p2rostersprite{
     margin-right:15px;
+}
+#p1rostersprites,#p2rostersprites{
 }
 .hidden_vars{
     display:none;
@@ -287,12 +293,16 @@ td{
     transform:scaleX(-1);
 }
 #p1battlesprite,#p2battlesprite{
+    margin-top:0;
 }
 #p1battlemain, #p2battlemain{
     border:5px solid purple;
     height:750px;
     display:inline-flex;
-    align-items:center;
+    align-items:flex-end;
+    vertical-align:bottom;
+}
+#p1battlecard,#p2battlecard{
 }
 #battlelog{
     border:5px solid purple;
@@ -311,7 +321,7 @@ td{
     width:50px;
 }
 #buttonimg{
-    width:60%;
+    width:66px;
 }
 #p1active_ATKtype1,
 #p1active_ATKtype2,
@@ -323,5 +333,8 @@ td{
 #p2active_SPATKtype2{
     width:50%;
     background-color:burlywood;
+}
+#p1pokeswap,#p2pokeswap{
+    margin-bottom:20px;
 }
 /* END MATCH ACTIVE------------------------------------------------------------------ */
