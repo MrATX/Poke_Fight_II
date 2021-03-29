@@ -11,13 +11,14 @@ var npoke = "6"
 var p1name = "JDUB"
 var p1roster = ["170","237","238","558","559","820"]
 // // 820
-var p1active = "170"
+var p1active = "820"
 var p1rosterHP = []
 var wip_p1rosterHP = {}
 var p1rosterATKS = []
 var p2name = "iPwn"
 var p2roster = ["182","183","184","296","297","843"]
-var p2active = "297"
+// // 843
+var p2active = "843"
 var p2rosterHP = []
 var wip_p2rosterHP = {}
 var p2rosterATKS = []
@@ -181,6 +182,25 @@ function render_battle_interface(data){
         .append("h3")
         .attr("id","battlelogtitle")
         .text("BATTLE LOG")
+    // Battle Log Text Box
+    d3.select("#battlelog")
+        .append("span")
+        .attr("id","battlelogtextspan")
+        .append("div")
+        .attr("id","battlelogtextbox")
+    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX
+    for(var i=0,length=50;i<length;i++){
+        d3.select("#battlelogtextbox")
+            .append("div")
+            .attr("class","battletext")
+            .text("iPwn")
+    }
+    d3.select("#battlelogtextbox")
+        .append("div")
+        .attr("class","battletext")
+        .text("I am all that is dev and now lets test the x wise scroll and see how it does with length or maybe plan to make sure the text size fits well enoguh; but what about the mobiles?")
+    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX
+    
     // Main P2 Battle Interface
     d3.select("#battleinterface")
         .append("div")

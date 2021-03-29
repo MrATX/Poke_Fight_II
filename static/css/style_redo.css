@@ -307,6 +307,9 @@ td{
 #battlelog{
     border:5px solid purple;
     height:750px;
+    align-items:center;
+    align-content:center;
+    justify-content:center;
 }
 #battlelogtitle{
     border-bottom:2px solid teal;
@@ -336,5 +339,17 @@ td{
 }
 #p1pokeswap,#p2pokeswap{
     margin-bottom:20px;
+}
+#battlelogtextbox{
+    overflow-y:scroll;
+    width:100%;
+    height:90%;
+}
+#battlelogtextspan{
+    align-items:center;
+    /* overflow-y:scroll; */
+}
+.battletext{
+    border-bottom:lightgray dotted 1px;
 }
 /* END MATCH ACTIVE------------------------------------------------------------------ */
