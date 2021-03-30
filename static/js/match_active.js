@@ -385,6 +385,14 @@ function render_p2battlecard(data){
             .text(p2active_type1SPATKcount)
     }
     // Dual Type Pokemon --------------------------
+    //TESTERZ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    function ipwntesterz(param){
+        if(param==="a"){
+            alert("iPwn")
+        }
+    }
+
+
     if(data[0].pokedex[parseInt(p2active)].type2!==" - "){
         var p2active_type1img = data[0].pokedex[parseInt(p2active)].type1img
         var p2active_type2img = data[0].pokedex[parseInt(p2active)].type2img
@@ -395,6 +403,7 @@ function render_p2battlecard(data){
         // Regular Attacks
         d3.select("#p2buttons")
             .append("button")
+            .attr("onclick",ipwntesterz("a"))
             .attr("id","p2active_ATKtype1")
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
             .append("img")
