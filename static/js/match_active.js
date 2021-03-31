@@ -6,6 +6,15 @@ function leave_match(){
     }
 }
 
+//TESTERZ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function ipwntesterz(param){
+    if(param==="a"){
+        // var test2 = document.getElementById("p2buttons")
+        // test2.html("")
+        alert("iPwn")
+    }
+}
+
 // WIPWIPWIP VARIABLES - Manual
 var npoke = "6"
 var p1name = "JDUB"
@@ -385,14 +394,6 @@ function render_p2battlecard(data){
             .text(p2active_type1SPATKcount)
     }
     // Dual Type Pokemon --------------------------
-    //TESTERZ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    function ipwntesterz(param){
-        if(param==="a"){
-            alert("iPwn")
-        }
-    }
-
-
     if(data[0].pokedex[parseInt(p2active)].type2!==" - "){
         var p2active_type1img = data[0].pokedex[parseInt(p2active)].type1img
         var p2active_type2img = data[0].pokedex[parseInt(p2active)].type2img
@@ -401,11 +402,13 @@ function render_p2battlecard(data){
         var p2active_type1SPATKcount = p2rosterATKS[p2active][2] + " / 5"
         var p2active_type2SPATKcount = p2rosterATKS[p2active][3] + " / 5"
         // Regular Attacks
+        var test2fer = "ipwntesterz('a')"
         d3.select("#p2buttons")
             .append("button")
-            .attr("onclick",ipwntesterz("a"))
             .attr("id","p2active_ATKtype1")
+            .attr("onclick",test2fer)
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
+        d3.select("#p2active_ATKtype1")
             .append("img")
             .attr("id","buttonimg")
             .attr("src",p2active_type1img)
@@ -415,7 +418,9 @@ function render_p2battlecard(data){
         d3.select("#p2buttons")
             .append("button")
             .attr("id","p2active_ATKtype2")
+            .attr("onclick",test2fer)
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
+        d3.select("#p2active_ATKtype2")
             .append("img")
             .attr("id","buttonimg")
             .attr("src",p2active_type2img)
