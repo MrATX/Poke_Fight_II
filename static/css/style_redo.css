@@ -352,4 +352,10 @@ td{
 .battletext{
     border-bottom:lightgray dotted 1px;
 }
+#attacktext{
+    color:teal;
+}
+#spattacktext{
+    color:purple;
+}
 /* END MATCH ACTIVE------------------------------------------------------------------ */

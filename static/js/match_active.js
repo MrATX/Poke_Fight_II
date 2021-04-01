@@ -6,14 +6,17 @@ function leave_match(){
     }
 }
 
+
 //TESTERZ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-function ipwntesterz(param){
-    if(param==="a"){
-        // var test2 = document.getElementById("p2buttons")
-        // test2.html("")
-        alert("iPwn")
-    }
-}
+// function ipwntesterz(param){
+//     if(param==="a"){
+//         // var test2 = document.getElementById("p2buttons")
+//         // test2.html("")
+//         alert("iPwn")
+//     }
+// }
+//TESTERZ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 // WIPWIPWIP VARIABLES - Manual
 var npoke = "6"
@@ -197,7 +200,7 @@ function render_battle_interface(data){
         .attr("id","battlelogtextspan")
         .append("div")
         .attr("id","battlelogtextbox")
-    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX
+    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX //////////////////////////////////////////
     for(var i=0,length=50;i<length;i++){
         d3.select("#battlelogtextbox")
             .append("div")
@@ -208,7 +211,7 @@ function render_battle_interface(data){
         .append("div")
         .attr("class","battletext")
         .text("I am all that is dev and now lets test the x wise scroll and see how it does with length or maybe plan to make sure the text size fits well enoguh; but what about the mobiles?")
-    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX
+    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX //////////////////////////////////////////
     
     // Main P2 Battle Interface
     d3.select("#battleinterface")
@@ -402,11 +405,16 @@ function render_p2battlecard(data){
         var p2active_type1SPATKcount = p2rosterATKS[p2active][2] + " / 5"
         var p2active_type2SPATKcount = p2rosterATKS[p2active][3] + " / 5"
         // Regular Attacks
-        var test2fer = "ipwntesterz('a')"
+        // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        var test2fer = "regatk()"
+        var test3fer = "spatk()"
+        // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         d3.select("#p2buttons")
             .append("button")
             .attr("id","p2active_ATKtype1")
+            // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             .attr("onclick",test2fer)
+            // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
         d3.select("#p2active_ATKtype1")
             .append("img")
@@ -418,7 +426,9 @@ function render_p2battlecard(data){
         d3.select("#p2buttons")
             .append("button")
             .attr("id","p2active_ATKtype2")
-            .attr("onclick",test2fer)
+            // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            .attr("onclick",test3fer)
+            // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
         d3.select("#p2active_ATKtype2")
             .append("img")
