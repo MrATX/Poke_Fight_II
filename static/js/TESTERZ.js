@@ -33,4 +33,6 @@ function spatk(param){
         .text("Pokemon 1 attacked Pokemon 2 for x damage")
     var scrolldown = document.getElementById("battlelogtextbox")
     scrolldown.scrollTop = scrolldown.scrollHeight
+    d3.select("#p2buttons")
+        .attr("style","visibility:hidden;")
 }
