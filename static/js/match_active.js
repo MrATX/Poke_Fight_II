@@ -6,34 +6,24 @@ function leave_match(){
     }
 }
 
-
-//TESTERZ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// function ipwntesterz(param){
-//     if(param==="a"){
-//         // var test2 = document.getElementById("p2buttons")
-//         // test2.html("")
-//         alert("iPwn")
-//     }
-// }
-//TESTERZ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 // WIPWIPWIP VARIABLES - Manual
 var npoke = "6"
 var p1name = "JDUB"
-var p1roster = ["170","237","238","558","559","820"]
+var p1roster_raw = ["170","237","238","558","559","820"]
+var p1roster = {}
 // // 820
 var p1active = "820"
-var p1rosterHP = []
-var wip_p1rosterHP = {}
-var p1rosterATKS = []
+// var p1rosterHP = []
+// var wip_p1rosterHP = {}
+// var p1rosterATKS = []
 var p2name = "iPwn"
-var p2roster = ["182","183","184","296","297","843"]
+var p2roster_raw = ["182","183","184","296","297","843"]
+var p2roster = {}
 // // 843
 var p2active = "843"
-var p2rosterHP = []
-var wip_p2rosterHP = {}
-var p2rosterATKS = []
+// var p2rosterHP = []
+// var wip_p2rosterHP = {}
+// var p2rosterATKS = []
 // WIPWIPWIP VARIABLES
 
 
@@ -57,36 +47,73 @@ var p2rosterATKS = []
 // }
 // var p2active = p2roster[1]
 
-// Create dictionaries for Pokemon HP for each roster to save HP changes
-function generate_rosterhparrays(data,p1rosterHP,p2rosterHP){
-    for(i in p1roster){
-        p1rosterHP[p1roster[i]] = data[0].pokedex[parseInt(p1roster[i])].hp
-        p2rosterHP[p2roster[i]] = data[0].pokedex[parseInt(p2roster[i])].hp
-        // p1rosterHP.push(data[0].pokedex[parseInt(p1roster[i])].hp)
+
+// Create dictionaries for each player's Pokemon roster to avoid extra API calls
+function generate_rosters(data,wiprawroster,wipgenroster){
+    for(i in wiprawroster){
+        wipgenroster[wiprawroster[i]] = data[0].pokedex[parseInt(wiprawroster[i])]
+        wipgenroster[wiprawroster[i]].hpcount = wipgenroster[wiprawroster[i]].hp
+        if(wipgenroster[wiprawroster[i]].type2===" - "){
+            wipgenroster[wiprawroster[i]].atkcount1 = 30
+            wipgenroster[wiprawroster[i]].spatkcount1 = 10
+        }
+        if(wipgenroster[wiprawroster[i]].type2!=" - "){
+            wipgenroster[wiprawroster[i]].atkcount1 = 15
+            wipgenroster[wiprawroster[i]].atkcount2 = 15
+            wipgenroster[wiprawroster[i]].spatkcount1 = 5
+            wipgenroster[wiprawroster[i]].spatkcount2 = 5
+        }
     }
+    // for(i in p1roster_raw){
+    //     // p1roster.push(data[0].pokedex[parseInt(p1roster_raw[i])])
+    //     p1roster[p1roster_raw[i]] = data[0].pokedex[parseInt(p1roster_raw[i])]
+    //     p1roster[p1roster_raw[i]].runninghp = p1roster[p1roster_raw[i]].hp
+    //     p2roster[p2roster_raw[i]] = data[0].pokedex[parseInt(p2roster_raw[i])]
+    // }
+    // d3.select("#p1rosterdiv")
+    //     .append("div")
+    //     .text(p1roster["170"].name)
+    //     .append("div")
+    //     .text(p1roster["238"].total)
+    console.log(p1roster)
+    console.log(p2roster)
 }
-// Create dictionaries for Pokemon Attack Counts to save uses
-function generate_atkcountarrays(data,playerno,roster){
-    var wiprosteratks = {}
-    for(i in roster){
-        if(data[0].pokedex[parseInt(roster[i])].type2===" - "){
-            wiprosteratks[roster[i]] = [30,"NA",10,"NA"]
-        }
-        else{
-            wiprosteratks[roster[i]] = [15,15,5,5]
-        }
-    }
-    if(playerno===1){
-        for(i in wiprosteratks){
-            p1rosterATKS[i] = wiprosteratks[i]
-        }
-    }
-    if(playerno===2){
-        for(i in wiprosteratks){
-            p2rosterATKS[i] = wiprosteratks[i]
-        }
-    }
-}
+
+
+// SOON TO BE DEPRECATED FUNCTIONS ////////////////////////////////////////////////////////////////
+// // Create dictionaries for Pokemon HP for each roster to save HP changes
+// function generate_rosterhparrays(data,p1rosterHP,p2rosterHP){
+//     for(i in p1roster){
+//         p1rosterHP[p1roster[i]] = data[0].pokedex[parseInt(p1roster[i])].hp
+//         p2rosterHP[p2roster[i]] = data[0].pokedex[parseInt(p2roster[i])].hp
+//         // p1rosterHP.push(data[0].pokedex[parseInt(p1roster[i])].hp)
+//     }
+// }
+// // Create dictionaries for Pokemon Attack Counts to save uses
+// function generate_atkcountarrays(data,playerno,roster){
+//     var wiprosteratks = {}
+//     for(i in roster){
+//         if(data[0].pokedex[parseInt(roster[i])].type2===" - "){
+//             wiprosteratks[roster[i]] = [30,"NA",10,"NA"]
+//         }
+//         else{
+//             wiprosteratks[roster[i]] = [15,15,5,5]
+//         }
+//     }
+//     if(playerno===1){
+//         for(i in wiprosteratks){
+//             p1rosterATKS[i] = wiprosteratks[i]
+//         }
+//     }
+//     if(playerno===2){
+//         for(i in wiprosteratks){
+//             p2rosterATKS[i] = wiprosteratks[i]
+//         }
+//     }
+// }
+// SOON TO BE DEPRECATED FUNCTIONS ////////////////////////////////////////////////////////////////
+
+
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
 function render_player_roster(data,playerno){
     var roster_div = "#p"+playerno+"rosterdiv"
@@ -97,12 +124,16 @@ function render_player_roster(data,playerno){
     var text_row_create = "p"+playerno+"rosterpoketext"
     var text_row_grab = "#"+text_row_create
     if(playerno===1){
-        var roster_div = "#p1rosterdiv"
+        // var roster_div = "#p1rosterdiv"
         var rosternametext = p1name+"'s Pokemon Roster"
+        var wipraw = p1roster_raw
+        var wiproster = p1roster
     }
     if(playerno===2){
-        var roster_div = "#p2rosterdiv"
+        // var roster_div = "#p2rosterdiv"
         var rosternametext = p2name+"'s Pokemon Roster"
+        var wipraw = p2roster_raw
+        var wiproster = p2roster
     }
     // Clear Roster div
     d3.select(roster_div).html("")
@@ -134,15 +165,14 @@ function render_player_roster(data,playerno){
             .attr("src","static/images/pokeball.png")
     }
     // Add Pokemon sprites
-    for(var i=0,length=parseInt(npoke);i<length;i++){
+    for(i in wiproster){
+        var spriteurl = wiproster[i].img_url
         if(playerno===1){
             var col_key = "p1col"+String(i)
-            var spriteurl = data[0].pokedex[parseInt(p1roster[i])].img_url
             var spriteclass = "p1rostersprite"
         }
         if(playerno===2){
             var col_key = "p2col"+String(i)
-            var spriteurl = data[0].pokedex[parseInt(p2roster[i])].img_url
             var spriteclass = "p2rostersprite"
         }
         d3.select(sprites_row_grab)
@@ -153,12 +183,50 @@ function render_player_roster(data,playerno){
             .attr("class",spriteclass)
             .attr("src",spriteurl)
     }
+    // // Add Pokemon sprites
+    // for(var i=0,length=parseInt(npoke);i<length;i++){
+    //     if(playerno===1){
+    //         var col_key = "p1col"+String(i)
+    //         // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED
+    //         // var spriteurl = p1roster[]
+    //         var spriteurl = data[0].pokedex[parseInt(p1roster_raw[i])].img_url
+    //         // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
+    //         var spriteclass = "p1rostersprite"
+    //     }
+    //     if(playerno===2){
+    //         var col_key = "p2col"+String(i)
+    //         var spriteurl = data[0].pokedex[parseInt(p2roster_raw[i])].img_url
+    //         var spriteclass = "p2rostersprite"
+    //     }
+    //     d3.select(sprites_row_grab)
+    //         .append("div")
+    //         .attr("class","col-md-2")
+    //         .attr("id",col_key)
+    //         .append("img")
+    //         .attr("class",spriteclass)
+    //         .attr("src",spriteurl)
+    // }
     // Add Pokemon names and HP
+    for(i in wiproster){
+        var rosterindex = i
+        var rosterpokename = wiproster[i].name
+        var rosterpokeHP = "HP - "+wiproster[i].hpcount+" / "+wiproster[i].hp
+        d3.select(text_row_grab)
+            .append("div")
+            .attr("class","col-md-2")
+            .append("p")
+            .html(`${rosterpokename}<br>${rosterpokeHP}<br>
+                <img id='battletype' src='${wiproster[i].type1img}'>
+                <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
+
+    }
     for(var i=0,length=parseInt(npoke);i<length;i++){
         if(playerno===1){
+            // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
             var rosterindex = p1roster[i]
             var rosterpokename = data[0].pokedex[parseInt(p1roster[i])].name
             var rosterpokeHP = "HP - "+p1rosterHP[p1roster[i]]+" / "+data[0].pokedex[parseInt(p1roster[i])].hp
+            // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
         }
         if(playerno===2){
             var rosterindex = p2roster[i]
@@ -233,7 +301,9 @@ function render_p1battlecard(data){
         .append("img")
         .attr("src",data[0].pokedex[parseInt(p1active)].img_url)
         .attr("id","p1battlesprite")
+    // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
     var rosterpokeHP = "HP - "+p1rosterHP[p1active]+" / "+data[0].pokedex[parseInt(p1active)].hp
+    // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
     d3.select("#p1battlecard")
         .append("div")
         .attr("id","p1battlecardHP")
@@ -248,9 +318,11 @@ function render_p1battlecard(data){
         .text("ATTACK")
     // Single Type Pokemon --------------------------
     if(data[0].pokedex[parseInt(p1active)].type2===" - "){
+        // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
         var p1active_type1img = data[0].pokedex[parseInt(p1active)].type1img
         var p1active_type1ATKcount = p1rosterATKS[p1active][0] + " / 30"
         var p1active_type1SPATKcount = p1rosterATKS[p1active][2] + " / 10"
+        // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
         // Regular Attack
         d3.select("#p1buttons")
             .append("button")
@@ -475,11 +547,13 @@ function render_p2battlecard(data){
 }
 // Aggregate function to ensure array generation first
 function sigma_battle_interface(data){
-    generate_rosterhparrays(data,p1rosterHP,p2rosterHP),
+    generate_rosters(data,p1roster_raw,p1roster),
+    generate_rosters(data,p2roster_raw,p2roster),
+    // generate_rosterhparrays(data,p1rosterHP,p2rosterHP),
     // p1rosterHP["238"] = 85,
     // p2rosterHP["843"] = 100,
-    generate_atkcountarrays(data,1,p1roster),
-    generate_atkcountarrays(data,2,p2roster),
+    // generate_atkcountarrays(data,1,p1roster),
+    // generate_atkcountarrays(data,2,p2roster),
     render_player_roster(data,1),
     render_player_roster(data,2),
     render_battle_interface(data),
@@ -491,9 +565,3 @@ function sigma_battle_interface(data){
 d3.json("/pokedex_data").then(data=>
     sigma_battle_interface(data)
     )
-
-function ipwn(){
-    d3.select("#battlelogtextbox")
-        .append("div")
-        .text(p1rosterHP["170"])
-}

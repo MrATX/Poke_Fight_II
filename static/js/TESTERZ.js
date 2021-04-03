@@ -24,6 +24,10 @@ function regatk(param){
         .text("Pokemon 1 attacked Pokemon 2 for x damage")
     var scrolldown = document.getElementById("battlelogtextbox")
     scrolldown.scrollTop = scrolldown.scrollHeight
+    console.log(p1rosterHP["170"])
+    d3.select("#battlelogtextbox")
+        .append("div")
+        .text(p1rosterHP["170"])
 }
 function spatk(param){
     d3.select("#battlelogtextbox")
