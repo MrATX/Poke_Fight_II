@@ -62,6 +62,7 @@ function generate_rosterhparrays(data,p1rosterHP,p2rosterHP){
     for(i in p1roster){
         p1rosterHP[p1roster[i]] = data[0].pokedex[parseInt(p1roster[i])].hp
         p2rosterHP[p2roster[i]] = data[0].pokedex[parseInt(p2roster[i])].hp
+        // p1rosterHP.push(data[0].pokedex[parseInt(p1roster[i])].hp)
     }
 }
 // Create dictionaries for Pokemon Attack Counts to save uses
@@ -475,17 +476,24 @@ function render_p2battlecard(data){
 // Aggregate function to ensure array generation first
 function sigma_battle_interface(data){
     generate_rosterhparrays(data,p1rosterHP,p2rosterHP),
-    p1rosterHP["238"] = 85,
-    p2rosterHP["843"] = 100,
+    // p1rosterHP["238"] = 85,
+    // p2rosterHP["843"] = 100,
     generate_atkcountarrays(data,1,p1roster),
     generate_atkcountarrays(data,2,p2roster),
     render_player_roster(data,1),
     render_player_roster(data,2),
     render_battle_interface(data),
     render_p1battlecard(data),
-    render_p2battlecard(data)
+    render_p2battlecard(data),
+    ipwn()
 }
 // Call Aggregate Function to render Rosters & Battle interface
 d3.json("/pokedex_data").then(data=>
     sigma_battle_interface(data)
     )
+
+function ipwn(){
+    d3.select("#battlelogtextbox")
+        .append("div")
+        .text(p1rosterHP["170"])
+}
