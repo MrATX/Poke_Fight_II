@@ -26,7 +26,7 @@ function swap_pokemon(playerno,pokeno){
     d3.select(swaprosterdiv).html("")
     d3.select("#battleinterface")
         .attr("style","visibility:visible")
-    window.scrollTo(0,1000)
+    window.scrollTo(0,58)
 }
 
 // WIPWIPWIP VARIABLES - Manual
@@ -398,7 +398,8 @@ function sigma_battle_interface(data){
     // render_player_roster(2),
     render_battle_interface(data),
     render_battlecard(1),
-    render_battlecard(2)
+    render_battlecard(2),
+    window.scrollTo(0,58)
 }
 // Call Aggregate Function to render Rosters & Battle interface
 d3.json("/pokedex_data").then(data=>
