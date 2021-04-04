@@ -5,14 +5,37 @@ function leave_match(){
         window.location.href = "/"
     }
 }
+function swap_button(playerno){
+    render_player_roster(playerno),
+    window.scrollTo(0,0),
+    d3.select("#battleinterface")
+        .attr("style","visibility:hidden")
+    
+}
+function swap_pokemon(playerno,pokeno){
+    if(playerno===1){
+        p1active = pokeno
+        var swaprosterdiv = "#p1rosterdiv"
+    }
+    if(playerno===2){
+        p2active = pokeno
+        var swaprosterdiv = "#p2rosterdiv"
+    }
+    render_battlecard(playerno)
+    console.log(p1active)
+    d3.select(swaprosterdiv).html("")
+    d3.select("#battleinterface")
+        .attr("style","visibility:visible")
+    window.scrollTo(0,1000)
+}
 
 // WIPWIPWIP VARIABLES - Manual
 var npoke = "6"
 var p1name = "JDUB"
-var p1roster_raw = ["170","237","238","558","559","820"]
+var p1roster_raw = ["170","237","238","558","559","843"]
 var p1roster = {}
 // // 820
-var p1active = "820"
+var p1active = "170"
 // var p1rosterHP = []
 // var wip_p1rosterHP = {}
 // var p1rosterATKS = []
@@ -54,68 +77,24 @@ function generate_rosters(data,wiprawroster,wipgenroster){
         wipgenroster[wiprawroster[i]] = data[0].pokedex[parseInt(wiprawroster[i])]
         wipgenroster[wiprawroster[i]].hpcount = wipgenroster[wiprawroster[i]].hp
         if(wipgenroster[wiprawroster[i]].type2===" - "){
+            wipgenroster[wiprawroster[i]].atktotal = 30
             wipgenroster[wiprawroster[i]].atkcount1 = 30
+            wipgenroster[wiprawroster[i]].spatktotal = 10
             wipgenroster[wiprawroster[i]].spatkcount1 = 10
         }
         if(wipgenroster[wiprawroster[i]].type2!=" - "){
+            wipgenroster[wiprawroster[i]].atktotal = 15
             wipgenroster[wiprawroster[i]].atkcount1 = 15
             wipgenroster[wiprawroster[i]].atkcount2 = 15
+            wipgenroster[wiprawroster[i]].spatktotal = 5
             wipgenroster[wiprawroster[i]].spatkcount1 = 5
             wipgenroster[wiprawroster[i]].spatkcount2 = 5
         }
     }
-    // for(i in p1roster_raw){
-    //     // p1roster.push(data[0].pokedex[parseInt(p1roster_raw[i])])
-    //     p1roster[p1roster_raw[i]] = data[0].pokedex[parseInt(p1roster_raw[i])]
-    //     p1roster[p1roster_raw[i]].runninghp = p1roster[p1roster_raw[i]].hp
-    //     p2roster[p2roster_raw[i]] = data[0].pokedex[parseInt(p2roster_raw[i])]
-    // }
-    // d3.select("#p1rosterdiv")
-    //     .append("div")
-    //     .text(p1roster["170"].name)
-    //     .append("div")
-    //     .text(p1roster["238"].total)
-    console.log(p1roster)
-    console.log(p2roster)
+    console.log(wipgenroster)
 }
-
-
-// SOON TO BE DEPRECATED FUNCTIONS ////////////////////////////////////////////////////////////////
-// // Create dictionaries for Pokemon HP for each roster to save HP changes
-// function generate_rosterhparrays(data,p1rosterHP,p2rosterHP){
-//     for(i in p1roster){
-//         p1rosterHP[p1roster[i]] = data[0].pokedex[parseInt(p1roster[i])].hp
-//         p2rosterHP[p2roster[i]] = data[0].pokedex[parseInt(p2roster[i])].hp
-//         // p1rosterHP.push(data[0].pokedex[parseInt(p1roster[i])].hp)
-//     }
-// }
-// // Create dictionaries for Pokemon Attack Counts to save uses
-// function generate_atkcountarrays(data,playerno,roster){
-//     var wiprosteratks = {}
-//     for(i in roster){
-//         if(data[0].pokedex[parseInt(roster[i])].type2===" - "){
-//             wiprosteratks[roster[i]] = [30,"NA",10,"NA"]
-//         }
-//         else{
-//             wiprosteratks[roster[i]] = [15,15,5,5]
-//         }
-//     }
-//     if(playerno===1){
-//         for(i in wiprosteratks){
-//             p1rosterATKS[i] = wiprosteratks[i]
-//         }
-//     }
-//     if(playerno===2){
-//         for(i in wiprosteratks){
-//             p2rosterATKS[i] = wiprosteratks[i]
-//         }
-//     }
-// }
-// SOON TO BE DEPRECATED FUNCTIONS ////////////////////////////////////////////////////////////////
-
-
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
-function render_player_roster(data,playerno){
+function render_player_roster(playerno){
     var roster_div = "#p"+playerno+"rosterdiv"
     var ballz_row_create = "p"+playerno+"pokeballz"
     var ballz_row_grab = "#"+ballz_row_create
@@ -156,14 +135,29 @@ function render_player_roster(data,playerno){
         .attr("class","row")
         .attr("id",text_row_create)
     // Add Pokeball images per npoke
-    for(var i=0,length=parseInt(npoke);i<length;i++){
+    for(i in wipraw){
+        if(playerno===1){
+            var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p1active)"
+        }
+        if(playerno===2){
+            var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p2active)"
+        }
         d3.select(ballz_row_grab)
             .append("div")
             .attr("class","col-md-2")
             .append("img")
+            .attr("onclick",ballfun)
             .attr("class","pokeball")
             .attr("src","static/images/pokeball.png")
     }
+    // for(var i=0,length=parseInt(npoke);i<length;i++){
+    //     d3.select(ballz_row_grab)
+    //         .append("div")
+    //         .attr("class","col-md-2")
+    //         .append("img")
+    //         .attr("class","pokeball")
+    //         .attr("src","static/images/pokeball.png")
+    // }
     // Add Pokemon sprites
     for(i in wiproster){
         var spriteurl = wiproster[i].img_url
@@ -183,29 +177,6 @@ function render_player_roster(data,playerno){
             .attr("class",spriteclass)
             .attr("src",spriteurl)
     }
-    // // Add Pokemon sprites
-    // for(var i=0,length=parseInt(npoke);i<length;i++){
-    //     if(playerno===1){
-    //         var col_key = "p1col"+String(i)
-    //         // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED
-    //         // var spriteurl = p1roster[]
-    //         var spriteurl = data[0].pokedex[parseInt(p1roster_raw[i])].img_url
-    //         // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
-    //         var spriteclass = "p1rostersprite"
-    //     }
-    //     if(playerno===2){
-    //         var col_key = "p2col"+String(i)
-    //         var spriteurl = data[0].pokedex[parseInt(p2roster_raw[i])].img_url
-    //         var spriteclass = "p2rostersprite"
-    //     }
-    //     d3.select(sprites_row_grab)
-    //         .append("div")
-    //         .attr("class","col-md-2")
-    //         .attr("id",col_key)
-    //         .append("img")
-    //         .attr("class",spriteclass)
-    //         .attr("src",spriteurl)
-    // }
     // Add Pokemon names and HP
     for(i in wiproster){
         var rosterindex = i
@@ -220,29 +191,7 @@ function render_player_roster(data,playerno){
                 <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
 
     }
-    for(var i=0,length=parseInt(npoke);i<length;i++){
-        if(playerno===1){
-            // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
-            var rosterindex = p1roster[i]
-            var rosterpokename = data[0].pokedex[parseInt(p1roster[i])].name
-            var rosterpokeHP = "HP - "+p1rosterHP[p1roster[i]]+" / "+data[0].pokedex[parseInt(p1roster[i])].hp
-            // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
-        }
-        if(playerno===2){
-            var rosterindex = p2roster[i]
-            var rosterpokename = data[0].pokedex[parseInt(p2roster[i])].name
-            var rosterpokeHP = "HP - "+p2rosterHP[p2roster[i]]+" / "+data[0].pokedex[parseInt(p2roster[i])].hp
-        }
-        d3.select(text_row_grab)
-            .append("div")
-            .attr("class","col-md-2")
-            .append("p")
-            .html(`${rosterpokename}<br>${rosterpokeHP}<br>
-                <img id='battletype' src='${data[0].pokedex[parseInt(rosterindex)].type1img}'>
-                <img id='battletype' src='${data[0].pokedex[parseInt(rosterindex)].type2img}' alt=' - '>`)
-    }
 }
-
 // Create Battle Interface
 function render_battle_interface(data){
     // P1 Name column
@@ -281,7 +230,6 @@ function render_battle_interface(data){
         .attr("class","battletext")
         .text("I am all that is dev and now lets test the x wise scroll and see how it does with length or maybe plan to make sure the text size fits well enoguh; but what about the mobiles?")
     // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX //////////////////////////////////////////
-    
     // Main P2 Battle Interface
     d3.select("#battleinterface")
         .append("div")
@@ -293,273 +241,164 @@ function render_battle_interface(data){
         .attr("class","col-md-1")
         .html(`<h2 id='p2battlename'>${p2name}</h2>`)
 }
-// Populate P1 Battle Card
-function render_p1battlecard(data){
-    d3.select("#p1battlemain")
+// Populate Battle Card
+function render_battlecard(playerno){
+    // Define variables for appropriate player
+    if(playerno===1){
+        d3.select("#p1battlemain").html("")
+        var rosterpokeHP = "HP - "+p1roster[p1active].hpcount+" / "+p1roster[p1active].hp
+        var bcroster = p1roster
+        var bcactive = p1active
+    }
+    if(playerno===2){
+        d3.select("#p2battlemain").html("")
+        var rosterpokeHP = "HP - "+p2roster[p2active].hpcount+" / "+p2roster[p2active].hp
+        var bcroster = p2roster
+        var bcactive = p2active
+    }
+    // Main BC variables
+    var battlemain = "#p"+playerno+"battlemain"
+    var battlecardID = "p"+playerno+"battlecard"
+    var battlecardselect = "#p"+playerno+"battlecard"
+    var battlesprite = "p"+playerno+"battlesprite"
+    var battlecardHP = "p"+playerno+"battlecardHP"
+    var bcbuttonsID = "p"+playerno+"buttons"
+    var bcbuttonssel = "#"+bcbuttonsID
+    // Button variables
+    var bcatktype1ID = "p"+playerno+"active_ATKtype1" 
+    var bcatktype1sel = "#"+bcatktype1ID
+    var bcatktype1text = bcroster[bcactive].atkcount1+" / "+bcroster[bcactive].atktotal
+    var bcatktype2ID = "p"+playerno+"active_ATKtype2"
+    var bcatktype2sel = "#"+bcatktype2ID
+    var bcatktype2text = bcroster[bcactive].atkcount2+" / "+bcroster[bcactive].atktotal
+    var bcspatktype1ID = "p"+playerno+"active_SPATKtype1"
+    var bcspatktype1sel = "#"+bcspatktype1ID
+    var bcspatktype1text = bcroster[bcactive].spatkcount1+" / "+bcroster[bcactive].spatktotal
+    var bcspatktype2ID = "p"+playerno+"active_SPATKtype2"
+    var bcspatktype2sel = "#"+bcspatktype2ID
+    var bcspatktype2text = bcroster[bcactive].spatkcount2+" / "+bcroster[bcactive].spatktotal
+    var bcswapbuttonID = "p"+playerno+"pokeswap"
+    // Populate main battle card
+    d3.select(battlemain)
         .append("span")
-        .attr("id","p1battlecard")
+        .attr("id",battlecardID)
         .append("img")
-        .attr("src",data[0].pokedex[parseInt(p1active)].img_url)
-        .attr("id","p1battlesprite")
-    // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
-    var rosterpokeHP = "HP - "+p1rosterHP[p1active]+" / "+data[0].pokedex[parseInt(p1active)].hp
-    // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
-    d3.select("#p1battlecard")
+        .attr("src",bcroster[bcactive].img_url)
+        .attr("id",battlesprite)
+    d3.select(battlecardselect)
         .append("div")
-        .attr("id","p1battlecardHP")
-        .html(`${data[0].pokedex[parseInt(p1active)].name}<br>${rosterpokeHP}`)
+        .attr("id",battlecardHP)
+        .html(`${bcroster[bcactive].name}<br>${rosterpokeHP}`)
     // P1 Buttons; Attack(s), SP Attack(s), Swap Pokemon
-    d3.select("#p1battlecard")
+    d3.select(battlecardselect)
         .append("hr")
-    d3.select("#p1battlecard")
+    d3.select(battlecardselect)
         .append("span")
-        .attr("id","p1buttons")
+        .attr("id",bcbuttonsID)
         .append("h2")
         .text("ATTACK")
     // Single Type Pokemon --------------------------
-    if(data[0].pokedex[parseInt(p1active)].type2===" - "){
-        // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
-        var p1active_type1img = data[0].pokedex[parseInt(p1active)].type1img
-        var p1active_type1ATKcount = p1rosterATKS[p1active][0] + " / 30"
-        var p1active_type1SPATKcount = p1rosterATKS[p1active][2] + " / 10"
-        // CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED CHANGE NEEDED 
+    if(bcroster[bcactive].type2===" - "){
         // Regular Attack
-        d3.select("#p1buttons")
+        d3.select(bcbuttonssel)
             .append("button")
-            .attr("id","p1active_ATKtype1")
+            .attr("id",bcatktype1ID)
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
             .append("img")
             .attr("id","buttonimg")
-            .attr("src",p1active_type1img)
-        d3.select("#p1active_ATKtype1")
+            .attr("src",bcroster[bcactive].type1img)
+        d3.select(bcatktype1sel)
             .append("p")
-            .text(p1active_type1ATKcount)
+            .text(bcatktype1text)
         // Special Attack
-        d3.select("#p1buttons")
+        d3.select(bcbuttonssel)
             .append("hr")
-        d3.select("#p1buttons")
+        d3.select(bcbuttonssel)
             .append("h2")
             .text("SPECIAL ATTACK")
-        d3.select("#p1buttons")
+        d3.select(bcbuttonssel)
             .append("button")
-            .attr("id","p1active_SPATKtype1")
+            .attr("id",bcspatktype1ID)
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
             .append("img")
             .attr("id","buttonimg")
-            .attr("src",p1active_type1img)
-        d3.select("#p1active_SPATKtype1")
+            .attr("src",bcroster[bcactive].type1img)
+        d3.select(bcspatktype1sel)
             .append("p")
-            .text(p1active_type1SPATKcount)
+            .text(bcspatktype1text)
     }
     // Dual Type Pokemon --------------------------
-    if(data[0].pokedex[parseInt(p1active)].type2!==" - "){
-        var p1active_type1img = data[0].pokedex[parseInt(p1active)].type1img
-        var p1active_type2img = data[0].pokedex[parseInt(p1active)].type2img
-        var p1active_type1ATKcount = p1rosterATKS[p1active][0] + " / 15"
-        var p1active_type2ATKcount = p1rosterATKS[p1active][1] + " / 15"
-        var p1active_type1SPATKcount = p1rosterATKS[p1active][2] + " / 5"
-        var p1active_type2SPATKcount = p1rosterATKS[p1active][3] + " / 5"
-        // Regular Attacks
-        d3.select("#p1buttons")
+    if(bcroster[bcactive].type2!=" - "){
+        // Regular Attack Type 1
+        d3.select(bcbuttonssel)
             .append("button")
-            .attr("id","p1active_ATKtype1")
+            .attr("id",bcatktype1ID)
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
             .append("img")
             .attr("id","buttonimg")
-            .attr("src",p1active_type1img)
-        d3.select("#p1active_ATKtype1")
+            .attr("src",bcroster[bcactive].type1img)
+        d3.select(bcatktype1sel)
             .append("p")
-            .text(p1active_type1ATKcount)
-        d3.select("#p1buttons")
+            .text(bcatktype1text)
+        // Regular Attack Type 2
+        d3.select(bcbuttonssel)
             .append("button")
-            .attr("id","p1active_ATKtype2")
+            .attr("id",bcatktype2ID)
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
             .append("img")
             .attr("id","buttonimg")
-            .attr("src",p1active_type2img)
-        d3.select("#p1active_ATKtype2")
+            .attr("src",bcroster[bcactive].type2img)
+        d3.select(bcatktype2sel)
             .append("p")
-            .text(p1active_type2ATKcount)
-        // Special Attacks
-        d3.select("#p1buttons")
+            .text(bcatktype2text)    
+        // Special Attack Type 1
+        d3.select(bcbuttonssel)
             .append("hr")
-        d3.select("#p1buttons")
+        d3.select(bcbuttonssel)
             .append("h2")
             .text("SPECIAL ATTACK")
-        d3.select("#p1buttons")
+        d3.select(bcbuttonssel)
             .append("button")
-            .attr("id","p1active_SPATKtype1")
+            .attr("id",bcspatktype1ID)
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
             .append("img")
             .attr("id","buttonimg")
-            .attr("src",p1active_type1img)
-        d3.select("#p1active_SPATKtype1")
+            .attr("src",bcroster[bcactive].type1img)
+        d3.select(bcspatktype1sel)
             .append("p")
-            .text(p1active_type1SPATKcount)
-        d3.select("#p1buttons")
+            .text(bcspatktype1text)
+        // Special Attack Type 2
+        d3.select(bcbuttonssel)
             .append("button")
-            .attr("id","p1active_SPATKtype2")
+            .attr("id",bcspatktype2ID)
             // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
             .append("img")
             .attr("id","buttonimg")
-            .attr("src",p1active_type2img)
-        d3.select("#p1active_SPATKtype2")
+            .attr("src",bcroster[bcactive].type2img)
+        d3.select(bcspatktype2sel)
             .append("p")
-            .text(p1active_type2SPATKcount)
+            .text(bcspatktype2text)
     }
-    // Add Swap Pokemon button at end
-    d3.select("#p1buttons")
+    // Add Swap Pokemon button at 
+    var swapfun = "swap_button("+playerno+")"
+    d3.select(bcbuttonssel)
         .append("hr")
-    d3.select("#p1buttons")
+    d3.select(bcbuttonssel)
         .append("button")
-        .attr("id","p1pokeswap")
-        .text("Swap Pokemon")
-}
-// Populate P2 Battle Card
-function render_p2battlecard(data){
-    d3.select("#p2battlemain")
-        .append("span")
-        .attr("id","p2battlecard")
-        .append("img")
-        .attr("src",data[0].pokedex[parseInt(p2active)].img_url)
-        .attr("id","p2battlesprite")
-    var rosterpokeHP = "HP - "+p2rosterHP[p2active]+" / "+data[0].pokedex[parseInt(p2active)].hp
-    d3.select("#p2battlecard")
-        .append("div")
-        .attr("id","p2battlecardHP")
-        .html(`${data[0].pokedex[parseInt(p2active)].name}<br>${rosterpokeHP}`)
-    // p2 Buttons; Attack(s), SP Attack(s), Swap Pokemon
-    d3.select("#p2battlecard")
-        .append("hr")
-    d3.select("#p2battlecard")
-        .append("span")
-        .attr("id","p2buttons")
-        .append("h2")
-        .text("ATTACK")
-    // Single Type Pokemon --------------------------
-    if(data[0].pokedex[parseInt(p2active)].type2===" - "){
-        var p2active_type1img = data[0].pokedex[parseInt(p2active)].type1img
-        var p2active_type1ATKcount = p2rosterATKS[p2active][0] + " / 30"
-        var p2active_type1SPATKcount = p2rosterATKS[p2active][2] + " / 10"
-        // Regular Attack
-        d3.select("#p2buttons")
-            .append("button")
-            .attr("id","p2active_ATKtype1")
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
-            .append("img")
-            .attr("id","buttonimg")
-            .attr("src",p2active_type1img)
-        d3.select("#p2active_ATKtype1")
-            .append("p")
-            .text(p2active_type1ATKcount)
-        // Special Attack
-        d3.select("#p2buttons")
-            .append("hr")
-        d3.select("#p2buttons")
-            .append("h2")
-            .text("SPECIAL ATTACK")
-        d3.select("#p2buttons")
-            .append("button")
-            .attr("id","p2active_SPATKtype1")
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
-            .append("img")
-            .attr("id","buttonimg")
-            .attr("src",p2active_type1img)
-        d3.select("#p2active_SPATKtype1")
-            .append("p")
-            .text(p2active_type1SPATKcount)
-    }
-    // Dual Type Pokemon --------------------------
-    if(data[0].pokedex[parseInt(p2active)].type2!==" - "){
-        var p2active_type1img = data[0].pokedex[parseInt(p2active)].type1img
-        var p2active_type2img = data[0].pokedex[parseInt(p2active)].type2img
-        var p2active_type1ATKcount = p2rosterATKS[p2active][0] + " / 15"
-        var p2active_type2ATKcount = p2rosterATKS[p2active][1] + " / 15"
-        var p2active_type1SPATKcount = p2rosterATKS[p2active][2] + " / 5"
-        var p2active_type2SPATKcount = p2rosterATKS[p2active][3] + " / 5"
-        // Regular Attacks
-        // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        var test2fer = "regatk()"
-        var test3fer = "spatk()"
-        // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        d3.select("#p2buttons")
-            .append("button")
-            .attr("id","p2active_ATKtype1")
-            // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            .attr("onclick",test2fer)
-            // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
-        d3.select("#p2active_ATKtype1")
-            .append("img")
-            .attr("id","buttonimg")
-            .attr("src",p2active_type1img)
-        d3.select("#p2active_ATKtype1")
-            .append("p")
-            .text(p2active_type1ATKcount)
-        d3.select("#p2buttons")
-            .append("button")
-            .attr("id","p2active_ATKtype2")
-            // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            .attr("onclick",test3fer)
-            // TEST FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
-        d3.select("#p2active_ATKtype2")
-            .append("img")
-            .attr("id","buttonimg")
-            .attr("src",p2active_type2img)
-        d3.select("#p2active_ATKtype2")
-            .append("p")
-            .text(p2active_type2ATKcount)
-        // Special Attacks
-        d3.select("#p2buttons")
-            .append("hr")
-        d3.select("#p2buttons")
-            .append("h2")
-            .text("SPECIAL ATTACK")
-        d3.select("#p2buttons")
-            .append("button")
-            .attr("id","p2active_SPATKtype1")
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
-            .append("img")
-            .attr("id","buttonimg")
-            .attr("src",p2active_type1img)
-        d3.select("#p2active_SPATKtype1")
-            .append("p")
-            .text(p2active_type1SPATKcount)
-        d3.select("#p2buttons")
-            .append("button")
-            .attr("id","p2active_SPATKtype2")
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
-            .append("img")
-            .attr("id","buttonimg")
-            .attr("src",p2active_type2img)
-        d3.select("#p2active_SPATKtype2")
-            .append("p")
-            .text(p2active_type2SPATKcount)
-    }
-    // Add Swap Pokemon button at end
-    d3.select("#p2buttons")
-        .append("hr")
-    d3.select("#p2buttons")
-        .append("button")
-        .attr("id","p2pokeswap")
-        .text("Swap Pokemon")
+        .attr("id",bcswapbuttonID)
+        .attr("onclick",swapfun)
+        // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
+        .text("Swap Pokemon")    
 }
 // Aggregate function to ensure array generation first
 function sigma_battle_interface(data){
     generate_rosters(data,p1roster_raw,p1roster),
     generate_rosters(data,p2roster_raw,p2roster),
-    // generate_rosterhparrays(data,p1rosterHP,p2rosterHP),
-    // p1rosterHP["238"] = 85,
-    // p2rosterHP["843"] = 100,
-    // generate_atkcountarrays(data,1,p1roster),
-    // generate_atkcountarrays(data,2,p2roster),
-    render_player_roster(data,1),
-    render_player_roster(data,2),
+    // render_player_roster(1),
+    // render_player_roster(2),
     render_battle_interface(data),
-    render_p1battlecard(data),
-    render_p2battlecard(data),
-    ipwn()
+    render_battlecard(1),
+    render_battlecard(2)
 }
 // Call Aggregate Function to render Rosters & Battle interface
 d3.json("/pokedex_data").then(data=>
