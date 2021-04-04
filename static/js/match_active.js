@@ -5,13 +5,52 @@ function leave_match(){
         window.location.href = "/"
     }
 }
+// Swap Pokemon functions
+// text gen for button function
+function swap_button_text(playerno){
+    if(playerno===1){
+        var swapbuttontext = p1name+" withdrew "+p1roster[p1active].name
+        var textclass = "p1battletext"
+    }
+    if(playerno===2){
+        var swapbuttontext = p2name+" withdrew "+p2roster[p2active].name
+        var textclass = "p2battletext"
+    }
+    d3.select("#battlelogtextbox")
+        .append("div")
+        .attr("id",textclass)
+        .attr("class","battletext")
+        .text(swapbuttontext)
+    var scrolldown = document.getElementById("battlelogtextbox")
+    scrolldown.scrollTop = scrolldown.scrollHeight
+}
+// button function
 function swap_button(playerno){
+    swap_button_text(playerno),
     render_player_roster(playerno),
     window.scrollTo(0,0),
     d3.select("#battleinterface")
         .attr("style","visibility:hidden")
-    
 }
+// text gen for pokeball function
+function swap_pokemon_text(playerno){
+    if(playerno===1){
+        var pokeballfunctiontext = p1name+" sent out "+p1roster[p1active].name
+        var textclass = "p1battletext"
+    }
+    if(playerno===2){
+        var pokeballfunctiontext = p2name+" sent out "+p2roster[p2active].name
+        var textclass = "p2battletext"
+    }
+    d3.select("#battlelogtextbox")
+        .append("div")
+        .attr("id",textclass)
+        .attr("class","battletext")
+        .text(pokeballfunctiontext)
+    var scrolldown = document.getElementById("battlelogtextbox")
+    scrolldown.scrollTop = scrolldown.scrollHeight
+}
+// pokeball function
 function swap_pokemon(playerno,pokeno){
     if(playerno===1){
         p1active = pokeno
@@ -22,7 +61,7 @@ function swap_pokemon(playerno,pokeno){
         var swaprosterdiv = "#p2rosterdiv"
     }
     render_battlecard(playerno)
-    console.log(p1active)
+    swap_pokemon_text(playerno)
     d3.select(swaprosterdiv).html("")
     d3.select("#battleinterface")
         .attr("style","visibility:visible")
@@ -32,10 +71,10 @@ function swap_pokemon(playerno,pokeno){
 // WIPWIPWIP VARIABLES - Manual
 var npoke = "6"
 var p1name = "JDUB"
-var p1roster_raw = ["170","237","238","558","559","843"]
+var p1roster_raw = ["170","237","238","558","559","820"]
 var p1roster = {}
 // // 820
-var p1active = "170"
+var p1active = "559"
 // var p1rosterHP = []
 // var wip_p1rosterHP = {}
 // var p1rosterATKS = []
@@ -43,7 +82,7 @@ var p2name = "iPwn"
 var p2roster_raw = ["182","183","184","296","297","843"]
 var p2roster = {}
 // // 843
-var p2active = "843"
+var p2active = "296"
 // var p2rosterHP = []
 // var wip_p2rosterHP = {}
 // var p2rosterATKS = []
@@ -102,15 +141,16 @@ function render_player_roster(playerno){
     var sprites_row_grab = "#"+sprites_row_create
     var text_row_create = "p"+playerno+"rosterpoketext"
     var text_row_grab = "#"+text_row_create
+    var rosternametextbackhalf = ", choose a Pokemon"
     if(playerno===1){
         // var roster_div = "#p1rosterdiv"
-        var rosternametext = p1name+"'s Pokemon Roster"
+        var rosternametext = p1name+rosternametextbackhalf
         var wipraw = p1roster_raw
         var wiproster = p1roster
     }
     if(playerno===2){
         // var roster_div = "#p2rosterdiv"
-        var rosternametext = p2name+"'s Pokemon Roster"
+        var rosternametext = p2name+rosternametextbackhalf
         var wipraw = p2roster_raw
         var wiproster = p2roster
     }
@@ -150,32 +190,29 @@ function render_player_roster(playerno){
             .attr("class","pokeball")
             .attr("src","static/images/pokeball.png")
     }
-    // for(var i=0,length=parseInt(npoke);i<length;i++){
-    //     d3.select(ballz_row_grab)
-    //         .append("div")
-    //         .attr("class","col-md-2")
-    //         .append("img")
-    //         .attr("class","pokeball")
-    //         .attr("src","static/images/pokeball.png")
-    // }
     // Add Pokemon sprites
+    var j = 0
     for(i in wiproster){
         var spriteurl = wiproster[i].img_url
         if(playerno===1){
-            var col_key = "p1col"+String(i)
+            var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p1active)"
+            // var col_key = "p1col"+String(i)
             var spriteclass = "p1rostersprite"
         }
         if(playerno===2){
-            var col_key = "p2col"+String(i)
+            var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p2active)"
+            // var col_key = "p2col"+String(i)
             var spriteclass = "p2rostersprite"
         }
         d3.select(sprites_row_grab)
             .append("div")
             .attr("class","col-md-2")
-            .attr("id",col_key)
+            // .attr("id",col_key)
             .append("img")
+            .attr("onclick",ballfun)
             .attr("class",spriteclass)
             .attr("src",spriteurl)
+        j = j + 1
     }
     // Add Pokemon names and HP
     for(i in wiproster){
@@ -218,17 +255,24 @@ function render_battle_interface(data){
         .attr("id","battlelogtextspan")
         .append("div")
         .attr("id","battlelogtextbox")
-    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX //////////////////////////////////////////
-    for(var i=0,length=50;i<length;i++){
-        d3.select("#battlelogtextbox")
-            .append("div")
-            .attr("class","battletext")
-            .text("iPwn")
-    }
+    // Start match text
+    var matchstarttext = p1name+" vs "+p2name
     d3.select("#battlelogtextbox")
         .append("div")
         .attr("class","battletext")
-        .text("I am all that is dev and now lets test the x wise scroll and see how it does with length or maybe plan to make sure the text size fits well enoguh; but what about the mobiles?")
+        .attr("id","sysbattletext")
+        .html(`${matchstarttext}<br>BEGIN!`)
+    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX //////////////////////////////////////////
+    // for(var i=0,length=50;i<length;i++){
+    //     d3.select("#battlelogtextbox")
+    //         .append("div")
+    //         .attr("class","battletext")
+    //         .text("iPwn")
+    // }
+    // d3.select("#battlelogtextbox")
+    //     .append("div")
+    //     .attr("class","battletext")
+    //     .text("I am all that is dev and now lets test the x wise scroll and see how it does with length or maybe plan to make sure the text size fits well enoguh; but what about the mobiles?")
     // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX //////////////////////////////////////////
     // Main P2 Battle Interface
     d3.select("#battleinterface")

@@ -352,8 +352,14 @@ td{
 .battletext{
     border-bottom:lightgray dotted 1px;
 }
-#attacktext{
+#sysbattletext{
+    color:gold;
+}
+#p1battletext,#p1battlename{
     color:teal;
+}
+#p2battletext,#p2battlename{
+    color:mediumvioletred
 }
 #spattacktext{
     color:purple;
