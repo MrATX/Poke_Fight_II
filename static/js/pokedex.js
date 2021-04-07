@@ -69,7 +69,7 @@ function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilte
     // Grab Headers Array
     headers = headers[0].pokedex_headers
     // Grab Types Array
-    types = combat_vars[0].types
+    types = combat_vars[0].types_list
     // Pass filtered array of Pokemon to base function to render table
     pokedex_table(pokedex_filtered,headers)
 }
@@ -91,7 +91,7 @@ function render_pokedex(){
 // Render Filters
 // Type 1 & Type 2
 function render_type_filters(combat_vars,type_no){
-    types = combat_vars[0].types
+    types = combat_vars[0].types_list
     var title = "Type"+type_no
     selection = "type"+type_no+"_filter"
     d3.select(selection)

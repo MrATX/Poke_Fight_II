@@ -4,7 +4,8 @@ function single_types_table(combat_vars){
         .append("tr")
         .append("th")
         .attr("class","typetable_row0")
-    for(var i=0,length=combat_vars[0].types.length;i<length;i++){
+    // for(var i=0,length=combat_vars[0].types.length;i<length;i++){
+    for(i in combat_vars[0].types){
         var atk_type = combat_vars[0].types[i]
         var row_id = atk_type + "_singlerow"
         var img_url = "static/images/type_imgs/" + atk_type.toLowerCase() + ".png"
@@ -21,9 +22,11 @@ function single_types_table(combat_vars){
         d3.select(".single_type_body")
             .append("tr")
             .attr("id",row_id)
-        for(var j=0,length=combat_vars[0].types.length;j<length;j++){
+        // for(var j=0,length=combat_vars[0].types.length;j<length;j++){
+        for(j in combat_vars[0].types){
             var def_type = combat_vars[0].types[j]
-            if(j===0){
+            // if(j===0){
+            if(j==="Normal"){
                 d3.select("#"+String(row_id))
                     .append("td")
                     .attr("class","typetable_col0")
@@ -53,7 +56,8 @@ function single_types_table(combat_vars){
 }
 // Populate dropdown list of types for Dual Types Chart
 function dual_type_filters(combat_vars){
-    for(var i=0,length=combat_vars[0].types.length;i<length;i++){
+    // for(var i=0,length=combat_vars[0].types.length;i<length;i++){
+    for(i in combat_vars[0].types){
         d3.select(".typetable_type1sel")
             .append("option")
             .attr("value",combat_vars[0].types[i])
@@ -67,7 +71,8 @@ function dual_types_table(combat_vars,filter){
         .append("tr")
         .append("th")
         .attr("class","typetable_row0")
-    for(var i=0,length=combat_vars[0].types.length;i<length;i++){
+    // for(var i=0,length=combat_vars[0].types.length;i<length;i++){
+    for(i in combat_vars[0].types){
         var atk_type = combat_vars[0].types[i]
         var row_id = atk_type + "_dualrow"
         var img_url = "static/images/type_imgs/" + atk_type.toLowerCase() + ".png"
@@ -85,7 +90,8 @@ function dual_types_table(combat_vars,filter){
         d3.select(".dual_type_body")
             .append("tr")
             .attr("id",row_id)
-        for(var j=0,length=combat_vars[0].types.length;j<length;j++){
+        // for(var j=0,length=combat_vars[0].types.length;j<length;j++){
+        for(j in combat_vars[0].types){
             var def_type = combat_vars[0].types[j]
             var cell_value = combat_vars[0].type_matchups[i][def_type].coeff * combat_vars[0].type_matchups[i][filter].coeff
             var dmg_ranges = {
@@ -97,7 +103,8 @@ function dual_types_table(combat_vars,filter){
                 4.00:"quadruple_dmg"
             }
             var td_id = dmg_ranges[cell_value]
-            if(j===0){
+            // if(j===0){
+            if(j==="Normal"){
                 d3.select("#"+String(row_id))
                     .append("td")
                     .attr("class","typetable_col0")
@@ -161,6 +168,8 @@ var type1_sel = document.getElementById("weight_filter").value
 var type1_sel_text = document.getElementById("weight_filter").innerText
 console.log(type1_sel,type1_sel_text)
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THIS SO IT'S NOT SO OBVIOUS YOU DON'T KNOW HOW IT WORKS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Also understanding it as you go through wouldn't be a bad call
 function openCity(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -180,7 +189,9 @@ function openCity(evt, cityName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
-    }     
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THIS SO IT'S NOT SO OBVIOUS YOU DON'T KNOW HOW IT WORKS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 // Create Tables, Populate Dropdown, Select Single Type Tab
 d3.json("combat_vars").then(combat_vars=>
     single_types_table(combat_vars)

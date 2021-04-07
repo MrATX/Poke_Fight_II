@@ -141,13 +141,37 @@ function test_attack(){
     d3.select("#p2battlecardHP")
         .html(`${DEFroster[DEFactive].name}<br>${DEFpokehp}`)
 }
+// Regular Attack
 // atkno and defno are 1 or 2 to denote which player is which for the attack
-// atktype is reg or special, typeno is 1 or 2 to denote which element
-function attack(atkno,defno,atktype,typeno){
+// typeno is 1 or 2 to denote which element
+function attack(combat_vars,atkno,defno,typeno){
+    // if(atkno===1){
+    //     var ATKroster = p1roster
+    //     var ATKactive = p1active
+    //     var DEFroster = p2roster
+    //     var DEFactive = p2active
+    // }
+    // if(atkno===2){
+
+    // }
+    console.log(combat_vars[0].type_matchups["Dark"]["Fairy"].coeff)
+    // console.log(combat_vars[0].type_matchups["Dark"])
+}
+// Special Attack
+function special_attack(atkno,defno,typeno){
     
 }
-
-
+// Parent Attack function with API call
+function attack_button(atkno,defno,typeno,atktype){
+    if(atktype==="reg"){
+        d3.json("/combat_vars").then(combat_vars=>
+            attack(combat_vars,atkno,defno,typeno)    
+            )
+    }
+    if(atktype==="special"){
+        special_attack(combat_vars,atkno,defno,typeno)
+    }
+}
 
 
 

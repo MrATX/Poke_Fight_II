@@ -82,7 +82,7 @@ wip_list_gen = []
 # Read Data
 type_matchups = pd.read_csv("type_matchups.csv").set_index("TYPE")
 # Create Variables
-type_coeffs = []
+type_coeffs = {}
 wip_dict_type = {}
 types = []
 combat_vars_dict = {}
@@ -118,11 +118,12 @@ for i in range(len(types)):
                 "id":coeff_id,
                 "text":coeff_text
             }
-    type_coeffs.append(wip_dict_type)
+    type_coeffs[types[i]] = wip_dict_type
     wip_dict_type = {}
 combat_vars_dict["type_matchups"]=(type_coeffs)
 # Pokemon Types
-types_dict = [
+types_dict = {}
+types_list = [
     "Normal",
     "Fighting",
     "Flying",
@@ -142,7 +143,10 @@ types_dict = [
     "Dark",
     "Fairy"
 ]
+for i in types_list:
+    types_dict[i] = i
 combat_vars_dict["types"]=(types_dict)
+combat_vars_dict["types_list"]=(types_list)
 ### Match Option Variables ---------------------------------
 match_vars_dict = {}
 # Radios
