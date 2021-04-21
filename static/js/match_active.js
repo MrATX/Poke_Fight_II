@@ -66,8 +66,25 @@ function generate_rosters(data,wiprawroster,wipgenroster){
             wipgenroster[wiprawroster[i]].spatkcount2 = 5
         }
     }
-    console.log(wipgenroster)
 }
+// Generate Type Matchups Object ----------------------------------------------
+var typematchups_object = []
+// function generate_typematchups(){
+//     d3.json("/combat_vars").then(combat_vars=>
+//         typematchups_object = combat_vars[0].type_matchups,
+//         console.log(combat_vars[0].type_matchups)
+//         )
+//     console.log(typematchups_object)   
+// }
+function generate_typematchups(combat_vars){
+    typematchups_object = combat_vars[0].type_matchups
+    console.log(combat_vars[0].type_matchups)
+    console.log(typematchups_object)
+}
+
+
+
+
 // Button Functions -------------------------------------------------------------------------
 // *********************** Swap Pokemon ***********************
 // text gen for swap button function
@@ -472,9 +489,13 @@ function sigma_battle_interface(data){
     render_battle_interface(data),
     render_battlecard(1),
     render_battlecard(2),
-    window.scrollTo(0,58)
+    window.scrollTo(0,58),
+    console.log(typematchups_object["Normal"]["Steel"].coeff)
 }
 // Call Aggregate Function to render Rosters & Battle interface
+d3.json("/combat_vars").then(combat_vars=>
+    generate_typematchups(combat_vars)
+    )
 d3.json("/pokedex_data").then(data=>
     sigma_battle_interface(data)
     )
