@@ -161,17 +161,34 @@ function test_attack(){
 // Regular Attack
 // atkno and defno are 1 or 2 to denote which player is which for the attack
 // typeno is 1 or 2 to denote which element
-function attack(combat_vars,atkno,defno,typeno){
-    // if(atkno===1){
-    //     var ATKroster = p1roster
-    //     var ATKactive = p1active
-    //     var DEFroster = p2roster
-    //     var DEFactive = p2active
-    // }
-    // if(atkno===2){
-
-    // }
-    console.log(combat_vars[0].type_matchups["Dark"]["Fairy"].coeff)
+function attack(attacker_no,atktype_no){
+    // p1/2active is just the number; redo function so far w/ p1roster[p1active.type1] etc..
+    if(attacker_no==="1"){
+        var ATKroster = p1roster
+        var ATKactive = p1active
+        var DEFroster = p2roster
+        var DEFactive = p2active
+    }
+    if(attacker_no==="2"){
+        var ATKroster = p2roster
+        var ATKactive = p2active
+        var DEFroster = p1roster
+        var DEFactive = p1active
+    }
+    console.log(p1active)
+    if(atktype_no==="1"){
+        var attacker_type = ATKactive.type1 
+    }
+    if(atktype_no==="2"){
+        var attacker_type = ATKactive.type2
+    }
+    if(ATKactive.type2===" - "){
+       var coeff_wip = typematchups_object[attacker_type][DEFactive.type1]
+    }
+    if(ATKactive.type2!=" - "){
+        var coeff_wip = (typematchups_object[attacker_type][DEFactive.type1])*(typematchups_object[attacker_type][DEFactive.type2])
+    }
+    console.log(coeff_wip)
     // console.log(combat_vars[0].type_matchups["Dark"])
 }
 // Special Attack
@@ -388,7 +405,8 @@ function render_battlecard(playerno){
     // Single Type Pokemon --------------------------
     if(bcroster[bcactive].type2===" - "){
         // Regular Attack
-        var regatkfun = "test_attack()"
+        // var regatkfun = "test_attack()"
+        var regatkfun = "attack(1,1)"
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcatktype1ID)
@@ -489,8 +507,7 @@ function sigma_battle_interface(data){
     render_battle_interface(data),
     render_battlecard(1),
     render_battlecard(2),
-    window.scrollTo(0,58),
-    console.log(typematchups_object["Normal"]["Steel"].coeff)
+    window.scrollTo(0,58)
 }
 // Call Aggregate Function to render Rosters & Battle interface
 d3.json("/combat_vars").then(combat_vars=>
