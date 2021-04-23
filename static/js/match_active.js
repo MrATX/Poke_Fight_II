@@ -391,7 +391,7 @@ function render_battlecard(playerno){
     if(bcroster[bcactive].type2===" - "){
         // Regular Attack
         // var regatkfun = "test_attack()"
-        var regatkfun = "attack(1,1)"
+        var regatkfun = "attack("+playerno+",1)"
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcatktype1ID)
@@ -423,6 +423,7 @@ function render_battlecard(playerno){
     // Dual Type Pokemon --------------------------
     if(bcroster[bcactive].type2!=" - "){
         // Regular Attack Type 1
+        // var regatkfun1 = "attack("+playerno+",1)"
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcatktype1ID)
@@ -434,6 +435,7 @@ function render_battlecard(playerno){
             .append("p")
             .text(bcatktype1text)
         // Regular Attack Type 2
+        // var regatkfun2 = "attack("+playerno+",2)"
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcatktype2ID)
