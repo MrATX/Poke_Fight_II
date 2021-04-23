@@ -87,40 +87,21 @@ function generate_typematchups(combat_vars){
 
 // Button Functions -------------------------------------------------------------------------
 // *********************** Swap Pokemon ***********************
-// text gen for swap button function
-function swap_button_text(playerno){
-    if(playerno===1){
-        var swapbuttontext = p1name+" withdrew "+p1roster[p1active].name
-        var textclass = "p1battletext"
-    }
-    if(playerno===2){
-        var swapbuttontext = p2name+" withdrew "+p2roster[p2active].name
-        var textclass = "p2battletext"
-    }
-    d3.select("#battlelogtextbox")
-        .append("div")
-        .attr("id",textclass)
-        .attr("class","battletext")
-        .text(swapbuttontext)
-    var scrolldown = document.getElementById("battlelogtextbox")
-    scrolldown.scrollTop = scrolldown.scrollHeight
-}
 // swap button function
 function swap_button(playerno){
-    swap_button_text(playerno),
     render_player_roster(playerno),
     window.scrollTo(0,0),
     d3.select("#battleinterface")
         .attr("style","visibility:hidden")
 }
 // text gen for pokeball/sprite swap function
-function swap_pokemon_text(playerno){
+function swap_pokemon_text(playerno,prevpokno){
     if(playerno===1){
-        var pokeballfunctiontext = p1name+" sent out "+p1roster[p1active].name
+        var pokeballfunctiontext = p1name+" withdrew "+p1roster[prevpokno].name+" and sent out "+p1roster[p1active].name
         var textclass = "p1battletext"
     }
     if(playerno===2){
-        var pokeballfunctiontext = p2name+" sent out "+p2roster[p2active].name
+        var pokeballfunctiontext = p2name+" withdrew "+p2roster[prevpokno].name+" and sent out "+p2roster[p2active].name
         var textclass = "p2battletext"
     }
     d3.select("#battlelogtextbox")
@@ -134,15 +115,17 @@ function swap_pokemon_text(playerno){
 // pokeball/sprite swap function
 function swap_pokemon(playerno,pokeno){
     if(playerno===1){
+        prevpokno = p1active
         p1active = pokeno
         var swaprosterdiv = "#p1rosterdiv"
     }
     if(playerno===2){
+        prevpokno = p2active
         p2active = pokeno
         var swaprosterdiv = "#p2rosterdiv"
     }
     render_battlecard(playerno)
-    swap_pokemon_text(playerno)
+    swap_pokemon_text(playerno,prevpokno)
     d3.select(swaprosterdiv).html("")
     d3.select("#battleinterface")
         .attr("style","visibility:visible")
@@ -163,30 +146,32 @@ function test_attack(){
 // typeno is 1 or 2 to denote which element
 function attack(attacker_no,atktype_no){
     // p1/2active is just the number; redo function so far w/ p1roster[p1active.type1] etc..
-    if(attacker_no==="1"){
+    if(attacker_no===1){
         var ATKroster = p1roster
-        var ATKactive = p1active
+        var ATKactive = p1roster[p1active]
         var DEFroster = p2roster
-        var DEFactive = p2active
+        var DEFactive = p2roster[p2active]
+        console.log("P1 attacking")
     }
-    if(attacker_no==="2"){
+    if(attacker_no===2){
         var ATKroster = p2roster
-        var ATKactive = p2active
+        var ATKactive = p2roster[p2active]
         var DEFroster = p1roster
-        var DEFactive = p1active
+        var DEFactive = p1roster[p1active]
+        console.log("P2 attacking")
     }
-    console.log(p1active)
-    if(atktype_no==="1"){
+    console.log(ATKactive)
+    if(atktype_no===1){
         var attacker_type = ATKactive.type1 
     }
-    if(atktype_no==="2"){
+    if(atktype_no===2){
         var attacker_type = ATKactive.type2
     }
     if(ATKactive.type2===" - "){
-       var coeff_wip = typematchups_object[attacker_type][DEFactive.type1]
+       var coeff_wip = typematchups_object[attacker_type][DEFactive.type1].coeff
     }
     if(ATKactive.type2!=" - "){
-        var coeff_wip = (typematchups_object[attacker_type][DEFactive.type1])*(typematchups_object[attacker_type][DEFactive.type2])
+        var coeff_wip = (typematchups_object[attacker_type][DEFactive.type1].coeff)*(typematchups_object[attacker_type][DEFactive.type2].coeff)
     }
     console.log(coeff_wip)
     // console.log(combat_vars[0].type_matchups["Dark"])
