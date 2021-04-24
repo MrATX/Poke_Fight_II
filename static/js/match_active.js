@@ -141,11 +141,11 @@ function test_attack(){
     d3.select("#p2battlecardHP")
         .html(`${DEFroster[DEFactive].name}<br>${DEFpokehp}`)
 }
-// Regular Attack
+// Attack
 // atkno and defno are 1 or 2 to denote which player is which for the attack
 // typeno is 1 or 2 to denote which element
-function attack(attacker_no,atktype_no){
-    // p1/2active is just the number; redo function so far w/ p1roster[p1active.type1] etc..
+// atktype reg or sp to denote regular or special attack
+function attack(attacker_no,atktype_no,atktype){
     if(attacker_no===1){
         var ATKroster = p1roster
         var ATKactive = p1roster[p1active]
@@ -160,7 +160,42 @@ function attack(attacker_no,atktype_no){
         var DEFactive = p1roster[p1active]
         console.log("P2 attacking")
     }
-    console.log(ATKactive)
+    if(atktype==="reg"){
+        if(atktype_no===1){
+            if(ATKactive.atkcount1===0){
+                alert("No more moves for this attack")
+                return
+            }
+        }
+        if(atktype_no===2){
+            if(ATKactive.atkcount2===0){
+                alert("No more moves for this attack")
+                return
+            }
+        }
+    }
+    if(atktype==="sp"){
+        if(atktype_no===1){
+            if(ATKactive.spatkcount1===0){
+                alert("No more moves for this attack")
+                return
+            }
+        }
+        if(atktype_no===2){
+            if(ATKactive.spatkcount2===0){
+                alert("No more moves for this attack")
+                return
+            }
+        }
+    }
+    if(atktype==="reg"){
+        var atkstat = ATKactive.attack
+        var defstat = DEFactive.defense
+    }
+    if(atktype==="sp"){
+        var atkstat = ATKactive.spatk
+        var defstat = DEFactive.spdef
+    }
     if(atktype_no===1){
         var attacker_type = ATKactive.type1 
     }
@@ -168,32 +203,52 @@ function attack(attacker_no,atktype_no){
         var attacker_type = ATKactive.type2
     }
     if(ATKactive.type2===" - "){
-       var coeff_wip = typematchups_object[attacker_type][DEFactive.type1].coeff
+       var coeff = typematchups_object[attacker_type][DEFactive.type1].coeff
     }
     if(ATKactive.type2!=" - "){
-        var coeff_wip = (typematchups_object[attacker_type][DEFactive.type1].coeff)*(typematchups_object[attacker_type][DEFactive.type2].coeff)
+        var coeff = (typematchups_object[attacker_type][DEFactive.type1].coeff)*(typematchups_object[attacker_type][DEFactive.type2].coeff)
     }
-    console.log(coeff_wip)
-    // console.log(combat_vars[0].type_matchups["Dark"])
-}
-// Special Attack
-function special_attack(atkno,defno,typeno){
+    // Damage Calculation
+    var damage = Math.round((atkstat*coeff)*(1-(defstat/230)))
+    console.log(p2roster[p2active].hpcount) 
+    console.log(DEFactive.hpcount)
+    console.log(damage)
+    // Create variables impact
+    if(DEFactive.hpcount - damage > 0){
+        DEFactive.hpcount = DEFactive.hpcount - damage
+    }
+    if(DEFactive.hpcount - damage <= 0){
+        DEFactive.hpcount = 0
+    }
+    if(atktype==="reg"){
+        if(atktype_no===1){
+            ATKactive.atkcount1 = ATKactive.atkcount1 - 1
+        }
+        if(atktype_no===2){
+            ATKactive.atkcount2 = ATKactive.atkcount2 - 1
+        }
+    }
+    if(atktype==="sp"){
+        if(atktype_no===1){
+            ATKactive.spatkcount1 = ATKactive.spatkcount1 -1
+        }
+        if(atktype_no===2){
+            ATKactive.spatkcount2 = ATKactive.spatkcount2 -1
+        }
+    }
+    // Assign variables impact
+    if(attacker_no===1){
+        p1roster[p1active] = ATKactive
+        p2roster[p2active] = DEFactive
+    }
+    if(attacker_no===2){
+        p1roster[p1active] = DEFactive
+        p2roster[p2active] = ATKactive
+    }
+    render_battlecard(1)
+    render_battlecard(2)
     
 }
-// Parent Attack function with API call
-function attack_button(atkno,defno,typeno,atktype){
-    if(atktype==="reg"){
-        d3.json("/combat_vars").then(combat_vars=>
-            attack(combat_vars,atkno,defno,typeno)    
-            )
-    }
-    if(atktype==="special"){
-        special_attack(combat_vars,atkno,defno,typeno)
-    }
-}
-
-
-
 // HTML Rendering Functions -----------------------------------------------------------------
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
 function render_player_roster(playerno){
@@ -390,12 +445,10 @@ function render_battlecard(playerno){
     // Single Type Pokemon --------------------------
     if(bcroster[bcactive].type2===" - "){
         // Regular Attack
-        // var regatkfun = "test_attack()"
-        var regatkfun = "attack("+playerno+",1)"
+        var regatkfun = "attack("+playerno+",1,'reg')"
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcatktype1ID)
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
             .attr("onclick",regatkfun)
             .append("img")
             .attr("id","buttonimg")
@@ -404,6 +457,7 @@ function render_battlecard(playerno){
             .append("p")
             .text(bcatktype1text)
         // Special Attack
+        var spatkfun = "attack("+playerno+",1,'sp')"
         d3.select(bcbuttonssel)
             .append("hr")
         d3.select(bcbuttonssel)
@@ -412,7 +466,7 @@ function render_battlecard(playerno){
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcspatktype1ID)
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
+            .attr("onclick",spatkfun)
             .append("img")
             .attr("id","buttonimg")
             .attr("src",bcroster[bcactive].type1img)
