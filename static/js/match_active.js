@@ -81,7 +81,12 @@ function generate_typematchups(combat_vars){
     console.log(combat_vars[0].type_matchups)
     console.log(typematchups_object)
 }
-
+// KO'd Text function
+function KOd_text(name){
+    console.log(name)
+    var text = name+" is KO'd. Select a different pokemon"
+    alert(text)
+}
 
 
 
@@ -141,6 +146,24 @@ function test_attack(){
     d3.select("#p2battlecardHP")
         .html(`${DEFroster[DEFactive].name}<br>${DEFpokehp}`)
 }
+// text gen for attacks
+function attack_text(attacker_no,attacktext){
+    if(attacker_no===1){
+        // var pokeballfunctiontext = p1name+" withdrew "+p1roster[prevpokno].name+" and sent out "+p1roster[p1active].name
+        var textclass = "p1battletext"
+    }
+    if(attacker_no===2){
+        // var pokeballfunctiontext = p2name+" withdrew "+p2roster[prevpokno].name+" and sent out "+p2roster[p2active].name
+        var textclass = "p2battletext"
+    }
+    d3.select("#battlelogtextbox")
+        .append("div")
+        .attr("id",textclass)
+        .attr("class","battletext")
+        .text(attacktext)
+    var scrolldown = document.getElementById("battlelogtextbox")
+    scrolldown.scrollTop = scrolldown.scrollHeight
+}
 // Attack
 // atkno and defno are 1 or 2 to denote which player is which for the attack
 // typeno is 1 or 2 to denote which element
@@ -160,6 +183,7 @@ function attack(attacker_no,atktype_no,atktype){
         var DEFactive = p1roster[p1active]
         console.log("P2 attacking")
     }
+    var damagetexthold = DEFactive.hpcount
     if(atktype==="reg"){
         if(atktype_no===1){
             if(ATKactive.atkcount1===0){
@@ -210,14 +234,12 @@ function attack(attacker_no,atktype_no,atktype){
     }
     // Damage Calculation
     var damage = Math.round((atkstat*coeff)*(1-(defstat/230)))
-    console.log(p2roster[p2active].hpcount) 
-    console.log(DEFactive.hpcount)
     console.log(damage)
     // Create variables impact
-    if(DEFactive.hpcount - damage > 0){
+    if((DEFactive.hpcount - damage) > 0){
         DEFactive.hpcount = DEFactive.hpcount - damage
     }
-    if(DEFactive.hpcount - damage <= 0){
+    else{
         DEFactive.hpcount = 0
     }
     if(atktype==="reg"){
@@ -245,9 +267,38 @@ function attack(attacker_no,atktype_no,atktype){
         p1roster[p1active] = DEFactive
         p2roster[p2active] = ATKactive
     }
+    // Apply variables impact
     render_battlecard(1)
     render_battlecard(2)
-    
+    // Generate and post attack text
+    var coefftext = "Ineffective"
+    if(coeff===0.25){
+        var coefftext = "Berely Effective"
+    }
+    if(coeff===0.5){
+        var coefftext = "Mildly Effective"
+    }
+    if(coeff===1){
+        var coefftext = "Effective"
+    }
+    if(coeff===2){
+        var coefftext = "Very Effective"
+    }
+    if(coeff===4){
+        var coefftext = "Super Effective"
+    }
+    console.log(coefftext)
+    var damagetext = damage
+    if(DEFactive.hpcount===0){
+        var damagetext = damagetexthold
+    }
+    if(atktype==="reg"){
+        var attacktext = ATKactive.name+" attacked "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
+    }
+    if(atktype==="sp"){
+        var attacktext = ATKactive.name+" used a special attack on "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
+    }
+    attack_text(attacker_no,attacktext)
 }
 // HTML Rendering Functions -----------------------------------------------------------------
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
@@ -292,20 +343,32 @@ function render_player_roster(playerno){
         .attr("id",text_row_create)
     // Add Pokeball images per npoke
     for(i in wipraw){
-        var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
+        if(wiproster[wipraw[i]].hpcount>0){
+            var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
+            var imglink = "static/images/pokeball.png"
+        }
+        if(wiproster[wipraw[i]].hpcount===0){
+            var ballfun = "KOd_text('"+wiproster[wipraw[i]].name+"')"
+            var imglink = "static/images/kod.png"
+        }
         d3.select(ballz_row_grab)
             .append("div")
             .attr("class","col-md-2")
             .append("img")
             .attr("onclick",ballfun)
             .attr("class","pokeball")
-            .attr("src","static/images/pokeball.png")
+            .attr("src",imglink)
     }
     // Add Pokemon sprites
     var j = 0
     for(i in wiproster){
         var spriteurl = wiproster[i].img_url
-        var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"
+        if(wiproster[i].hpcount>0){
+            var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
+        }
+        if(wiproster[i].hpcount===0){
+            var ballfun = "KOd_text('"+wiproster[i].name+"')"
+        }
         var spriteclass = "p"+playerno+"rostersprite"
         d3.select(sprites_row_grab)
             .append("div")
@@ -318,6 +381,10 @@ function render_player_roster(playerno){
     }
     // Add Pokemon names and HP
     for(i in wiproster){
+        var textid = "hold"
+        if(wiproster[i].hpcount===0){
+            var textid = "KOd"
+        }
         var rosterindex = i
         var rosterpokename = wiproster[i].name
         var rosterpokeHP = "HP - "+wiproster[i].hpcount+" / "+wiproster[i].hp
@@ -325,6 +392,7 @@ function render_player_roster(playerno){
             .append("div")
             .attr("class","col-md-2")
             .append("p")
+            .attr("id",textid)
             .html(`${rosterpokename}<br>${rosterpokeHP}<br>
                 <img id='battletype' src='${wiproster[i].type1img}'>
                 <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)

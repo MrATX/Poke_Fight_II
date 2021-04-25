@@ -92,7 +92,7 @@ for i in type_matchups:
         types.append(i)
 coeff_values = {
     0.0:{"id":"no_dmg","text":"Ineffective"},
-    0.25:{"id":"quarter_dmg","text":"Berely Ineffective"},
+    0.25:{"id":"quarter_dmg","text":"Berely Effective"},
     0.5:{"id":"half_dmg","text":"Mildly Effective"},
     1:{"id":"single_dmg","text":"Effective"},
     2:{"id":"double_dmg","text":"Very Effective"},
