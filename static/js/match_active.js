@@ -98,6 +98,10 @@ function swap_button(playerno){
     window.scrollTo(0,0),
     d3.select("#battleinterface")
         .attr("style","visibility:hidden")
+    d3.select("#p1buttons")
+        .attr("style","visibility:hidden")
+    d3.select("#p2buttons")
+        .attr("style","visibility:hidden")
 }
 // text gen for pokeball/sprite swap function
 function swap_pokemon_text(playerno,prevpokno){
@@ -118,6 +122,14 @@ function swap_pokemon_text(playerno,prevpokno){
     scrolldown.scrollTop = scrolldown.scrollHeight
 }
 // pokeball/sprite swap function
+// *****************************************************************************
+// Need way to have same player keep turn if swap was for a KO'd Pokemon
+// *****************************************************************************
+// *****************************************************************************
+// Also need to setup speed check for who goes first, which has to come after
+// the player by player picking of 1st pokemon to deply.
+// order random? P1 goes first? or P1 picks first then to speed. probably that one
+// *****************************************************************************
 function swap_pokemon(playerno,pokeno){
     if(playerno===1){
         prevpokno = p1active
@@ -135,6 +147,18 @@ function swap_pokemon(playerno,pokeno){
     d3.select("#battleinterface")
         .attr("style","visibility:visible")
     window.scrollTo(0,58)
+    if(playerno===1){
+        d3.select("#p2buttons")
+            .attr("style","visibility:visible;")
+        d3.select("#p1buttons")
+            .attr("style","visibility:hidden;")
+    }
+    if(playerno===2){
+        d3.select("#p1buttons")
+            .attr("style","visibility:visible;")
+        d3.select("#p2buttons")
+            .attr("style","visibility:hidden;")
+    }
 }
 // *********************** Attack ***********************
 function test_attack(){
@@ -226,14 +250,14 @@ function attack(attacker_no,atktype_no,atktype){
     if(atktype_no===2){
         var attacker_type = ATKactive.type2
     }
-    if(ATKactive.type2===" - "){
+    if(DEFactive.type2===" - "){
        var coeff = typematchups_object[attacker_type][DEFactive.type1].coeff
     }
-    if(ATKactive.type2!=" - "){
+    if(DEFactive.type2!=" - "){
         var coeff = (typematchups_object[attacker_type][DEFactive.type1].coeff)*(typematchups_object[attacker_type][DEFactive.type2].coeff)
     }
     // Damage Calculation
-    var damage = Math.round((atkstat*coeff)*(1-(defstat/230)))
+    var damage = Math.round((atkstat*coeff*0.33)*(1-(defstat/250)))
     console.log(damage)
     // Create variables impact
     if((DEFactive.hpcount - damage) > 0){
@@ -299,6 +323,36 @@ function attack(attacker_no,atktype_no,atktype){
         var attacktext = ATKactive.name+" used a special attack on "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
     }
     attack_text(attacker_no,attacktext)
+    if(DEFactive.hpcount===0){
+        var KOd_battletext = DEFactive.name+" was KO'd"
+        d3.select("#battlelogtextbox")
+            .append("div")
+            .attr("id","sysbattletext")
+            .attr("class","battletext")
+            .text(KOd_battletext)
+        var scrolldown = document.getElementById("battlelogtextbox")
+        scrolldown.scrollTop = scrolldown.scrollHeight
+        if(attacker_no===1){
+            swap_button(2)
+        }
+        if(attacker_no===2){
+            swap_button(1)
+        }
+    }
+    if(DEFactive.hpcount>0){
+        if(attacker_no===1){
+            d3.select("#p1buttons")
+                .attr("style","visibility:hidden;")
+            d3.select("#p2buttons")
+                .attr("style","visibility:visible")
+        }
+        if(attacker_no===2){
+            d3.select("#p2buttons")
+                .attr("style","visibility:hidden;")
+            d3.select("#p1buttons")
+                .attr("style","visibility:visible")
+        }
+    }
 }
 // HTML Rendering Functions -----------------------------------------------------------------
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
@@ -545,11 +599,11 @@ function render_battlecard(playerno){
     // Dual Type Pokemon --------------------------
     if(bcroster[bcactive].type2!=" - "){
         // Regular Attack Type 1
-        // var regatkfun1 = "attack("+playerno+",1)"
+        var regatkfun1 = "attack("+playerno+",1,'reg')"
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcatktype1ID)
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
+            .attr("onclick",regatkfun1)
             .append("img")
             .attr("id","buttonimg")
             .attr("src",bcroster[bcactive].type1img)
@@ -557,11 +611,11 @@ function render_battlecard(playerno){
             .append("p")
             .text(bcatktype1text)
         // Regular Attack Type 2
-        // var regatkfun2 = "attack("+playerno+",2)"
+        var regatkfun2 = "attack("+playerno+",2,'reg')"
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcatktype2ID)
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
+            .attr("onclick",regatkfun2)
             .append("img")
             .attr("id","buttonimg")
             .attr("src",bcroster[bcactive].type2img)
@@ -569,6 +623,7 @@ function render_battlecard(playerno){
             .append("p")
             .text(bcatktype2text)    
         // Special Attack Type 1
+        var spatkfun1 = "attack("+playerno+",1,'sp')"
         d3.select(bcbuttonssel)
             .append("hr")
         d3.select(bcbuttonssel)
@@ -577,7 +632,7 @@ function render_battlecard(playerno){
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcspatktype1ID)
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
+            .attr("onclick",spatkfun1)
             .append("img")
             .attr("id","buttonimg")
             .attr("src",bcroster[bcactive].type1img)
@@ -585,10 +640,11 @@ function render_battlecard(playerno){
             .append("p")
             .text(bcspatktype1text)
         // Special Attack Type 2
+        var spatkfun2 = "attack("+playerno+",2,'sp')"
         d3.select(bcbuttonssel)
             .append("button")
             .attr("id",bcspatktype2ID)
-            // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
+            .attr("onclick",spatkfun2)
             .append("img")
             .attr("id","buttonimg")
             .attr("src",bcroster[bcactive].type2img)
