@@ -12,12 +12,13 @@ totalpoke = pokemon.index.nunique()
 pokemon = pokemon.fillna(" - ")
 image_exceptions = ["slowbro-galar","sirfetchd","kubfu","urshifu","urshifu-rapid-strike","zarude"]
 for i in range(0,totalpoke):
-    if pokemon.iloc[i,14] in image_exceptions:
-        pokemon.iloc[i,16] = f"https://projectpokemon.org/images/sprites-models/swsh-normal-sprites/{pokemon.iloc[i,14]}.gif"
-    if pokemon.iloc[i,14] not in image_exceptions:
-        pokemon.iloc[i,16] = f"https://projectpokemon.org/images/normal-sprite/{pokemon.iloc[i,14]}.gif"
+    # if pokemon.iloc[i,14] in image_exceptions:
+    #     pokemon.iloc[i,16] = f"https://projectpokemon.org/images/sprites-models/swsh-normal-sprites/{pokemon.iloc[i,14]}.gif"
+    # if pokemon.iloc[i,14] not in image_exceptions:
+    #     pokemon.iloc[i,16] = f"https://projectpokemon.org/images/normal-sprite/{pokemon.iloc[i,14]}.gif"
+    pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,14]}.gif"
     # Previously used static images; missing images for expanded Pokedex, should still work fine for most Pokemon though
-    # pokemon.iloc[i,14] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
+    # pokemon.iloc[i,16] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
     if pokemon.iloc[i,12] == "Yes":
         pokemon.iloc[i,12] = "Legendary"
     if pokemon.iloc[i,12] == "No":
