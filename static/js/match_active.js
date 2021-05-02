@@ -39,38 +39,37 @@ var p2active = "296"
 // }
 // var p2active = p2roster[1]
 // Utility Functions -----------------------------------------------------------------------
-function starting_pokemon_selection(pokeno){
-    render_player_roster(1,start)
-    render_player_roster(2,start)
-    if(p1roster[p1active].speed>p2roster[p2active].speed){
-
+function speedcheck(){
+    var nextplayer = 1
+    if(p1roster[p1active].speed<p2roster[p2active].speed){
+        nextplayer = 2
     }
-    if(playerno===1){
-        prevpokno = p1active
-        p1active = pokeno
-        var swaprosterdiv = "#p1rosterdiv"
-    }
-    if(playerno===2){
-        prevpokno = p2active
-        p2active = pokeno
-        var swaprosterdiv = "#p2rosterdiv"
-    }
-    render_battlecard(playerno)
-    swap_pokemon_text(playerno,prevpokno)
-    d3.select(swaprosterdiv).html("")
-    d3.select("#battleinterface")
-        .attr("style","visibility:visible")
-    window.scrollTo(0,58)
-    if(playerno===1){
-        d3.select("#p2buttons")
-            .attr("style","visibility:visible;")
+    // if(playerno===1){
+    //     prevpokno = p1active
+    //     p1active = pokeno
+    //     var swaprosterdiv = "#p1rosterdiv"
+    // }
+    // if(playerno===2){
+    //     prevpokno = p2active
+    //     p2active = pokeno
+    //     var swaprosterdiv = "#p2rosterdiv"
+    // }
+    // render_battlecard(playerno)
+    // swap_pokemon_text(playerno,prevpokno)
+    // d3.select(swaprosterdiv).html("")
+    // d3.select("#battleinterface")
+    //     .attr("style","visibility:visible")
+    // window.scrollTo(0,58)
+    if(nextplayer===1){
         d3.select("#p1buttons")
+            .attr("style","visibility:visible;")
+        d3.select("#p2buttons")
             .attr("style","visibility:hidden;")
     }
-    if(playerno===2){
-        d3.select("#p1buttons")
-            .attr("style","visibility:visible;")
+    if(nextplayer===2){
         d3.select("#p2buttons")
+            .attr("style","visibility:visible;")
+        d3.select("#p1buttons")
             .attr("style","visibility:hidden;")
     }
 }
@@ -158,9 +157,6 @@ function swap_pokemon_text(playerno,prevpokno){
     scrolldown.scrollTop = scrolldown.scrollHeight
 }
 // pokeball/sprite swap function
-// *****************************************************************************
-// Need way to have same player keep turn if swap was for a KO'd Pokemon
-// *****************************************************************************
 // *****************************************************************************
 // Also need to setup speed check for who goes first, which has to come after
 // the player by player picking of 1st pokemon to deply.
@@ -404,7 +400,6 @@ function attack(attacker_no,atktype_no,atktype){
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
 // Phase is start or combat; former is for picking rosters up front, latter for swapping during combat
 function render_player_roster(playerno,phase){
-    // Check to see if previous pokemon was KO'd for turn order
     var roster_div = "#p"+playerno+"rosterdiv"
     var ballz_row_create = "p"+playerno+"pokeballz"
     var ballz_row_grab = "#"+ballz_row_create
@@ -417,6 +412,12 @@ function render_player_roster(playerno,phase){
         var rosternametext = p1name+rosternametextbackhalf
         var wipraw = p1roster_raw
         var wiproster = p1roster
+        if(phase==="start"){
+            // d3.select("#battleinterface")
+            //     .attr("style","visibility:hidden")
+            d3.select("#p2rosterdiv")
+                .attr("style","visibility:hidden")
+        }
     }
     if(playerno===2){
         var rosternametext = p2name+rosternametextbackhalf
@@ -447,7 +448,7 @@ function render_player_roster(playerno,phase){
     for(i in wipraw){
         if(wiproster[wipraw[i]].hpcount>0){
             if(phase==="start"){
-                var ballfun = "clear_player_rosters()"
+                var ballfun = "clear_player_rosters("+playerno+","+wipraw[i]+")"
                 var imglink = "static/images/pokeball.png"
             }
             if(phase==="combat"){
@@ -509,12 +510,26 @@ function render_player_roster(playerno,phase){
     }
 }
 // Function to clear rosters for initial active Pokemon selection
-function clear_player_rosters(){
-    d3.select("#p1rosterdiv").html("")
-    d3.select("#p2rosterdiv").html("")
+function clear_player_rosters(playerno,pokeno){
+    if(playerno===1){
+        d3.select("#p1rosterdiv").html("")
+        d3.select("#p2rosterdiv")
+            .attr("style","visibility:visible")
+        p1active = pokeno
+    }
+    if(playerno===2){
+        d3.select("#p2rosterdiv").html("")
+        // d3.select("#battleinterface")
+        //     .attr("style","visibility:visible")
+        p2active = pokeno
+        render_battle_interface(),
+        render_battlecard(1),
+        render_battlecard(2),
+        speedcheck()
+    }
 }
 // Create Battle Interface
-function render_battle_interface(data){
+function render_battle_interface(){
     // P1 Name column
     d3.select("#battleinterface")
         .append("div")
@@ -728,11 +743,14 @@ function render_battlecard(playerno){
 function sigma_battle_interface(data){
     generate_rosters(data,p1roster_raw,p1roster),
     generate_rosters(data,p2roster_raw,p2roster),
+    render_player_roster(1,"start"),
+    render_player_roster(2,"start"),
     // render_player_roster(1),
     // render_player_roster(2),
-    render_battle_interface(data),
-    render_battlecard(1),
-    render_battlecard(2),
+    // render_battle_interface(),
+    // render_battlecard(1),
+    // render_battlecard(2),
+    // speedcheck(),
     window.scrollTo(0,58)
 }
 // Call Aggregate Function to render Rosters & Battle interface
