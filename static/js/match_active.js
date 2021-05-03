@@ -1,44 +1,63 @@
-// WIPWIPWIP VARIABLES - Manual
-var npoke = "6"
-var p1name = "JDUB"
-var p1roster_raw = ["170","237","238","558","559","843"]
-var p1roster = {}
-// // 820
-var p1active = "559"
-// var p1rosterHP = []
-// var wip_p1rosterHP = {}
-// var p1rosterATKS = []
-var p2name = "iPwn"
-var p2roster_raw = ["182","183","184","296","297","820"]
-var p2roster = {}
-// // 843
-var p2active = "296"
-// var p2rosterHP = []
-// var wip_p2rosterHP = {}
-// var p2rosterATKS = []
-// WIPWIPWIP VARIABLES
+// // WIPWIPWIP VARIABLES - Manual
+// var npoke = "6"
+// var p1name = "JDUB"
+// var p1roster_raw = ["170","237","238","558","559","843"]
+// var p1roster = {}
+// // // 820
+// var p1active = "559"
+// // var p1rosterHP = []
+// // var wip_p1rosterHP = {}
+// // var p1rosterATKS = []
+// var p2name = "iPwn"
+// var p2roster_raw = ["182","183","184","296","297","820"]
+// var p2roster = {}
+// // // 843
+// var p2active = "296"
+// // var p2rosterHP = []
+// // var wip_p2rosterHP = {}
+// // var p2rosterATKS = []
+// // WIPWIPWIP VARIABLES
 
 
 
 
 // Pull in match setup variables from POST
 // grab hidden variables from HTML
-// var npoke = document.getElementById("npoke").innerText
-// var p1name = document.getElementById("p1name").innerText
-// var p1roster_raw = document.getElementsByName("p1roster")
+var npoke = document.getElementById("npoke").innerText
+var p1name = document.getElementById("p1name").innerText
+var p1roster_raw = document.getElementsByName("p1roster")
 // var p1roster = []
-// for(var i=0,length=parseInt(npoke);i<length;i++){
-//     p1roster.push(p1roster_raw[i].textContent)
-// }
+var wiprosterpull = []
+var p1roster = {}
+for(var i=0,length=parseInt(npoke);i<length;i++){
+    wiprosterpull.push(p1roster_raw[i].textContent)
+}
+p1roster_raw = wiprosterpull
 // var p1active = p1roster[2]
-// var p2name = document.getElementById("p2name").innerText
-// var p2roster_raw = document.getElementsByName("p2roster")
+var p1active = "420"
+var p2name = document.getElementById("p2name").innerText
+var p2roster_raw = document.getElementsByName("p2roster")
 // var p2roster = []
-// for(var i=0,length=parseInt(npoke);i<length;i++){
-//     p2roster.push(p2roster_raw[i].textContent)
-// }
+wiprosterpull = []
+var p2roster = {}
+for(var i=0,length=parseInt(npoke);i<length;i++){
+    wiprosterpull.push(p2roster_raw[i].textContent)
+}
+p2roster_raw = wiprosterpull
 // var p2active = p2roster[1]
+var p2active = "420"
 // Utility Functions -----------------------------------------------------------------------
+function match_victory(loser){
+    d3.select("#battleinterface").html("")
+    var losername = p1name
+    if(loser===2){
+        losername = p2name
+    }
+    var endgametext = "GAME OVER MOTHAFUCKA!!! "+losername+" fuckin' lost!"
+    d3.select("#endgame")
+        .append("h2")
+        .text(endgametext)
+}
 function speedcheck(){
     var nextplayer = 1
     if(p1roster[p1active].speed<p2roster[p2active].speed){
@@ -424,90 +443,183 @@ function render_player_roster(playerno,phase){
         var wipraw = p2roster_raw
         var wiproster = p2roster
     }
-    // Clear Roster div
-    d3.select(roster_div).html("")
-    // Create rows for Player Name, Pokeballs, Sprites, & Text
-    d3.select(roster_div)
-        .append("div")
-        .attr("class","row")
-        .append("h1")
-        .text(rosternametext)
-    d3.select(roster_div)
-        .append("div")
-        .attr("class","row")
-        .attr("id",ballz_row_create)
-    d3.select(roster_div)
-        .append("div")
-        .attr("class","row")
-        .attr("id",sprites_row_create)
-    d3.select(roster_div)
-        .append("div")
-        .attr("class","row")
-        .attr("id",text_row_create)
-    // Add Pokeball images per npoke
+    var healthcheck = 0
     for(i in wipraw){
-        if(wiproster[wipraw[i]].hpcount>0){
-            if(phase==="start"){
-                var ballfun = "clear_player_rosters("+playerno+","+wipraw[i]+")"
-                var imglink = "static/images/pokeball.png"
+        healthcheck = healthcheck + wiproster[wipraw[i]].hpcount
+    }
+    if(healthcheck===0){
+        match_victory(playerno)
+    }
+    if(healthcheck>0){
+        // Clear Roster div
+        d3.select(roster_div).html("")
+        // Create rows for Player Name, Pokeballs, Sprites, & Text
+        d3.select(roster_div)
+            .append("div")
+            .attr("class","row")
+            .append("h1")
+            .text(rosternametext)
+        d3.select(roster_div)
+            .append("div")
+            .attr("class","row")
+            .attr("id",ballz_row_create)
+        d3.select(roster_div)
+            .append("div")
+            .attr("class","row")
+            .attr("id",sprites_row_create)
+        d3.select(roster_div)
+            .append("div")
+            .attr("class","row")
+            .attr("id",text_row_create)
+        // Add Pokeball images per npoke
+        for(i in wipraw){
+            if(wiproster[wipraw[i]].hpcount>0){
+                if(phase==="start"){
+                    var ballfun = "clear_player_rosters("+playerno+","+wipraw[i]+")"
+                    var imglink = "static/images/pokeball.png"
+                }
+                if(phase==="combat"){
+                    var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
+                    var imglink = "static/images/pokeball.png"                
+                }
+                // var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
+                // var imglink = "static/images/pokeball.png"
             }
-            if(phase==="combat"){
-                var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
-                var imglink = "static/images/pokeball.png"                
+            if(wiproster[wipraw[i]].hpcount===0){
+                var ballfun = "KOd_text('"+wiproster[wipraw[i]].name+"')"
+                var imglink = "static/images/kod.png"
             }
-            // var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
-            // var imglink = "static/images/pokeball.png"
+            d3.select(ballz_row_grab)
+                .append("div")
+                .attr("class","col-md-2")
+                .append("img")
+                .attr("onclick",ballfun)
+                .attr("class","pokeball")
+                .attr("src",imglink)
         }
-        if(wiproster[wipraw[i]].hpcount===0){
-            var ballfun = "KOd_text('"+wiproster[wipraw[i]].name+"')"
-            var imglink = "static/images/kod.png"
+        // Add Pokemon sprites
+        var j = 0
+        for(i in wiproster){
+            var spriteurl = wiproster[i].img_url
+            if(wiproster[i].hpcount>0){
+                var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
+            }
+            if(wiproster[i].hpcount===0){
+                var ballfun = "KOd_text('"+wiproster[i].name+"')"
+            }
+            var spriteclass = "p"+playerno+"rostersprite"
+            d3.select(sprites_row_grab)
+                .append("div")
+                .attr("class","col-md-2")
+                .append("img")
+                .attr("onclick",ballfun)
+                .attr("class",spriteclass)
+                .attr("src",spriteurl)
+            j = j + 1
         }
-        d3.select(ballz_row_grab)
-            .append("div")
-            .attr("class","col-md-2")
-            .append("img")
-            .attr("onclick",ballfun)
-            .attr("class","pokeball")
-            .attr("src",imglink)
+        // Add Pokemon names and HP
+        for(i in wiproster){
+            var textid = "hold"
+            if(wiproster[i].hpcount===0){
+                var textid = "KOd"
+            }
+            var rosterindex = i
+            var rosterpokename = wiproster[i].name
+            var rosterpokeHP = "HP - "+wiproster[i].hpcount+" / "+wiproster[i].hp
+            d3.select(text_row_grab)
+                .append("div")
+                .attr("class","col-md-2")
+                .append("p")
+                .attr("id",textid)
+                .html(`${rosterpokename}<br>${rosterpokeHP}<br>
+                    <img id='battletype' src='${wiproster[i].type1img}'>
+                    <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
+        }
     }
-    // Add Pokemon sprites
-    var j = 0
-    for(i in wiproster){
-        var spriteurl = wiproster[i].img_url
-        if(wiproster[i].hpcount>0){
-            var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
-        }
-        if(wiproster[i].hpcount===0){
-            var ballfun = "KOd_text('"+wiproster[i].name+"')"
-        }
-        var spriteclass = "p"+playerno+"rostersprite"
-        d3.select(sprites_row_grab)
-            .append("div")
-            .attr("class","col-md-2")
-            .append("img")
-            .attr("onclick",ballfun)
-            .attr("class",spriteclass)
-            .attr("src",spriteurl)
-        j = j + 1
-    }
-    // Add Pokemon names and HP
-    for(i in wiproster){
-        var textid = "hold"
-        if(wiproster[i].hpcount===0){
-            var textid = "KOd"
-        }
-        var rosterindex = i
-        var rosterpokename = wiproster[i].name
-        var rosterpokeHP = "HP - "+wiproster[i].hpcount+" / "+wiproster[i].hp
-        d3.select(text_row_grab)
-            .append("div")
-            .attr("class","col-md-2")
-            .append("p")
-            .attr("id",textid)
-            .html(`${rosterpokename}<br>${rosterpokeHP}<br>
-                <img id='battletype' src='${wiproster[i].type1img}'>
-                <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
-    }
+    // // Clear Roster div
+    // d3.select(roster_div).html("")
+    // // Create rows for Player Name, Pokeballs, Sprites, & Text
+    // d3.select(roster_div)
+    //     .append("div")
+    //     .attr("class","row")
+    //     .append("h1")
+    //     .text(rosternametext)
+    // d3.select(roster_div)
+    //     .append("div")
+    //     .attr("class","row")
+    //     .attr("id",ballz_row_create)
+    // d3.select(roster_div)
+    //     .append("div")
+    //     .attr("class","row")
+    //     .attr("id",sprites_row_create)
+    // d3.select(roster_div)
+    //     .append("div")
+    //     .attr("class","row")
+    //     .attr("id",text_row_create)
+    // // Add Pokeball images per npoke
+    // for(i in wipraw){
+    //     if(wiproster[wipraw[i]].hpcount>0){
+    //         if(phase==="start"){
+    //             var ballfun = "clear_player_rosters("+playerno+","+wipraw[i]+")"
+    //             var imglink = "static/images/pokeball.png"
+    //         }
+    //         if(phase==="combat"){
+    //             var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
+    //             var imglink = "static/images/pokeball.png"                
+    //         }
+    //         // var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
+    //         // var imglink = "static/images/pokeball.png"
+    //     }
+    //     if(wiproster[wipraw[i]].hpcount===0){
+    //         var ballfun = "KOd_text('"+wiproster[wipraw[i]].name+"')"
+    //         var imglink = "static/images/kod.png"
+    //     }
+    //     d3.select(ballz_row_grab)
+    //         .append("div")
+    //         .attr("class","col-md-2")
+    //         .append("img")
+    //         .attr("onclick",ballfun)
+    //         .attr("class","pokeball")
+    //         .attr("src",imglink)
+    // }
+    // // Add Pokemon sprites
+    // var j = 0
+    // for(i in wiproster){
+    //     var spriteurl = wiproster[i].img_url
+    //     if(wiproster[i].hpcount>0){
+    //         var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
+    //     }
+    //     if(wiproster[i].hpcount===0){
+    //         var ballfun = "KOd_text('"+wiproster[i].name+"')"
+    //     }
+    //     var spriteclass = "p"+playerno+"rostersprite"
+    //     d3.select(sprites_row_grab)
+    //         .append("div")
+    //         .attr("class","col-md-2")
+    //         .append("img")
+    //         .attr("onclick",ballfun)
+    //         .attr("class",spriteclass)
+    //         .attr("src",spriteurl)
+    //     j = j + 1
+    // }
+    // // Add Pokemon names and HP
+    // for(i in wiproster){
+    //     var textid = "hold"
+    //     if(wiproster[i].hpcount===0){
+    //         var textid = "KOd"
+    //     }
+    //     var rosterindex = i
+    //     var rosterpokename = wiproster[i].name
+    //     var rosterpokeHP = "HP - "+wiproster[i].hpcount+" / "+wiproster[i].hp
+    //     d3.select(text_row_grab)
+    //         .append("div")
+    //         .attr("class","col-md-2")
+    //         .append("p")
+    //         .attr("id",textid)
+    //         .html(`${rosterpokename}<br>${rosterpokeHP}<br>
+    //             <img id='battletype' src='${wiproster[i].type1img}'>
+    //             <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
+    // }
 }
 // Function to clear rosters for initial active Pokemon selection
 function clear_player_rosters(playerno,pokeno){

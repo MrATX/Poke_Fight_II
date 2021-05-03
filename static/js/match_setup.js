@@ -47,7 +47,17 @@ function render_radios(radio_vars){
                         id="${radio_vars.ids[i]}" onchange="radios_val('${radio_vars.name}',value,id)">${radio_vars.text[i]}`)
         }
     }
-
+    // for(var i=0,length=radio_vars.values.length;i<length;i++){
+    //     d3.select(radios_div)
+    //         .select(".jumbotron")
+    //         .select("row")
+    //         .append("radio")
+    //         .attr("class","radio")
+    //         .html(`<input class="radio" type="radio"
+    //                 name="${radio_vars.name}"
+    //                 value="${radio_vars.values[i]}"
+    //                 id="${radio_vars.ids[i]}" onchange="radios_val('${radio_vars.name}',value,id)">${radio_vars.text[i]}`)
+    // }
 }
 // Middle Function
 // Pass through each parameter to create set of radios
@@ -55,7 +65,7 @@ function match_params_radios(match_vars){
     render_radios(match_vars[0].radios["nplayers"])
     render_radios(match_vars[0].radios["npoke"])
     render_radios(match_vars[0].radios["weight_class"])
-    render_radios(match_vars[0].radios["generation"])
+    // render_radios(match_vars[0].radios["generation"])
 }
 // Outer Function with Data call to display radios on page load
 d3.json("match_vars").then(match_vars=>
@@ -100,21 +110,24 @@ function radios_val(name,value,id){
 function xfer_matchvars2nameinput(){
     if(typeof nplayers !=='undefined' &&
     typeof npoke !=='undefined' &&
-    typeof weight_class !== 'undefined' &&
-    typeof generation !=='undefined'){
-        var matchconfirm_text = "Begin a " + nplayers_text + " match with " +
-        npoke_text +" "+ weight_class_text + " from " + gen_text + " generation?"
+    typeof weight_class !== 'undefined'){
+    // typeof weight_class !== 'undefined' &&
+    // typeof generation !=='undefined'){
+        // var matchconfirm_text = "Begin a " + nplayers_text + " match with " +
+        // npoke_text +" "+ weight_class_text + " from " + gen_text + " generation?"
+        var matchconfirm_text = "Begin a "+nplayers_text+" match with "+npoke_text +" "+ weight_class_text+"?"
         if(confirm(matchconfirm_text)){
             d3.select("#nplayers_div").attr("value",nplayers)
             d3.select("#npoke_div").attr("value",npoke)
             d3.select("#weight_class_div").attr("value",weight_class)
-            d3.select("#generation_div").attr("value",generation)
+            // d3.select("#generation_div").attr("value",generation)
             d3.select("#radios_container").html("")
             nameinputbox(1)
         }
     }
     else{
-        alert("Choose Number of Players, Number of Pokemon, a Weight Class, and a Generation before continuing")
+        // alert("Choose Number of Players, Number of Pokemon, a Weight Class, and a Generation before continuing")
+        alert("Choose Number of Players, Number of Pokemon, and a Weight Class before continuing")
     }
 }
 // END RADIOS ---------------------------------------------------------
@@ -293,14 +306,15 @@ function pokedex_table(pokedex,headers){
             <td class="pokedex_id">${d.id}`)
 }
 // Middle Function generating list of Pokemon based on chosen filters
-function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter,genfilter){
+// function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter,genfilter){
+function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter){
     // Grab table body & header, and clear rows
     theader = d3.select("thead");
     theader.html("")
     tbody = d3.select("tbody");
     tbody.html("")
     // Grab Types Array
-    types = combat_vars[0].types
+    types = combat_vars[0].types_list
     // Check Filter Variables
     if(t1filter[0] === undefined){
         var t1filter = types
@@ -312,9 +326,9 @@ function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilte
     if(classfilter[0] === undefined || classfilter.includes("all")){
         var classfilter = ["light","middle","cruiser","heavy","legendary"]
     }
-    if(genfilter[0] === undefined || genfilter.includes("all")){
-        var genfilter = [1,2,3,4,5,6,7,8]
-    }
+    // if(genfilter[0] === undefined || genfilter.includes("all")){
+    //     var genfilter = [1,2,3,4,5,6,7,8]
+    // }
     // Route into data dictionary
     var pokedex = pokedex[0]["pokedex"]
     // Create Array for Filtered Pokemon
@@ -326,8 +340,9 @@ function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilte
         if(
             t1filter.includes(pokemon.type1) &&
             t2filter.includes(pokemon.type2) &&
-            classfilter.includes(pokemon.weight_class) &&
-            genfilter.includes(pokemon.generation)
+            classfilter.includes(pokemon.weight_class)
+            // classfilter.includes(pokemon.weight_class) &&
+            // genfilter.includes(pokemon.generation)
         ){
             pokemon.tableindex = k
             k = k + 1
@@ -348,17 +363,18 @@ function render_pokedex(){
     var t2filter = []
     var classfilter = []
     classfilter.push(weight_class)
-    var genfilter = []
-    if(generation==="all"){
-        genfilter.push(generation)
-    }
-    else{
-        genfilter.push(parseInt(generation))    
-    }
+    // var genfilter = []
+    // if(generation==="all"){
+    //     genfilter.push(generation)
+    // }
+    // else{
+    //     genfilter.push(parseInt(generation))    
+    // }
     d3.json("pokedex_data").then(pokedex=>
         d3.json("match_vars").then(match_vars=>
             d3.json("combat_vars").then(combat_vars=>
-                pokedex_filter(pokedex,match_vars,combat_vars,t1filter,t2filter,classfilter,genfilter)    
+                // pokedex_filter(pokedex,match_vars,combat_vars,t1filter,t2filter,classfilter,genfilter)    
+                pokedex_filter(pokedex,match_vars,combat_vars,t1filter,t2filter,classfilter)    
                 )
             )
         )
