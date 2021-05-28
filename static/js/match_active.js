@@ -8,7 +8,7 @@
 // // var p1rosterHP = []
 // // var wip_p1rosterHP = {}
 // // var p1rosterATKS = []
-// var p2name = "iPwn"
+// var p2name = "Ahsoka"
 // var p2roster_raw = ["182","183","184","296","297","820"]
 // var p2roster = {}
 // // // 843
@@ -20,9 +20,6 @@
 
 
 // *********************************************************************************************** \\
-
-// Need to create failsafe for scenario where each player has one Pokemon left that are unable to
-// damage each other. Maybe make ineffective only do 1 dmg? Or a tiny percentage?
 
 // Also need to add in chance to miss based on speed and/or speed differential between Pokemon
 
@@ -370,8 +367,17 @@ function attack(attacker_no,atktype_no,atktype){
         var coeff = (typematchups_object[attacker_type][DEFactive.type1].coeff)*(typematchups_object[attacker_type][DEFactive.type2].coeff)
     }
     // Damage Calculation
-    var damage = Math.round((atkstat*coeff*0.33)*(1-(defstat/250)))
-    console.log(damage)
+    if(coeff===0){
+        var damage = 1
+    }
+    if(coeff>0){
+        var damage = Math.round((atkstat*coeff*0.33)*(1-(defstat/250)))
+    }
+    // var damage = Math.round((atkstat*coeff*0.33)*(1-(defstat/250)))
+    // console.log(damage)
+    // **************************************************************************************
+    // Missed attack check and if statement w/ correct text for battelog somewhere round here
+    // **************************************************************************************
     // Create variables impact
     if((DEFactive.hpcount - damage) > 0){
         DEFactive.hpcount = DEFactive.hpcount - damage
