@@ -148,25 +148,25 @@ function dual_types_filter_change(){
 
 document.getElementById("singletype_tab").click()
 
-d3.json("combat_vars").then(combat_vars=>
-    single_types_table(combat_vars)
-    )
-d3.json("combat_vars").then(combat_vars=>
-    dual_type_filters(combat_vars)
-    )
-d3.json("combat_vars").then(combat_vars=>
-    dual_types_table(combat_vars,"Normal")
-    )
+// d3.json("combat_vars").then(combat_vars=>
+//     single_types_table(combat_vars)
+//     )
+// d3.json("combat_vars").then(combat_vars=>
+//     dual_type_filters(combat_vars)
+//     )
+// d3.json("combat_vars").then(combat_vars=>
+//     dual_types_table(combat_vars,"Fire")
+//     )
 
+// Testerz stuffs; to be removed once verified that it's not pertinent
+// function logtest(){
+//     console.log(document.getElementsByClassName("typetable_type1sel")[0].value);
+// }
+// console.log(document.getElementsByClassName("typetable_type1sel")[0].value);
 
-function logtest(){
-    console.log(document.getElementsByClassName("typetable_type1sel")[0].value);
-}
-console.log(document.getElementsByClassName("typetable_type1sel")[0].value);
-
-var type1_sel = document.getElementById("weight_filter").value
-var type1_sel_text = document.getElementById("weight_filter").innerText
-console.log(type1_sel,type1_sel_text)
+// var type1_sel = document.getElementById("weight_filter").value
+// var type1_sel_text = document.getElementById("weight_filter").innerText
+// console.log(type1_sel,type1_sel_text)
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THIS SO IT'S NOT SO OBVIOUS YOU DON'T KNOW HOW IT WORKS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // Also understanding it as you go through wouldn't be a bad call

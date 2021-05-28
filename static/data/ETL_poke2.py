@@ -12,6 +12,7 @@ totalpoke = pokemon.index.nunique()
 pokemon = pokemon.fillna(" - ")
 image_exceptions = ["slowbro-galar","sirfetchd","kubfu","urshifu","urshifu-rapid-strike","zarude"]
 for i in range(0,totalpoke):
+    # Outdated image referencing; now pulling from local images and .png names changed appropriately
     # if pokemon.iloc[i,14] in image_exceptions:
     #     pokemon.iloc[i,16] = f"https://projectpokemon.org/images/sprites-models/swsh-normal-sprites/{pokemon.iloc[i,14]}.gif"
     # if pokemon.iloc[i,14] not in image_exceptions:

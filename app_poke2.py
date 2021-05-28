@@ -80,16 +80,18 @@ def match_active():
             p2_name = p2_name,
             p2_roster = p2_roster,
         )
+# Testerz match_active page for static test variables
 # @poke2.route("/match_active")
 # def match_active_wip():
 #     return render_template(
 #         "match_active.html",
 #     )
-@poke2.route("/match_over")
-def match_over():
-    return render_template(
-        "match_over.html",
-    )
+# Not using this page anymore to not have to pass data across pages just for victory screen
+# @poke2.route("/match_over")
+# def match_over():
+#     return render_template(
+#         "match_over.html",
+#     )
 # Backend App Routes --------------------------------------------------
 @poke2.route("/pokedex_data")
 def servePokemon():

@@ -183,6 +183,7 @@ function render_generation_filter(match_vars){
             .attr("class","checkmark")
             .html(`<input id="${checkbox_id}" class="checkbox" type="checkbox" name="generation" value="${checkbox_value}">
             <label class="checkbox_label">${checkbox_text}</label>`)
+        // Outdated d3 functionality; replaced with above .html writing
         //     .append("input")
         //     .attr("id",checkbox_id)
         //     .attr("class","checkbox")

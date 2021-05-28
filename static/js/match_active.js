@@ -19,6 +19,14 @@
 // // WIPWIPWIP VARIABLES
 
 
+// *********************************************************************************************** \\
+
+// Need to create failsafe for scenario where each player has one Pokemon left that are unable to
+// damage each other. Maybe make ineffective only do 1 dmg? Or a tiny percentage?
+
+// Also need to add in chance to miss based on speed and/or speed differential between Pokemon
+
+// *********************************************************************************************** \\
 
 
 // Pull in match setup variables from POST
@@ -33,8 +41,8 @@ for(var i=0,length=parseInt(npoke);i<length;i++){
     wiprosterpull.push(p1roster_raw[i].textContent)
 }
 p1roster_raw = wiprosterpull
-// var p1active = p1roster[2]
-var p1active = "420"
+var p1active = p1roster_raw[0]
+// var p1active = "420"
 var p2name = document.getElementById("p2name").innerText
 var p2roster_raw = document.getElementsByName("p2roster")
 // var p2roster = []
@@ -44,19 +52,30 @@ for(var i=0,length=parseInt(npoke);i<length;i++){
     wiprosterpull.push(p2roster_raw[i].textContent)
 }
 p2roster_raw = wiprosterpull
-// var p2active = p2roster[1]
-var p2active = "420"
+var p2active = p2roster_raw[0]
+// var p2active = "420"
 // Utility Functions -----------------------------------------------------------------------
 function match_victory(loser){
     d3.select("#battleinterface").html("")
     var losername = p1name
+    var winnername = p2name
+    var winner = 2
     if(loser===2){
         losername = p2name
+        winnername = p1name
+        winner = 1
     }
-    var endgametext = "GAME OVER MOTHAFUCKA!!! "+losername+" fuckin' lost!"
+    var gameovertext = "GAME OVER"
     d3.select("#endgame")
-        .append("h2")
-        .text(endgametext)
+        .append("div")
+        .attr("class","container-fluid")
+        .append("div")
+        .attr("class","jumbotron")
+        .append("h1")
+        .attr("class","jumbotitle")
+        .text(gameovertext)
+        .append("hr")
+    render_player_roster(winner,"end")
 }
 function speedcheck(){
     var nextplayer = 1
@@ -167,6 +186,16 @@ function swap_pokemon_text(playerno,prevpokno){
         var pokeballfunctiontext = p2name+" withdrew "+p2roster[prevpokno].name+" and sent out "+p2roster[p2active].name
         var textclass = "p2battletext"
     }
+    // var start_check = document.getElementById("battlelogtextbox")
+    // if(start_check!=null){
+    //     d3.select("#battlelogtextbox")
+    //         .append("div")
+    //         .attr("id",textclass)
+    //         .attr("class","battletext")
+    //         .text(pokeballfunctiontext)
+    //     var scrolldown = document.getElementById("battlelogtextbox")
+    //     scrolldown.scrollTop = scrolldown.scrollHeight
+    // }
     d3.select("#battlelogtextbox")
         .append("div")
         .attr("id",textclass)
@@ -176,11 +205,6 @@ function swap_pokemon_text(playerno,prevpokno){
     scrolldown.scrollTop = scrolldown.scrollHeight
 }
 // pokeball/sprite swap function
-// *****************************************************************************
-// Also need to setup speed check for who goes first, which has to come after
-// the player by player picking of 1st pokemon to deply.
-// order random? P1 goes first? or P1 picks first then to speed. probably that one
-// *****************************************************************************
 function swap_pokemon(playerno,pokeno){
     // Assign variables for correct player and check for KO'd or turn swap
     if(playerno===1){
@@ -201,7 +225,27 @@ function swap_pokemon(playerno,pokeno){
             nextplayer = 2
         }
     }
-    // if(swaprosterdiv)
+    // var start_check = document.getElementById("battlelogtextbox")
+    // if(start_check!=null){
+    //     render_battlecard(playerno)
+    //     swap_pokemon_text(playerno,prevpokno)
+    //     d3.select(swaprosterdiv).html("")
+    //     d3.select("#battleinterface")
+    //         .attr("style","visibility:visible")
+    //     window.scrollTo(0,58)
+    //     if(nextplayer===1){
+    //         d3.select("#p1buttons")
+    //             .attr("style","visibility:visible;")
+    //         d3.select("#p2buttons")
+    //             .attr("style","visibility:hidden;")
+    //     }
+    //     if(nextplayer===2){
+    //         d3.select("#p2buttons")
+    //             .attr("style","visibility:visible;")
+    //         d3.select("#p1buttons")
+    //             .attr("style","visibility:hidden;")
+    //     }
+    // }   
     render_battlecard(playerno)
     swap_pokemon_text(playerno,prevpokno)
     d3.select(swaprosterdiv).html("")
@@ -222,17 +266,18 @@ function swap_pokemon(playerno,pokeno){
     }
 }
 // *********************** Attack ***********************
-function test_attack(){
-    var DEFroster = p2roster
-    var DEFactive = p2active
-    p2roster[p2active].hpcount = p2roster[p2active].hpcount - 10
-    var DEFpokehp = "HP - "+DEFroster[DEFactive].hpcount+" / "+DEFroster[DEFactive].hp
-    console.log(p2roster)
-    d3.select("#p2battlecardHP")
-        .html(`${DEFroster[DEFactive].name}<br>${DEFpokehp}`)
-}
+// function test_attack(){
+//     var DEFroster = p2roster
+//     var DEFactive = p2active
+//     p2roster[p2active].hpcount = p2roster[p2active].hpcount - 10
+//     var DEFpokehp = "HP - "+DEFroster[DEFactive].hpcount+" / "+DEFroster[DEFactive].hp
+//     console.log(p2roster)
+//     d3.select("#p2battlecardHP")
+//         .html(`${DEFroster[DEFactive].name}<br>${DEFpokehp}`)
+// }
 // text gen for attacks
-function attack_text(attacker_no,attacktext){
+function attack_text(attacker_no,attacktext,attacker_type){
+    var typeimg = "static/images/type_imgs/"+attacker_type+".png"
     if(attacker_no===1){
         // var pokeballfunctiontext = p1name+" withdrew "+p1roster[prevpokno].name+" and sent out "+p1roster[p1active].name
         var textclass = "p1battletext"
@@ -241,11 +286,18 @@ function attack_text(attacker_no,attacktext){
         // var pokeballfunctiontext = p2name+" withdrew "+p2roster[prevpokno].name+" and sent out "+p2roster[p2active].name
         var textclass = "p2battletext"
     }
+    // d3.select("#battlelogtextbox")
+    //     .append("img")
+    //     .attr("src",typeimg)
+    //     .attr("class","battletext_img")
     d3.select("#battlelogtextbox")
         .append("div")
         .attr("id",textclass)
         .attr("class","battletext")
         .text(attacktext)
+        .append("img")
+        .attr("src",typeimg)
+        .attr("class","battletext_img")
     var scrolldown = document.getElementById("battlelogtextbox")
     scrolldown.scrollTop = scrolldown.scrollHeight
 }
@@ -383,7 +435,7 @@ function attack(attacker_no,atktype_no,atktype){
     if(atktype==="sp"){
         var attacktext = ATKactive.name+" used a special attack on "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
     }
-    attack_text(attacker_no,attacktext)
+    attack_text(attacker_no,attacktext,attacker_type)
     if(DEFactive.hpcount===0){
         var KOd_battletext = DEFactive.name+" was KO'd"
         d3.select("#battlelogtextbox")
@@ -417,7 +469,7 @@ function attack(attacker_no,atktype_no,atktype){
 }
 // HTML Rendering Functions -----------------------------------------------------------------
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
-// Phase is start or combat; former is for picking rosters up front, latter for swapping during combat
+// Phase is start, combat, or end;start is for picking rosters up front, combat for swapping during combat, end for victory screen
 function render_player_roster(playerno,phase){
     var roster_div = "#p"+playerno+"rosterdiv"
     var ballz_row_create = "p"+playerno+"pokeballz"
@@ -426,7 +478,13 @@ function render_player_roster(playerno,phase){
     var sprites_row_grab = "#"+sprites_row_create
     var text_row_create = "p"+playerno+"rosterpoketext"
     var text_row_grab = "#"+text_row_create
-    var rosternametextbackhalf = ", choose a Pokemon"
+    if(phase==="end"){
+        var rosternametextbackhalf = " wins"
+    }
+    if(phase!="end"){
+        var rosternametextbackhalf = ", choose a Pokemon"
+    }
+    // var rosternametextbackhalf = ", choose a Pokemon"
     if(playerno===1){
         var rosternametext = p1name+rosternametextbackhalf
         var wipraw = p1roster_raw
@@ -484,10 +542,19 @@ function render_player_roster(playerno,phase){
                 }
                 // var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
                 // var imglink = "static/images/pokeball.png"
+                if(phase==="end"){
+                    var ballfun = "hold"
+                    var imglink = "static/images/pokeball.png"
+                }
             }
             if(wiproster[wipraw[i]].hpcount===0){
-                var ballfun = "KOd_text('"+wiproster[wipraw[i]].name+"')"
                 var imglink = "static/images/kod.png"
+                if(phase!="end"){
+                    var ballfun = "KOd_text('"+wiproster[wipraw[i]].name+"')"
+                }
+                if(phase==="end"){
+                    var ballfun = "hold"
+                }
             }
             d3.select(ballz_row_grab)
                 .append("div")
@@ -502,10 +569,25 @@ function render_player_roster(playerno,phase){
         for(i in wiproster){
             var spriteurl = wiproster[i].img_url
             if(wiproster[i].hpcount>0){
-                var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
+                if(phase==="start"){
+                    var ballfun = "clear_player_rosters("+playerno+","+wipraw[j]+")"
+                }
+                if(phase==="combat"){
+                    var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
+                }
+                // var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
+                if(phase==="end"){
+                    var ballfun = "hold"
+                }
             }
             if(wiproster[i].hpcount===0){
-                var ballfun = "KOd_text('"+wiproster[i].name+"')"
+                if(phase!="end"){
+                    var ballfun = "KOd_text('"+wiproster[i].name+"')"    
+                }
+                if(phase==="end"){
+                    var ballfun = "hold"
+                }
+                // var ballfun = "KOd_text('"+wiproster[i].name+"')"
             }
             var spriteclass = "p"+playerno+"rostersprite"
             d3.select(sprites_row_grab)

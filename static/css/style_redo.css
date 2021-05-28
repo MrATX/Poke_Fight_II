@@ -1,3 +1,6 @@
+/* The ordering of the variables and stuffs is a bit off; could use some reorganizing but not a priority */
+
+
 div,#p1rosterdiv,#p2rosterdiv{
     text-align:center;
     justify-content:center;
@@ -13,6 +16,9 @@ div,#p1rosterdiv,#p2rosterdiv{
 .jumbotron{
     background-color:burlywood;
     color:teal;
+}
+#victor{
+    color:maroon;
 }
 #body{
     background-color:black;
@@ -366,5 +372,8 @@ td{
 }
 #KOd{
     color:maroon;
+}
+.battletext_img{
+    height:25px;
 }
 /* END MATCH ACTIVE------------------------------------------------------------------ */

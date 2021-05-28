@@ -47,6 +47,10 @@ function render_radios(radio_vars){
                         id="${radio_vars.ids[i]}" onchange="radios_val('${radio_vars.name}',value,id)">${radio_vars.text[i]}`)
         }
     }
+    // Removed Generation from Filters because it breaks Heavyweight roster (less than 12)
+    // May add back in later with a conditional where generation auto selects all for heavyweight; will decide later
+    // Quite a few additional commented out lines to remove generation below; if kept out of options may benefit from a reworking
+    // of the whole radio rendering process sans generation field
     // for(var i=0,length=radio_vars.values.length;i<length;i++){
     //     d3.select(radios_div)
     //         .select(".jumbotron")
@@ -154,7 +158,6 @@ function nameinputbox(player_no){
         .append("button")
         .attr("onclick",xfer_function)
         .text("Continue")
-
 }
 // XFER Name Input to Roster Select
 function xfer_name2roster(player_no){
@@ -272,8 +275,6 @@ function xfer_player2match(player_no){
         }
     }
 }
-
-
 
 // Base function rendering table with given list of Pokemon
 function pokedex_table(pokedex,headers){

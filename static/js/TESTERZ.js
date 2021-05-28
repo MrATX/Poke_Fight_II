@@ -1,3 +1,4 @@
+// Outdated testerz page; either clear and bury, or delete; we'll see
 //TESTERZ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function ipwntesterz(param){
     if(param==="a"){
