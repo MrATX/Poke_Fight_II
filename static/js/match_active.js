@@ -54,12 +54,12 @@ var p2active = p2roster_raw[0]
 // Utility Functions -----------------------------------------------------------------------
 function match_victory(loser){
     d3.select("#battleinterface").html("")
-    var losername = p1name
-    var winnername = p2name
+    // var losername = p1name
+    // var winnername = p2name
     var winner = 2
     if(loser===2){
-        losername = p2name
-        winnername = p1name
+        // losername = p2name
+        // winnername = p1name
         winner = 1
     }
     var gameovertext = "GAME OVER"
@@ -297,6 +297,7 @@ function attack_text(attacker_no,attacktext,attacker_type){
         .attr("class","battletext_img")
     var scrolldown = document.getElementById("battlelogtextbox")
     scrolldown.scrollTop = scrolldown.scrollHeight
+    window.scrollTo(0,58)
 }
 // Attack
 // atkno and defno are 1 or 2 to denote which player is which for the attack
@@ -366,12 +367,24 @@ function attack(attacker_no,atktype_no,atktype){
     if(DEFactive.type2!=" - "){
         var coeff = (typematchups_object[attacker_type][DEFactive.type1].coeff)*(typematchups_object[attacker_type][DEFactive.type2].coeff)
     }
+    // Miss Check
+    var miss_attack = "false"
+    var spddiff = DEFactive.speed - ATKactive.speed
+    if(spddiff>0){
+        // Maths on differential for miss chance
+    }
+    if(spddiff<=0){
+        // Default small miss chance if defender is slower? Or maths to make dynamic small chance? Or no chance it misses?
+    }
     // Damage Calculation
     if(coeff===0){
         var damage = 1
     }
     if(coeff>0){
         var damage = Math.round((atkstat*coeff*0.33)*(1-(defstat/250)))
+    }
+    if(miss_attack==="true"){
+        damage = 0
     }
     // var damage = Math.round((atkstat*coeff*0.33)*(1-(defstat/250)))
     // console.log(damage)
@@ -435,12 +448,23 @@ function attack(attacker_no,atktype_no,atktype){
     if(DEFactive.hpcount===0){
         var damagetext = damagetexthold
     }
-    if(atktype==="reg"){
-        var attacktext = ATKactive.name+" attacked "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
+    if(miss_attack==="true"){
+        var attacktext = ATKactive.name+" attacked "+DEFactive.name+" and missed!"
     }
-    if(atktype==="sp"){
-        var attacktext = ATKactive.name+" used a special attack on "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
+    if(miss_attack==="false"){
+        if(atktype==="reg"){
+            var attacktext = ATKactive.name+" attacked "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
+        }
+        if(atktype==="sp"){
+            var attacktext = ATKactive.name+" used a special attack on "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
+        }
     }
+    // if(atktype==="reg"){
+    //     var attacktext = ATKactive.name+" attacked "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
+    // }
+    // if(atktype==="sp"){
+    //     var attacktext = ATKactive.name+" used a special attack on "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
+    // }
     attack_text(attacker_no,attacktext,attacker_type)
     if(DEFactive.hpcount===0){
         var KOd_battletext = DEFactive.name+" was KO'd"
