@@ -369,12 +369,32 @@ function attack(attacker_no,atktype_no,atktype){
     }
     // Miss Check
     var miss_attack = "false"
+    var base_miss = 0.07
+    // var magic_spdno = 292 (max at 60%)
+    // 350 = max at 50%
+    var magic_spdno = 350 
     var spddiff = DEFactive.speed - ATKactive.speed
-    if(spddiff>0){
-        // Maths on differential for miss chance
+    console.log(spddiff)
+    // matched speeds
+    if(spddiff===0){
+        var miss_chance = base_miss * 100
+        var miss_chance_array = Array.from({length:miss_chance},p => p)
     }
-    if(spddiff<=0){
-        // Default small miss chance if defender is slower? Or maths to make dynamic small chance? Or no chance it misses?
+    // positive for defender
+    if(spddiff>0){
+        var miss_integer = ((spddiff/magic_spdno) + base_miss) * 100
+        console.log(miss_integer)
+        var miss_chance = Math.round(miss_integer)
+        console.log(miss_chance)  
+        var miss_chance_array = Array.from({length:miss_chance},p => p)
+    }
+    // negative for defender
+    if(spddiff<0){
+        var miss_integer = (spddiff * -1)/magic_spdno
+        console.log(miss_integer)
+        miss_chance = Math.round((1 - (miss_integer * 1.98)) * base_miss * 100)
+        console.log(miss_chance)
+        var miss_chance_array = Array.from({length:miss_chance},p => p)
     }
     // Damage Calculation
     if(coeff===0){
@@ -751,6 +771,7 @@ function clear_player_rosters(playerno,pokeno){
         render_battlecard(2),
         speedcheck()
     }
+    window.scrollTo(0,58)
 }
 // Create Battle Interface
 function render_battle_interface(){
