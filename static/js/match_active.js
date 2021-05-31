@@ -20,8 +20,7 @@
 
 // ?????????????????????????????????????????????????????????????????????????
 
-// Should I add in mechanic where if player swaps current pokemon for same it's still their turn?
-// kind of allows for a roster check; maybe 86 the text too; will look into it later
+
 
 // ?????????????????????????????????????????????????????????????????????????
 
@@ -179,13 +178,16 @@ function swap_pokemon_text(playerno,prevpokno){
 }
 // pokeball/sprite swap function
 function swap_pokemon(playerno,pokeno){
+    pokeno = parseInt(pokeno)
     // Assign variables for correct player and check for KO'd or turn swap
     if(playerno===1){
         var prevpokno = p1active
         p1active = pokeno
         var swaprosterdiv = "#p1rosterdiv"
         var nextplayer = 2
-        if(p1roster[prevpokno].hpcount===0){
+        console.log(pokeno)
+        console.log(prevpokno)
+        if(p1roster[prevpokno].hpcount===0 || pokeno===prevpokno){
             nextplayer = 1
         }
     }
@@ -194,13 +196,17 @@ function swap_pokemon(playerno,pokeno){
         p2active = pokeno
         var swaprosterdiv = "#p2rosterdiv"
         var nextplayer = 1
-        if(p2roster[prevpokno].hpcount===0){
+        console.log(pokeno)
+        console.log(prevpokno)
+        if(p2roster[prevpokno].hpcount===0 || pokeno===prevpokno){
             nextplayer = 2
         }
     }
-    // Render interface again and align
+    // Render interface again, post text, and align
     render_battlecard(playerno)
-    swap_pokemon_text(playerno,prevpokno)
+    if(pokeno!=prevpokno){
+        swap_pokemon_text(playerno,prevpokno)
+    }
     d3.select(swaprosterdiv).html("")
     d3.select("#battleinterface")
         .attr("style","visibility:visible")

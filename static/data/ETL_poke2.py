@@ -153,9 +153,13 @@ combat_vars_dict["types_list"]=(types_list)
 match_vars_dict = {}
 # Radios
 # nplayers
-nplayers_radio_values = ["1","2"]
-nplayers_radio_ids = ["oneplayerradio","twoplayerradio"]
-nplayers_radio_text = ["One Player","Two Player"]
+# removing 1 player option for now
+# nplayers_radio_values = ["1","2"]
+# nplayers_radio_ids = ["oneplayerradio","twoplayerradio"]
+# nplayers_radio_text = ["One Player","Two Player"]
+nplayers_radio_values = ["2"]
+nplayers_radio_ids = ["twoplayerradio"]
+nplayers_radio_text = ["Two Player"]
 nplayers_ = [nplayers_radio_values,nplayers_radio_ids,nplayers_radio_text]
 nplayers_radios = {
     "name":"nplayers",
