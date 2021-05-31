@@ -121,18 +121,28 @@ function generate_rosters(data,wiprawroster,wipgenroster){
         wipgenroster[wiprawroster[i]] = data[0].pokedex[parseInt(wiprawroster[i])]
         wipgenroster[wiprawroster[i]].hpcount = wipgenroster[wiprawroster[i]].hp
         if(wipgenroster[wiprawroster[i]].type2===" - "){
-            wipgenroster[wiprawroster[i]].atktotal = 30
-            wipgenroster[wiprawroster[i]].atkcount1 = 30
-            wipgenroster[wiprawroster[i]].spatktotal = 10
-            wipgenroster[wiprawroster[i]].spatkcount1 = 10
+            // wipgenroster[wiprawroster[i]].atktotal = 30
+            // wipgenroster[wiprawroster[i]].atkcount1 = 30
+            // wipgenroster[wiprawroster[i]].spatktotal = 10
+            // wipgenroster[wiprawroster[i]].spatkcount1 = 10
+            wipgenroster[wiprawroster[i]].atktotal = 2
+            wipgenroster[wiprawroster[i]].atkcount1 = 2
+            wipgenroster[wiprawroster[i]].spatktotal = 1
+            wipgenroster[wiprawroster[i]].spatkcount1 = 1
         }
         if(wipgenroster[wiprawroster[i]].type2!=" - "){
-            wipgenroster[wiprawroster[i]].atktotal = 15
-            wipgenroster[wiprawroster[i]].atkcount1 = 15
-            wipgenroster[wiprawroster[i]].atkcount2 = 15
-            wipgenroster[wiprawroster[i]].spatktotal = 5
-            wipgenroster[wiprawroster[i]].spatkcount1 = 5
-            wipgenroster[wiprawroster[i]].spatkcount2 = 5
+            // wipgenroster[wiprawroster[i]].atktotal = 15
+            // wipgenroster[wiprawroster[i]].atkcount1 = 15
+            // wipgenroster[wiprawroster[i]].atkcount2 = 15
+            // wipgenroster[wiprawroster[i]].spatktotal = 5
+            // wipgenroster[wiprawroster[i]].spatkcount1 = 5
+            // wipgenroster[wiprawroster[i]].spatkcount2 = 5
+            wipgenroster[wiprawroster[i]].atktotal = 1
+            wipgenroster[wiprawroster[i]].atkcount1 = 1
+            wipgenroster[wiprawroster[i]].atkcount2 = 1
+            wipgenroster[wiprawroster[i]].spatktotal = 1
+            wipgenroster[wiprawroster[i]].spatkcount1 = 1
+            wipgenroster[wiprawroster[i]].spatkcount2 = 1
         }
     }
 }
@@ -147,12 +157,12 @@ var typematchups_object = []
 // }
 function generate_typematchups(combat_vars){
     typematchups_object = combat_vars[0].type_matchups
-    console.log(combat_vars[0].type_matchups)
-    console.log(typematchups_object)
+    // console.log(combat_vars[0].type_matchups)
+    // console.log(typematchups_object)
 }
 // KO'd Text function
 function KOd_text(name){
-    console.log(name)
+    // console.log(name)
     var text = name+" is KO'd. Select a different pokemon"
     alert(text)
 }
@@ -309,16 +319,45 @@ function attack(attacker_no,atktype_no,atktype){
         var ATKactive = p1roster[p1active]
         var DEFroster = p2roster
         var DEFactive = p2roster[p2active]
-        console.log("P1 attacking")
+        // console.log("P1 attacking")
     }
     if(attacker_no===2){
         var ATKroster = p2roster
         var ATKactive = p2roster[p2active]
         var DEFroster = p1roster
         var DEFactive = p1roster[p1active]
-        console.log("P2 attacking")
+        // console.log("P2 attacking")
     }
     var damagetexthold = DEFactive.hpcount
+    // Out of attacks check
+    if(ATKactive.type2===" - "){
+        var attacks_sum = ATKactive.atkcount1 + ATKactive.spatkcount1
+    }
+    if(ATKactive.type2!=" - "){
+        var attacks_sum = ATKactive.atkcount1 + ATKactive.atkcount2 + ATKactive.spatkcount1 + ATKactive.spatkcount2
+    }
+    console.log("atkcount")
+    console.log(attacks_sum)
+    console.log("atkcount")
+    if(attacks_sum===0){
+        var noattackstext = ATKactive.name + " is all out of attacks. They collapsed from exhaustion."
+        d3.select("#battlelogtextbox")
+            .append("div")
+            .attr("id","sysbattletext")
+            .attr("class","battletext")
+            .text(noattackstext)
+        var scrolldown = document.getElementById("battlelogtextbox")
+        scrolldown.scrollTop = scrolldown.scrollHeight
+        if(attacker_no===1){
+            p1roster[p1active].hpcount = 0
+            swap_button(1)
+        }
+        if(attacker_no===2){
+            p2roster[p2active].hpcount = 0
+            swap_button(2)
+        }
+        return
+    }
     if(atktype==="reg"){
         if(atktype_no===1){
             if(ATKactive.atkcount1===0){
@@ -463,7 +502,7 @@ function attack(attacker_no,atktype_no,atktype){
     if(coeff===4){
         var coefftext = "Super Effective"
     }
-    console.log(coefftext)
+    // console.log(coefftext)
     var damagetext = damage
     if(DEFactive.hpcount===0){
         var damagetext = damagetexthold
@@ -486,6 +525,10 @@ function attack(attacker_no,atktype_no,atktype){
     //     var attacktext = ATKactive.name+" used a special attack on "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
     // }
     attack_text(attacker_no,attacktext,attacker_type)
+    // ******************************************************
+    // NEED TO ADD IN KO CHECK FOR IF NO ATTACKS LEFT
+    // ******************************************************
+    // KO Check
     if(DEFactive.hpcount===0){
         var KOd_battletext = DEFactive.name+" was KO'd"
         d3.select("#battlelogtextbox")
@@ -597,7 +640,13 @@ function render_player_roster(playerno,phase){
                     var imglink = "static/images/pokeball.png"
                 }
             }
-            if(wiproster[wipraw[i]].hpcount===0){
+            if(wiproster[wipraw[i]].type2===" - "){
+                var attacks_sum = wiproster[wipraw[i]].atkcount1 + wiproster[wipraw[i]].spatkcount1
+            }
+            if(wiproster[wipraw[i]].type2!=" - "){
+                var attacks_sum = wiproster[wipraw[i]].atkcount1 + wiproster[wipraw[i]].atkcount2 + wiproster[wipraw[i]].spatkcount1 + wiproster[wipraw[i]].spatkcount2
+            }
+            if(wiproster[wipraw[i]].hpcount===0 || attacks_sum===0){
                 var imglink = "static/images/kod.png"
                 if(phase!="end"){
                     var ballfun = "KOd_text('"+wiproster[wipraw[i]].name+"')"
