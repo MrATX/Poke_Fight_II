@@ -18,31 +18,32 @@
 // // var p2rosterATKS = []
 // // WIPWIPWIP VARIABLES
 
+// ?????????????????????????????????????????????????????????????????????????
 
-// *********************************************************************************************** \\
+// Should I add in mechanic where if player swaps current pokemon for same it's still their turn?
+// kind of allows for a roster check; maybe 86 the text too; will look into it later
 
-// Also need to add in chance to miss based on speed and/or speed differential between Pokemon
+// ?????????????????????????????????????????????????????????????????????????
 
-// *********************************************************************************************** \\
-
-
+// ******************************************************
+// *********************** VARIABLES ********************
+// ******************************************************
 // Pull in match setup variables from POST
 // grab hidden variables from HTML
 var npoke = document.getElementById("npoke").innerText
 var p1name = document.getElementById("p1name").innerText
 var p1roster_raw = document.getElementsByName("p1roster")
-// var p1roster = []
 var wiprosterpull = []
+// P1 stuffs
 var p1roster = {}
 for(var i=0,length=parseInt(npoke);i<length;i++){
     wiprosterpull.push(p1roster_raw[i].textContent)
 }
 p1roster_raw = wiprosterpull
 var p1active = p1roster_raw[0]
-// var p1active = "420"
+// P2 stuffs
 var p2name = document.getElementById("p2name").innerText
 var p2roster_raw = document.getElementsByName("p2roster")
-// var p2roster = []
 wiprosterpull = []
 var p2roster = {}
 for(var i=0,length=parseInt(npoke);i<length;i++){
@@ -50,16 +51,14 @@ for(var i=0,length=parseInt(npoke);i<length;i++){
 }
 p2roster_raw = wiprosterpull
 var p2active = p2roster_raw[0]
-// var p2active = "420"
-// Utility Functions -----------------------------------------------------------------------
+// *****************************************************************
+// *********************** UTILITY FUNCTIONS ***********************
+// *****************************************************************
+// Game over screen
 function match_victory(loser){
     d3.select("#battleinterface").html("")
-    // var losername = p1name
-    // var winnername = p2name
     var winner = 2
     if(loser===2){
-        // losername = p2name
-        // winnername = p1name
         winner = 1
     }
     var gameovertext = "GAME OVER"
@@ -74,27 +73,12 @@ function match_victory(loser){
         .append("hr")
     render_player_roster(winner,"end")
 }
+// Compare active Pokemons' speeds to see who goes first
 function speedcheck(){
     var nextplayer = 1
     if(p1roster[p1active].speed<p2roster[p2active].speed){
         nextplayer = 2
     }
-    // if(playerno===1){
-    //     prevpokno = p1active
-    //     p1active = pokeno
-    //     var swaprosterdiv = "#p1rosterdiv"
-    // }
-    // if(playerno===2){
-    //     prevpokno = p2active
-    //     p2active = pokeno
-    //     var swaprosterdiv = "#p2rosterdiv"
-    // }
-    // render_battlecard(playerno)
-    // swap_pokemon_text(playerno,prevpokno)
-    // d3.select(swaprosterdiv).html("")
-    // d3.select("#battleinterface")
-    //     .attr("style","visibility:visible")
-    // window.scrollTo(0,58)
     if(nextplayer===1){
         d3.select("#p1buttons")
             .attr("style","visibility:visible;")
@@ -115,65 +99,57 @@ function leave_match(){
         window.location.href = "/"
     }
 }
-// Generate players' rosters as dicts of dicts ----------------------------------------------
+// Generate players' rosters as dicts of dicts and assign hp and attack counts to Pokemon
 function generate_rosters(data,wiprawroster,wipgenroster){
     for(i in wiprawroster){
         wipgenroster[wiprawroster[i]] = data[0].pokedex[parseInt(wiprawroster[i])]
         wipgenroster[wiprawroster[i]].hpcount = wipgenroster[wiprawroster[i]].hp
         if(wipgenroster[wiprawroster[i]].type2===" - "){
-            // wipgenroster[wiprawroster[i]].atktotal = 30
-            // wipgenroster[wiprawroster[i]].atkcount1 = 30
-            // wipgenroster[wiprawroster[i]].spatktotal = 10
-            // wipgenroster[wiprawroster[i]].spatkcount1 = 10
-            wipgenroster[wiprawroster[i]].atktotal = 2
-            wipgenroster[wiprawroster[i]].atkcount1 = 2
-            wipgenroster[wiprawroster[i]].spatktotal = 1
-            wipgenroster[wiprawroster[i]].spatkcount1 = 1
+            wipgenroster[wiprawroster[i]].atktotal = 30
+            wipgenroster[wiprawroster[i]].atkcount1 = 30
+            wipgenroster[wiprawroster[i]].spatktotal = 10
+            wipgenroster[wiprawroster[i]].spatkcount1 = 10
+            // TESTERZ ATTACK VALUE TO TEST KO FROM EXHAUSTION
+            // wipgenroster[wiprawroster[i]].atktotal = 2
+            // wipgenroster[wiprawroster[i]].atkcount1 = 2
+            // wipgenroster[wiprawroster[i]].spatktotal = 1
+            // wipgenroster[wiprawroster[i]].spatkcount1 = 1
         }
         if(wipgenroster[wiprawroster[i]].type2!=" - "){
-            // wipgenroster[wiprawroster[i]].atktotal = 15
-            // wipgenroster[wiprawroster[i]].atkcount1 = 15
-            // wipgenroster[wiprawroster[i]].atkcount2 = 15
-            // wipgenroster[wiprawroster[i]].spatktotal = 5
-            // wipgenroster[wiprawroster[i]].spatkcount1 = 5
-            // wipgenroster[wiprawroster[i]].spatkcount2 = 5
-            wipgenroster[wiprawroster[i]].atktotal = 1
-            wipgenroster[wiprawroster[i]].atkcount1 = 1
-            wipgenroster[wiprawroster[i]].atkcount2 = 1
-            wipgenroster[wiprawroster[i]].spatktotal = 1
-            wipgenroster[wiprawroster[i]].spatkcount1 = 1
-            wipgenroster[wiprawroster[i]].spatkcount2 = 1
+            wipgenroster[wiprawroster[i]].atktotal = 15
+            wipgenroster[wiprawroster[i]].atkcount1 = 15
+            wipgenroster[wiprawroster[i]].atkcount2 = 15
+            wipgenroster[wiprawroster[i]].spatktotal = 5
+            wipgenroster[wiprawroster[i]].spatkcount1 = 5
+            wipgenroster[wiprawroster[i]].spatkcount2 = 5
+            // TESTERZ ATTACK VALUE TO TEST KO FROM EXHAUSTION
+            // wipgenroster[wiprawroster[i]].atktotal = 1
+            // wipgenroster[wiprawroster[i]].atkcount1 = 1
+            // wipgenroster[wiprawroster[i]].atkcount2 = 1
+            // wipgenroster[wiprawroster[i]].spatktotal = 1
+            // wipgenroster[wiprawroster[i]].spatkcount1 = 1
+            // wipgenroster[wiprawroster[i]].spatkcount2 = 1
         }
     }
 }
-// Generate Type Matchups Object ----------------------------------------------
+// Generate Type Matchups array to sort coeffecients for damage calculation
 var typematchups_object = []
-// function generate_typematchups(){
-//     d3.json("/combat_vars").then(combat_vars=>
-//         typematchups_object = combat_vars[0].type_matchups,
-//         console.log(combat_vars[0].type_matchups)
-//         )
-//     console.log(typematchups_object)   
-// }
 function generate_typematchups(combat_vars){
     typematchups_object = combat_vars[0].type_matchups
-    // console.log(combat_vars[0].type_matchups)
-    // console.log(typematchups_object)
 }
-// KO'd Text function
+// KO'd Text function for roster ballfuns
 function KOd_text(name){
-    // console.log(name)
     var text = name+" is KO'd. Select a different pokemon"
     alert(text)
 }
-
-
-
-// Button Functions -------------------------------------------------------------------------
-// *********************** Swap Pokemon ***********************
+// ****************************************************************
+// *********************** BUTTON FUNCTIONS ***********************
+// ****************************************************************
+// ****************************************************************
+// *********************** SWAP POKEMON ***********************
+// ****************************************************************
 // swap button function
 function swap_button(playerno){
-    // var rostervariable = "combat"
     render_player_roster(playerno,"combat"),
     window.scrollTo(0,0),
     d3.select("#battleinterface")
@@ -193,16 +169,6 @@ function swap_pokemon_text(playerno,prevpokno){
         var pokeballfunctiontext = p2name+" withdrew "+p2roster[prevpokno].name+" and sent out "+p2roster[p2active].name
         var textclass = "p2battletext"
     }
-    // var start_check = document.getElementById("battlelogtextbox")
-    // if(start_check!=null){
-    //     d3.select("#battlelogtextbox")
-    //         .append("div")
-    //         .attr("id",textclass)
-    //         .attr("class","battletext")
-    //         .text(pokeballfunctiontext)
-    //     var scrolldown = document.getElementById("battlelogtextbox")
-    //     scrolldown.scrollTop = scrolldown.scrollHeight
-    // }
     d3.select("#battlelogtextbox")
         .append("div")
         .attr("id",textclass)
@@ -232,33 +198,14 @@ function swap_pokemon(playerno,pokeno){
             nextplayer = 2
         }
     }
-    // var start_check = document.getElementById("battlelogtextbox")
-    // if(start_check!=null){
-    //     render_battlecard(playerno)
-    //     swap_pokemon_text(playerno,prevpokno)
-    //     d3.select(swaprosterdiv).html("")
-    //     d3.select("#battleinterface")
-    //         .attr("style","visibility:visible")
-    //     window.scrollTo(0,58)
-    //     if(nextplayer===1){
-    //         d3.select("#p1buttons")
-    //             .attr("style","visibility:visible;")
-    //         d3.select("#p2buttons")
-    //             .attr("style","visibility:hidden;")
-    //     }
-    //     if(nextplayer===2){
-    //         d3.select("#p2buttons")
-    //             .attr("style","visibility:visible;")
-    //         d3.select("#p1buttons")
-    //             .attr("style","visibility:hidden;")
-    //     }
-    // }   
+    // Render interface again and align
     render_battlecard(playerno)
     swap_pokemon_text(playerno,prevpokno)
     d3.select(swaprosterdiv).html("")
     d3.select("#battleinterface")
         .attr("style","visibility:visible")
     window.scrollTo(0,58)
+    // Assign next up player
     if(nextplayer===1){
         d3.select("#p1buttons")
             .attr("style","visibility:visible;")
@@ -272,31 +219,18 @@ function swap_pokemon(playerno,pokeno){
             .attr("style","visibility:hidden;")
     }
 }
-// *********************** Attack ***********************
-// function test_attack(){
-//     var DEFroster = p2roster
-//     var DEFactive = p2active
-//     p2roster[p2active].hpcount = p2roster[p2active].hpcount - 10
-//     var DEFpokehp = "HP - "+DEFroster[DEFactive].hpcount+" / "+DEFroster[DEFactive].hp
-//     console.log(p2roster)
-//     d3.select("#p2battlecardHP")
-//         .html(`${DEFroster[DEFactive].name}<br>${DEFpokehp}`)
-// }
-// text gen for attacks
+// ******************************************************
+// *********************** ATTACK ***********************
+// ******************************************************
+// Text gen for attacks
 function attack_text(attacker_no,attacktext,attacker_type){
     var typeimg = "static/images/type_imgs/"+attacker_type+".png"
     if(attacker_no===1){
-        // var pokeballfunctiontext = p1name+" withdrew "+p1roster[prevpokno].name+" and sent out "+p1roster[p1active].name
         var textclass = "p1battletext"
     }
     if(attacker_no===2){
-        // var pokeballfunctiontext = p2name+" withdrew "+p2roster[prevpokno].name+" and sent out "+p2roster[p2active].name
         var textclass = "p2battletext"
     }
-    // d3.select("#battlelogtextbox")
-    //     .append("img")
-    //     .attr("src",typeimg)
-    //     .attr("class","battletext_img")
     d3.select("#battlelogtextbox")
         .append("div")
         .attr("id",textclass)
@@ -309,9 +243,9 @@ function attack_text(attacker_no,attacktext,attacker_type){
     scrolldown.scrollTop = scrolldown.scrollHeight
     window.scrollTo(0,58)
 }
-// Attack
+// Attack function
 // atkno and defno are 1 or 2 to denote which player is which for the attack
-// typeno is 1 or 2 to denote which element
+// typeno is 1 or 2 to denote which attack type (element)
 // atktype reg or sp to denote regular or special attack
 function attack(attacker_no,atktype_no,atktype){
     if(attacker_no===1){
@@ -319,26 +253,21 @@ function attack(attacker_no,atktype_no,atktype){
         var ATKactive = p1roster[p1active]
         var DEFroster = p2roster
         var DEFactive = p2roster[p2active]
-        // console.log("P1 attacking")
     }
     if(attacker_no===2){
         var ATKroster = p2roster
         var ATKactive = p2roster[p2active]
         var DEFroster = p1roster
         var DEFactive = p1roster[p1active]
-        // console.log("P2 attacking")
     }
     var damagetexthold = DEFactive.hpcount
-    // Out of attacks check
+    // KO from exhaustion check; out of all attacks check
     if(ATKactive.type2===" - "){
         var attacks_sum = ATKactive.atkcount1 + ATKactive.spatkcount1
     }
     if(ATKactive.type2!=" - "){
         var attacks_sum = ATKactive.atkcount1 + ATKactive.atkcount2 + ATKactive.spatkcount1 + ATKactive.spatkcount2
     }
-    console.log("atkcount")
-    console.log(attacks_sum)
-    console.log("atkcount")
     if(attacks_sum===0){
         var noattackstext = ATKactive.name + " is all out of attacks. They collapsed from exhaustion."
         d3.select("#battlelogtextbox")
@@ -358,6 +287,7 @@ function attack(attacker_no,atktype_no,atktype){
         }
         return
     }
+    // Out of individual moves check
     if(atktype==="reg"){
         if(atktype_no===1){
             if(ATKactive.atkcount1===0){
@@ -386,6 +316,7 @@ function attack(attacker_no,atktype_no,atktype){
             }
         }
     }
+    // Select regular or special stats, attacker type, grab coeffecient for attack
     if(atktype==="reg"){
         var atkstat = ATKactive.attack
         var defstat = DEFactive.defense
@@ -409,31 +340,37 @@ function attack(attacker_no,atktype_no,atktype){
     // Miss Check
     var miss_attack = "false"
     var base_miss = 0.07
+    var miss_chance_array = []
     // var magic_spdno = 292 (max at 60%)
     // 350 = max at 50%
     var magic_spdno = 350 
     var spddiff = DEFactive.speed - ATKactive.speed
-    console.log(spddiff)
     // matched speeds
     if(spddiff===0){
         var miss_chance = base_miss * 100
-        var miss_chance_array = Array.from({length:miss_chance},p => p)
+        for (var i = 1; i <= miss_chance; i++) {
+            miss_chance_array.push(i);
+        }
     }
-    // positive for defender
+    // defender is faster
     if(spddiff>0){
         var miss_integer = ((spddiff/magic_spdno) + base_miss) * 100
-        console.log(miss_integer)
         var miss_chance = Math.round(miss_integer)
-        console.log(miss_chance)  
-        var miss_chance_array = Array.from({length:miss_chance},p => p)
+        for (var i = 1; i <= miss_chance; i++) {
+            miss_chance_array.push(i);
+        }
     }
-    // negative for defender
+    // defender is slower
     if(spddiff<0){
         var miss_integer = (spddiff * -1)/magic_spdno
-        console.log(miss_integer)
         miss_chance = Math.round((1 - (miss_integer * 1.98)) * base_miss * 100)
-        console.log(miss_chance)
-        var miss_chance_array = Array.from({length:miss_chance},p => p)
+        for (var i = 1; i <= miss_chance; i++) {
+            miss_chance_array.push(i);
+        }
+    }
+    var testerzRNG = Math.round(Math.random() * (99 - 0) + 0)
+    if(miss_chance_array.includes(testerzRNG)){
+        miss_attack = "true"
     }
     // Damage Calculation
     if(coeff===0){
@@ -445,12 +382,7 @@ function attack(attacker_no,atktype_no,atktype){
     if(miss_attack==="true"){
         damage = 0
     }
-    // var damage = Math.round((atkstat*coeff*0.33)*(1-(defstat/250)))
-    // console.log(damage)
-    // **************************************************************************************
-    // Missed attack check and if statement w/ correct text for battelog somewhere round here
-    // **************************************************************************************
-    // Create variables impact
+    // Create variables impact; reduce HP and ATK counts accordingly
     if((DEFactive.hpcount - damage) > 0){
         DEFactive.hpcount = DEFactive.hpcount - damage
     }
@@ -473,7 +405,7 @@ function attack(attacker_no,atktype_no,atktype){
             ATKactive.spatkcount2 = ATKactive.spatkcount2 -1
         }
     }
-    // Assign variables impact
+    // Assign variables impact to player rosters
     if(attacker_no===1){
         p1roster[p1active] = ATKactive
         p2roster[p2active] = DEFactive
@@ -502,7 +434,6 @@ function attack(attacker_no,atktype_no,atktype){
     if(coeff===4){
         var coefftext = "Super Effective"
     }
-    // console.log(coefftext)
     var damagetext = damage
     if(DEFactive.hpcount===0){
         var damagetext = damagetexthold
@@ -518,16 +449,7 @@ function attack(attacker_no,atktype_no,atktype){
             var attacktext = ATKactive.name+" used a special attack on "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
         }
     }
-    // if(atktype==="reg"){
-    //     var attacktext = ATKactive.name+" attacked "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
-    // }
-    // if(atktype==="sp"){
-    //     var attacktext = ATKactive.name+" used a special attack on "+DEFactive.name+" for "+damagetext+" damage. It was "+coefftext
-    // }
     attack_text(attacker_no,attacktext,attacker_type)
-    // ******************************************************
-    // NEED TO ADD IN KO CHECK FOR IF NO ATTACKS LEFT
-    // ******************************************************
     // KO Check
     if(DEFactive.hpcount===0){
         var KOd_battletext = DEFactive.name+" was KO'd"
@@ -545,6 +467,7 @@ function attack(attacker_no,atktype_no,atktype){
             swap_button(1)
         }
     }
+    // Buttons swap if defender not KO'd
     if(DEFactive.hpcount>0){
         if(attacker_no===1){
             d3.select("#p1buttons")
@@ -577,14 +500,11 @@ function render_player_roster(playerno,phase){
     if(phase!="end"){
         var rosternametextbackhalf = ", choose a Pokemon"
     }
-    // var rosternametextbackhalf = ", choose a Pokemon"
     if(playerno===1){
         var rosternametext = p1name+rosternametextbackhalf
         var wipraw = p1roster_raw
         var wiproster = p1roster
         if(phase==="start"){
-            // d3.select("#battleinterface")
-            //     .attr("style","visibility:hidden")
             d3.select("#p2rosterdiv")
                 .attr("style","visibility:hidden")
         }
@@ -633,8 +553,6 @@ function render_player_roster(playerno,phase){
                     var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
                     var imglink = "static/images/pokeball.png"                
                 }
-                // var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
-                // var imglink = "static/images/pokeball.png"
                 if(phase==="end"){
                     var ballfun = "hold"
                     var imglink = "static/images/pokeball.png"
@@ -674,7 +592,6 @@ function render_player_roster(playerno,phase){
                 if(phase==="combat"){
                     var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
                 }
-                // var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
                 if(phase==="end"){
                     var ballfun = "hold"
                 }
@@ -686,7 +603,6 @@ function render_player_roster(playerno,phase){
                 if(phase==="end"){
                     var ballfun = "hold"
                 }
-                // var ballfun = "KOd_text('"+wiproster[i].name+"')"
             }
             var spriteclass = "p"+playerno+"rostersprite"
             d3.select(sprites_row_grab)
@@ -717,90 +633,6 @@ function render_player_roster(playerno,phase){
                     <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
         }
     }
-    // // Clear Roster div
-    // d3.select(roster_div).html("")
-    // // Create rows for Player Name, Pokeballs, Sprites, & Text
-    // d3.select(roster_div)
-    //     .append("div")
-    //     .attr("class","row")
-    //     .append("h1")
-    //     .text(rosternametext)
-    // d3.select(roster_div)
-    //     .append("div")
-    //     .attr("class","row")
-    //     .attr("id",ballz_row_create)
-    // d3.select(roster_div)
-    //     .append("div")
-    //     .attr("class","row")
-    //     .attr("id",sprites_row_create)
-    // d3.select(roster_div)
-    //     .append("div")
-    //     .attr("class","row")
-    //     .attr("id",text_row_create)
-    // // Add Pokeball images per npoke
-    // for(i in wipraw){
-    //     if(wiproster[wipraw[i]].hpcount>0){
-    //         if(phase==="start"){
-    //             var ballfun = "clear_player_rosters("+playerno+","+wipraw[i]+")"
-    //             var imglink = "static/images/pokeball.png"
-    //         }
-    //         if(phase==="combat"){
-    //             var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
-    //             var imglink = "static/images/pokeball.png"                
-    //         }
-    //         // var ballfun = "swap_pokemon("+playerno+",'"+wipraw[i]+"',p"+playerno+"active)"
-    //         // var imglink = "static/images/pokeball.png"
-    //     }
-    //     if(wiproster[wipraw[i]].hpcount===0){
-    //         var ballfun = "KOd_text('"+wiproster[wipraw[i]].name+"')"
-    //         var imglink = "static/images/kod.png"
-    //     }
-    //     d3.select(ballz_row_grab)
-    //         .append("div")
-    //         .attr("class","col-md-2")
-    //         .append("img")
-    //         .attr("onclick",ballfun)
-    //         .attr("class","pokeball")
-    //         .attr("src",imglink)
-    // }
-    // // Add Pokemon sprites
-    // var j = 0
-    // for(i in wiproster){
-    //     var spriteurl = wiproster[i].img_url
-    //     if(wiproster[i].hpcount>0){
-    //         var ballfun = "swap_pokemon("+playerno+",'"+wipraw[j]+"',p"+playerno+"active)"    
-    //     }
-    //     if(wiproster[i].hpcount===0){
-    //         var ballfun = "KOd_text('"+wiproster[i].name+"')"
-    //     }
-    //     var spriteclass = "p"+playerno+"rostersprite"
-    //     d3.select(sprites_row_grab)
-    //         .append("div")
-    //         .attr("class","col-md-2")
-    //         .append("img")
-    //         .attr("onclick",ballfun)
-    //         .attr("class",spriteclass)
-    //         .attr("src",spriteurl)
-    //     j = j + 1
-    // }
-    // // Add Pokemon names and HP
-    // for(i in wiproster){
-    //     var textid = "hold"
-    //     if(wiproster[i].hpcount===0){
-    //         var textid = "KOd"
-    //     }
-    //     var rosterindex = i
-    //     var rosterpokename = wiproster[i].name
-    //     var rosterpokeHP = "HP - "+wiproster[i].hpcount+" / "+wiproster[i].hp
-    //     d3.select(text_row_grab)
-    //         .append("div")
-    //         .attr("class","col-md-2")
-    //         .append("p")
-    //         .attr("id",textid)
-    //         .html(`${rosterpokename}<br>${rosterpokeHP}<br>
-    //             <img id='battletype' src='${wiproster[i].type1img}'>
-    //             <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
-    // }
 }
 // Function to clear rosters for initial active Pokemon selection
 function clear_player_rosters(playerno,pokeno){
@@ -812,8 +644,6 @@ function clear_player_rosters(playerno,pokeno){
     }
     if(playerno===2){
         d3.select("#p2rosterdiv").html("")
-        // d3.select("#battleinterface")
-        //     .attr("style","visibility:visible")
         p2active = pokeno
         render_battle_interface(),
         render_battlecard(1),
@@ -855,18 +685,6 @@ function render_battle_interface(){
         .attr("class","battletext")
         .attr("id","sysbattletext")
         .html(`${matchstarttext}<br>BEGIN!`)
-    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX //////////////////////////////////////////
-    // for(var i=0,length=50;i<length;i++){
-    //     d3.select("#battlelogtextbox")
-    //         .append("div")
-    //         .attr("class","battletext")
-    //         .text("iPwn")
-    // }
-    // d3.select("#battlelogtextbox")
-    //     .append("div")
-    //     .attr("class","battletext")
-    //     .text("I am all that is dev and now lets test the x wise scroll and see how it does with length or maybe plan to make sure the text size fits well enoguh; but what about the mobiles?")
-    // TESTERZ PLACEHOLDERS TEXT FOR BATTLE LOG TEXT BOX //////////////////////////////////////////
     // Main P2 Battle Interface
     d3.select("#battleinterface")
         .append("div")
@@ -1030,7 +848,6 @@ function render_battlecard(playerno){
         .append("button")
         .attr("id",bcswapbuttonID)
         .attr("onclick",swapfun)
-        // FUNCTION FOR BUTTON !!!!!!!!!!!!!!!!
         .text("Swap Pokemon")    
 }
 // Aggregate function to ensure array generation first
@@ -1039,16 +856,9 @@ function sigma_battle_interface(data){
     generate_rosters(data,p2roster_raw,p2roster),
     render_player_roster(1,"start"),
     render_player_roster(2,"start"),
-    // render_player_roster(1),
-    // render_player_roster(2),
-    // render_battle_interface(),
-    // render_battlecard(1),
-    // render_battlecard(2),
-    // speedcheck(),
     window.scrollTo(0,58)
 }
 // Call Aggregate Function to render Rosters & Battle interface
-// starting_pokemon_selection(npoke)
 d3.json("/combat_vars").then(combat_vars=>
     generate_typematchups(combat_vars)
     )
