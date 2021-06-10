@@ -5,7 +5,7 @@ function leave_match(){
         window.location.href = "/"
     }
 }
-// RADIOS ---------------------------------------------------------
+// RADIOS ----------------------------------------------------------
 // Base Function
 // Create and Display Radios for Selection Match Parameters
 function render_radios(radio_vars){

@@ -39,12 +39,84 @@
   <div class="container-fluid">
     <div class="jumbotron">
         <h1 id="jumbotitle">
-            Poke Fight II - Game Info
+            Welcome to Poke Fight II
         </h1>
         <hr>
         <p id="jumbopara">
-          Helpful game info & other such stuffs to come. Not sure what yet, but maybe some basic intro stuffs on gameplay.
+          Thank you for playing my game! It's a Flask app with mostly JavaScript backend to create a simple GUI-based Pokemon fighting game.
+          Disclaimer: I take no credit for inventing any characters or principal mechanics featured in the game. I came up with some math and
+          functions from scratch but mostly just organized existing characters from the Pokemon IP with a spreadsheet of Pokemon stats to
+          make this game for fun. I am in no way monetizing or profiting from it. Simply an exercise in coding and creativity.
+          Please explore the tabs below to learn more about the game. Enjoy!<br>
+          - Mr_ATX
         </p>
     </div>
-</div>
+  </div>
+  <div class="container-fluid">
+    <!-- Tab links -->
+   <div class="tab">
+     <button class="tablinks_info" id="gameplay_tab" onclick="swapTabs(event, 'gameplay')">Setting up a match</button>
+     <button class="tablinks_info" id="pokemon_tab" onclick="swapTabs(event, 'pokemon')">Choosing Pokemon</button>
+     <button class="tablinks_info" id="combat_tab" onclick="swapTabs(event, 'combat')">Combat Mechanics</button>
+     <button class="tablinks_info" id="future_tab" onclick="swapTabs(event, 'future')">Future Plans</button>
+   </div>
+   <!-- Gameplay -->
+   <div id="gameplay" class="tabcontent_info">
+      <h3>Setting up a match</h3>
+      <p>
+        <br>To begin a match of Poke Fight II, navigate to the 'Play' page via the link in the top-left corner, then click the button 'Play a Match'<br>
+        <br>You will then be prompted to choose the settings for the match; Number of Players (only two player local at this time), the Number of Pokemon
+        that each player will have, and the Weight Class of the Pokemon. The Weight Classes are general ranges of the overall strength of the various
+        Pokemon in an attempt to balance the gameplay independent of a leveling system.<br>
+        <br>Each player will then enter their name and select the respective number of Pokemon from the chosen Weight Class. Once rosters are chosen,
+        you may begin the match.
+      </p>
+   </div>
+    <!-- Pokemon -->
+    <div id="pokemon" class="tabcontent_info">
+      <h3>Choosing Pokemon</h3>
+      <p>
+        <br>This game features nearly every single Pokemon from all 8 generations and the Weight Classes are independent of generation.
+        To explore the Pokemon available and their stats, please check out the Pokedex via its link in the top-left corner. Be sure to
+        make use of the filters by clicking the 'Show Filters' button just below the top Nav Bar.
+      </p>
+    </div>
+    <!-- Combat -->
+    <div id="combat" class="tabcontent_info">
+      <h3>Combat Mechanics</h3>
+      <p>
+        <br>At the start of a match, each player will select their first Pokemon to send out and the Pokemon with the highest SPD goes first.
+        <br>The match will proceed with alternating turns for each player. On each turn, you may use a Pokemon's Regular Attack, their Special Attack,
+        or swap them for another Pokemon.<br>
+        <br>Regular Attack uses the attacking Pokemon's ATK stat and the defending Pokemon's DEF stat. Special Attacks use SP ATK and SP DEF.
+        All attacks have a chance to miss and that chance is higher or lower based on the difference in SPD between Pokemon. If the attacking Pokemon
+        is faster than the defender then they will have a lower chance of missing the attack. If the attacking Pokemon is slower, the chance of missing
+        is higher.<br>
+        <br>All Attacks also have an effectiveness level which is determined by the interaction of Pokemon types of the attacking and defending Pokemon.
+        Dual-type Pokemon may use two types of attacks for both Regular Attacks and Special Attacks but they also share the weaknesses of both types.
+        To explore the weaknesses and the correlating effectiveness, please check out the Types tables via the link in the top-left corner.<br>
+        <br>If a Pokemon's HP reaches 0 or they exhaust all of their charges for Regular Attacks and Special Attacks then they will be KO'd.
+        The first player to have all of their Pokemon KO'd, loses.
+      </p>
+    </div>
+    <!-- Future -->
+    <div id="future" class="tabcontent_info">
+    <h3>Future Plans</h3>
+    <p>
+      <br>Going forward, I would like to implement the following additions:<br>
+      <br>- Single Player vs AI, ideally with 'Easy' and 'Hard' difficulties<br>
+      - Gym Leaders with static rosters as AI opponents, as well as misc Trainers with random rosters<br>
+      - Misc balancing and bug fixes as necessary
+    </p>
+  </div>
+ <!-- Close Container -->
+ </div>
+
+ <!-- Web Depenencies -->
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+<!-- Local JS -->
+<script src="../static/js/info_menu.js"></script>
+
 </body>

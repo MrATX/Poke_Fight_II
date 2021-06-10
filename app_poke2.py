@@ -12,7 +12,7 @@ pokedex = mongo.db.pokedex
 combat_vars = mongo.db.combat_vars
 match_vars = mongo.db.match_vars
 # Frontend App Routes --------------------------------------------------
-# Main Menu routes --------------------------------------------------
+# Main Menu routes ----------------------------------------------------
 @poke2.route("/")
 def index():
     return render_template(

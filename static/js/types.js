@@ -4,7 +4,6 @@ function single_types_table(combat_vars){
         .append("tr")
         .append("th")
         .attr("class","typetable_row0")
-    // for(var i=0,length=combat_vars[0].types.length;i<length;i++){
     for(i in combat_vars[0].types){
         var atk_type = combat_vars[0].types[i]
         var row_id = atk_type + "_singlerow"
@@ -22,10 +21,8 @@ function single_types_table(combat_vars){
         d3.select(".single_type_body")
             .append("tr")
             .attr("id",row_id)
-        // for(var j=0,length=combat_vars[0].types.length;j<length;j++){
         for(j in combat_vars[0].types){
             var def_type = combat_vars[0].types[j]
-            // if(j===0){
             if(j==="Normal"){
                 d3.select("#"+String(row_id))
                     .append("td")
@@ -56,7 +53,6 @@ function single_types_table(combat_vars){
 }
 // Populate dropdown list of types for Dual Types Chart
 function dual_type_filters(combat_vars){
-    // for(var i=0,length=combat_vars[0].types.length;i<length;i++){
     for(i in combat_vars[0].types){
         d3.select(".typetable_type1sel")
             .append("option")
@@ -71,7 +67,6 @@ function dual_types_table(combat_vars,filter){
         .append("tr")
         .append("th")
         .attr("class","typetable_row0")
-    // for(var i=0,length=combat_vars[0].types.length;i<length;i++){
     for(i in combat_vars[0].types){
         var atk_type = combat_vars[0].types[i]
         var row_id = atk_type + "_dualrow"
@@ -90,7 +85,6 @@ function dual_types_table(combat_vars,filter){
         d3.select(".dual_type_body")
             .append("tr")
             .attr("id",row_id)
-        // for(var j=0,length=combat_vars[0].types.length;j<length;j++){
         for(j in combat_vars[0].types){
             var def_type = combat_vars[0].types[j]
             var cell_value = combat_vars[0].type_matchups[i][def_type].coeff * combat_vars[0].type_matchups[i][filter].coeff
@@ -103,7 +97,6 @@ function dual_types_table(combat_vars,filter){
                 4.00:"quadruple_dmg"
             }
             var td_id = dmg_ranges[cell_value]
-            // if(j===0){
             if(j==="Normal"){
                 d3.select("#"+String(row_id))
                     .append("td")
@@ -145,53 +138,24 @@ function dual_types_filter_change(){
     d3.select(".dual_type_body").html("")
     update_dual_types_table(filter)
 }
-
-document.getElementById("singletype_tab").click()
-
-// d3.json("combat_vars").then(combat_vars=>
-//     single_types_table(combat_vars)
-//     )
-// d3.json("combat_vars").then(combat_vars=>
-//     dual_type_filters(combat_vars)
-//     )
-// d3.json("combat_vars").then(combat_vars=>
-//     dual_types_table(combat_vars,"Fire")
-//     )
-
-// Testerz stuffs; to be removed once verified that it's not pertinent
-// function logtest(){
-//     console.log(document.getElementsByClassName("typetable_type1sel")[0].value);
-// }
-// console.log(document.getElementsByClassName("typetable_type1sel")[0].value);
-
-// var type1_sel = document.getElementById("weight_filter").value
-// var type1_sel_text = document.getElementById("weight_filter").innerText
-// console.log(type1_sel,type1_sel_text)
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THIS SO IT'S NOT SO OBVIOUS YOU DON'T KNOW HOW IT WORKS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// Also understanding it as you go through wouldn't be a bad call
-function openCity(evt, cityName) {
+// Tab swap function
+function swapTabs(evt, tabName) {
     // Declare all variables
     var i, tabcontent, tablinks;
-    
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
-    
     // Get all elements with class="tablinks" and remove the class "active"
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
-    }
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHANGE THIS SO IT'S NOT SO OBVIOUS YOU DON'T KNOW HOW IT WORKS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+}
 // Create Tables, Populate Dropdown, Select Single Type Tab
 d3.json("combat_vars").then(combat_vars=>
     single_types_table(combat_vars)

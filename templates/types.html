@@ -38,8 +38,8 @@
 <div class="container-fluid">
    <!-- Tab links -->
   <div class="tab">
-    <button class="tablinks" id="singletype_tab" onclick="openCity(event, 'single_type')">Single Type Matchups</button>
-    <button class="tablinks" id="dualtype_tab" onclick="openCity(event, 'dual_type')">Dual Type Matchups</button>
+    <button class="tablinks" id="singletype_tab" onclick="swapTabs(event, 'single_type')">Single Type Matchups</button>
+    <button class="tablinks" id="dualtype_tab" onclick="swapTabs(event, 'dual_type')">Dual Type Matchups</button>
   </div>
   <!-- Single Type Table -->
   <div id="single_type" class="tabcontent">
@@ -78,7 +78,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 <!-- Local JS -->
 <script src="../static/js/types.js"></script>
-<!-- <script src="../static/js/types_highlight.js"></script> -->
 <!-- Close Body -->
 </body>
 <!-- Close HTML -->
