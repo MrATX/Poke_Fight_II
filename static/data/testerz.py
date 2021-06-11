@@ -24,3 +24,5 @@ for i in type_imgs:
     # dict["iPwn"] = type_imgs["Steel"]
     dict[i] = type_imgs[i]
 print(dict)
+
+# empty commmit test change
