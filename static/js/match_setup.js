@@ -166,7 +166,7 @@ function xfer_name2roster(player_no){
     var buttontext = "Begin Match"
     var buttonfunction = "xfer_player2match("+player_no+")"
     if(nplayers==="2" && player_no===1){
-        buttontext = "Continue"
+        buttontext = "Next Player"
         buttonfunction = "xfer_p12p2()"
     }
     if(name!==""){
@@ -210,7 +210,7 @@ function xfer_p12p2(){
         }
     }
     if(String(k) !== npoke){
-        var alerttext = "Please select "+npoke+" Pokemon before continuing"
+        var alerttext = "Please select "+npoke+" Pokemon before continuing to the next player"
         alert(alerttext)
     }
     if(String(k) === npoke){
@@ -234,6 +234,9 @@ function xfer_p12p2(){
     }
 }
 // Xfer player to match
+//*******************************************************************************************\\
+// I think this is the place to plug in the AI selection in the first if playerno === 1
+//*******************************************************************************************\\
 function xfer_player2match(player_no){
     if(player_no === 1){
         var player_div = "#p1_roster_div"
@@ -252,7 +255,7 @@ function xfer_player2match(player_no){
         }
     }
     if(String(k) !== npoke){
-        var alerttext = "Please select "+npoke+" Pokemon before continuing"
+        var alerttext = "Please select "+npoke+" Pokemon before beginning the match"
         alert(alerttext)
     }
     if(String(k) === npoke){
@@ -350,6 +353,20 @@ function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilte
             pokedex_filtered.push(pokemon)
         }
     })
+    // TESTING PICKING AI ARRAY OF POKE INDEX NUMBERS
+    ////
+    console.log(pokedex_filtered)
+    ////
+    airoster = []
+    for(var i=0, length=npoke; i<length; i++){
+        var aipick = Math.floor(Math.random() * pokedex_filtered.length)
+        aipick = pokedex_filtered[aipick].id
+        airoster.push(aipick)
+    }
+    // var aipick = Math.floor(Math.random() * pokedex_filtered.length);
+    // aipick = pokedex_filtered[aipick].id
+    console.log(airoster)
+    
     // Grab Headers Array
     headers = headers[0].pokedex_headers
     // Grab Types Array

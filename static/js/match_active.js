@@ -19,6 +19,18 @@
 // // WIPWIPWIP VARIABLES
 
 
+//*******************************************************************************************\\
+
+// For adding single player
+// - Adaptations or new function for pokemon picks so AI picks randomly the first time and based on the type matchups otherwise
+// - Likely new functions for AI attacks that target the highest coeffecient
+// - AI for swapping if matchup is unfavorable? Could turn into a loop... Maybe keep it simpler for meow
+// - I think all the checks and such should work as long as AI is p2, but them being p2 might prompt them for actions
+//   -- Might need to make a subset of options in the core functions for AI, or just AI functions
+//   -- Will likely also need to ensure all the current functions work without a live p2
+
+//*******************************************************************************************\\
+
 // ******************************************************
 // *********************** VARIABLES ********************
 // ******************************************************
