@@ -388,4 +388,8 @@ td{
 .battletext_img{
     height:25px;
 }
+.pokedex_id{
+    color:pink;
+    /* visibility:hidden; */
+}
 /* END MATCH ACTIVE------------------------------------------------------------------ */

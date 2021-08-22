@@ -235,7 +235,8 @@ function xfer_p12p2(){
 }
 // Xfer player to match
 //*******************************************************************************************\\
-// I think this is the place to plug in the AI selection in the first if playerno === 1
+// Something about the way that the AI roster is being pulled in as p2roster is messing up
+// the swap functions; X is misplaced and some functions are misplaced; need to investigate
 //*******************************************************************************************\\
 function xfer_player2match(player_no){
     if(player_no === 1){
@@ -259,6 +260,7 @@ function xfer_player2match(player_no){
         alert(alerttext)
     }
     if(String(k) === npoke){
+        var p1roster = []
         if(confirm("Are these the Pokemon you would like to take into battle?")){
             var ids = document.getElementsByClassName("pokedex_id")
             for(var i=0, length=checks.length; i<length; i++){
@@ -269,11 +271,38 @@ function xfer_player2match(player_no){
                         .append("input")
                         .attr("name",roster_id)
                         .attr("value",ids[i].innerText)
+                    if(player_no === 1){
+                        p1roster.push(ids[i].innerText)
+                    }
                 }
             }
             d3.select("rosterselectprompt").html("")
             d3.select(".pokedex_header").html("")
             d3.select(".pokedex_body").html("")
+            if(player_no === 1){
+                var airoster = p1roster
+                console.log(airoster)
+                for(var i=0, length=npoke; i<length; i++){
+                    if(p1roster.includes(airoster[i])){
+                        airoster = []
+                        for(var i=0, length=npoke; i<length; i++){
+                            var aipick = Math.floor(Math.random() * pokedex_filtered.length)
+                            aipick = pokedex_filtered[aipick].id
+                            airoster.push(aipick)
+                        }
+                    }
+                }
+                console.log(airoster)
+                var l = 0
+                for(i in airoster){
+                    l = l + 1
+                    roster_id = "p2pokemon" + String(l)
+                    d3.select("#p2_roster_div")
+                        .append("input")
+                        .attr("name",roster_id)
+                        .attr("value",airoster[i])
+                }
+            }
             document.getElementById("ghost_submit").click()
         }
     }
@@ -310,6 +339,7 @@ function pokedex_table(pokedex,headers){
             <td class="pokedex_id">${d.id}`)
 }
 // Middle Function generating list of Pokemon based on chosen filters
+var pokedex_filtered = []
 // function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter,genfilter){
 function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter){
     // Grab table body & header, and clear rows
@@ -336,7 +366,7 @@ function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilte
     // Route into data dictionary
     var pokedex = pokedex[0]["pokedex"]
     // Create Array for Filtered Pokemon
-    var pokedex_filtered = []
+    // var pokedex_filtered = []
     // Create dummy variable to generate row indexes
     var k = 0
     // Loop through Pokedex, get Pokemon meeting filter criteria and push to array
@@ -357,15 +387,12 @@ function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilte
     ////
     console.log(pokedex_filtered)
     ////
-    airoster = []
-    for(var i=0, length=npoke; i<length; i++){
-        var aipick = Math.floor(Math.random() * pokedex_filtered.length)
-        aipick = pokedex_filtered[aipick].id
-        airoster.push(aipick)
-    }
-    // var aipick = Math.floor(Math.random() * pokedex_filtered.length);
-    // aipick = pokedex_filtered[aipick].id
-    console.log(airoster)
+    // airoster = []
+    // for(var i=0, length=npoke; i<length; i++){
+    //     var aipick = Math.floor(Math.random() * pokedex_filtered.length)
+    //     aipick = pokedex_filtered[aipick].id
+    //     airoster.push(aipick)
+    // }
     
     // Grab Headers Array
     headers = headers[0].pokedex_headers
