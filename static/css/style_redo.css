@@ -391,5 +391,6 @@ td{
 .pokedex_id{
     color:pink;
     /* visibility:hidden; */
+    display:none;
 }
 /* END MATCH ACTIVE------------------------------------------------------------------ */

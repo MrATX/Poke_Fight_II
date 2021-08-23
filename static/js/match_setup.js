@@ -300,8 +300,10 @@ function xfer_player2match(player_no){
                     d3.select("#p2_roster_div")
                         .append("input")
                         .attr("name",roster_id)
-                        .attr("value",airoster[i])
+                        .attr("value",String(airoster[i]))
                 }
+                d3.select("#p2_name_div")
+                    .attr("value","HorseyFuckerFace")
             }
             document.getElementById("ghost_submit").click()
         }

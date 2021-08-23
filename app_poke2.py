@@ -59,6 +59,7 @@ def roster_select():
 @poke2.route("/match_active",methods=['GET','POST'])
 def match_active():
     if request.method == 'POST':
+        nplayers = request.form['nplayers']
         npoke = request.form['npoke']
         p1_name = request.form['p1_name']
         p1_roster = []
@@ -74,6 +75,7 @@ def match_active():
             p2_roster.append(wip)
         return render_template(
             'match_active.html',
+            nplayers = nplayers,
             npoke = npoke,
             p1_name = p1_name,
             p1_roster = p1_roster,

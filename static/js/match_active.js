@@ -36,10 +36,12 @@
 // ******************************************************
 // Pull in match setup variables from POST
 // grab hidden variables from HTML
+var nplayers = document.getElementById("nplayers").innerText
 var npoke = document.getElementById("npoke").innerText
 var p1name = document.getElementById("p1name").innerText
 var p1roster_raw = document.getElementsByName("p1roster")
 var wiprosterpull = []
+console.log(nplayers)
 // P1 stuffs
 var p1roster = {}
 for(var i=0,length=parseInt(npoke);i<length;i++){
@@ -57,6 +59,8 @@ for(var i=0,length=parseInt(npoke);i<length;i++){
 }
 p2roster_raw = wiprosterpull
 var p2active = p2roster_raw[0]
+console.log("player1",p1roster,p1active)
+console.log("player2",p2roster,p2active)
 // *****************************************************************
 // *********************** UTILITY FUNCTIONS ***********************
 // *****************************************************************
@@ -534,7 +538,10 @@ function render_player_roster(playerno,phase){
     if(healthcheck===0){
         match_victory(playerno)
     }
-    if(healthcheck>0){
+    if(healthcheck>0 && (nplayers==="2" || (nplayers==="1" && playerno===1))){
+        console.log("ipwn_testerz")
+    }
+    if(healthcheck>0 && (nplayers==="2" || (nplayers==="1" && playerno===1))){
         // Clear Roster div
         d3.select(roster_div).html("")
         // Create rows for Player Name, Pokeballs, Sprites, & Text
@@ -646,24 +653,56 @@ function render_player_roster(playerno,phase){
                     <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
         }
     }
+    // console.log(playerno)
+    // if(healthcheck>0 && playerno===2){
+    //     clear_player_rosters(2,p2active),
+    //     console.log("it's working")
+    // }
 }
 // Function to clear rosters for initial active Pokemon selection
 function clear_player_rosters(playerno,pokeno){
-    if(playerno===1){
-        d3.select("#p1rosterdiv").html("")
-        d3.select("#p2rosterdiv")
-            .attr("style","visibility:visible")
-        p1active = pokeno
+    if(nplayers==="2"){
+        if(playerno===1){
+            d3.select("#p1rosterdiv").html("")
+            d3.select("#p2rosterdiv")
+                .attr("style","visibility:visible")
+            p1active = pokeno
+        }
+        if(playerno===2){
+            d3.select("#p2rosterdiv").html("")
+            p2active = pokeno
+            render_battle_interface(),
+            render_battlecard(1),
+            render_battlecard(2),
+            speedcheck()
+        }
+        window.scrollTo(0,58)
     }
-    if(playerno===2){
+    if(nplayers==="1"){
+        d3.select("#p1rosterdiv").html("")
         d3.select("#p2rosterdiv").html("")
-        p2active = pokeno
+        p1active = pokeno
         render_battle_interface(),
         render_battlecard(1),
         render_battlecard(2),
         speedcheck()
+        window.scrollTo(0,58)
     }
-    window.scrollTo(0,58)
+    // if(playerno===1){
+    //     d3.select("#p1rosterdiv").html("")
+    //     d3.select("#p2rosterdiv")
+    //         .attr("style","visibility:visible")
+    //     p1active = pokeno
+    // }
+    // if(playerno===2 || (nplayers===1 && playerno===1)){
+    //     d3.select("#p2rosterdiv").html("")
+    //     p2active = pokeno
+    //     render_battle_interface(),
+    //     render_battlecard(1),
+    //     render_battlecard(2),
+    //     speedcheck()
+    // }
+    // window.scrollTo(0,58)
 }
 // Create Battle Interface
 function render_battle_interface(){
