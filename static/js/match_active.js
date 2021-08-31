@@ -22,7 +22,7 @@
 //*******************************************************************************************\\
 
 // For adding single player
-// - Adaptations or new function for pokemon picks so AI picks randomly the first time and based on the type matchups otherwise
+// - New AI swap function which chooses the next Pokemon with HP > 0; need to make sure the game over health check is correctly triggered
 // - Likely new functions for AI attacks that target the highest coeffecient
 // - AI for swapping if matchup is unfavorable? Could turn into a loop... Maybe keep it simpler for meow
 // - I think all the checks and such should work as long as AI is p2, but them being p2 might prompt them for actions
@@ -66,6 +66,7 @@ console.log("player2",p2roster,p2active)
 // *****************************************************************
 // Game over screen
 function match_victory(loser){
+    console.log("match_victory FIRING")
     d3.select("#battleinterface").html("")
     var winner = 2
     if(loser===2){
@@ -85,6 +86,7 @@ function match_victory(loser){
 }
 // Compare active Pokemons' speeds to see who goes first
 function speedcheck(){
+    console.log("speedcheck FIRING")
     var nextplayer = 1
     if(p1roster[p1active].speed<p2roster[p2active].speed){
         nextplayer = 2
@@ -104,6 +106,7 @@ function speedcheck(){
 }
 // Leave Match Check
 function leave_match(){
+    console.log("leave_match FIRING")
     var prompt_text = "Are you sure you want to quit the match and return to the home page?"
     if(confirm(prompt_text)){
         window.location.href = "/"
@@ -111,6 +114,7 @@ function leave_match(){
 }
 // Generate players' rosters as dicts of dicts and assign hp and attack counts to Pokemon
 function generate_rosters(data,wiprawroster,wipgenroster){
+    console.log("generate_rosters FIRING")
     for(i in wiprawroster){
         wipgenroster[wiprawroster[i]] = data[0].pokedex[parseInt(wiprawroster[i])]
         wipgenroster[wiprawroster[i]].hpcount = wipgenroster[wiprawroster[i]].hp
@@ -145,10 +149,12 @@ function generate_rosters(data,wiprawroster,wipgenroster){
 // Generate Type Matchups array to sort coeffecients for damage calculation
 var typematchups_object = []
 function generate_typematchups(combat_vars){
+    console.log("generate_typematchups FIRING")
     typematchups_object = combat_vars[0].type_matchups
 }
 // KO'd Text function for roster ballfuns
 function KOd_text(name){
+    console.log("KOd_text FIRING")
     var text = name+" is KO'd. Select a different pokemon"
     alert(text)
 }
@@ -156,10 +162,24 @@ function KOd_text(name){
 // *********************** BUTTON FUNCTIONS ***********************
 // ****************************************************************
 // ****************************************************************
-// *********************** SWAP POKEMON ***********************
+// ************************* SWAP POKEMON *************************
 // ****************************************************************
 // swap button function
 function swap_button(playerno){
+    console.log("swap_button FIRING")
+    // if(nplayers===1 && playerno===2){
+    //     clear_player_rosters(2,p1active)
+    // }
+    // else{
+    //     render_player_roster(playerno,"combat"),
+    //     window.scrollTo(0,0),
+    //     d3.select("#battleinterface")
+    //         .attr("style","visibility:hidden")
+    //     d3.select("#p1buttons")
+    //         .attr("style","visibility:hidden")
+    //     d3.select("#p2buttons")
+    //         .attr("style","visibility:hidden")
+    // }
     render_player_roster(playerno,"combat"),
     window.scrollTo(0,0),
     d3.select("#battleinterface")
@@ -171,6 +191,7 @@ function swap_button(playerno){
 }
 // text gen for pokeball/sprite swap function
 function swap_pokemon_text(playerno,prevpokno){
+    console.log("swap_pokemon_text FIRING")
     if(playerno===1){
         var pokeballfunctiontext = p1name+" withdrew "+p1roster[prevpokno].name+" and sent out "+p1roster[p1active].name
         var textclass = "p1battletext"
@@ -189,6 +210,7 @@ function swap_pokemon_text(playerno,prevpokno){
 }
 // pokeball/sprite swap function
 function swap_pokemon(playerno,pokeno){
+    console.log("swap_pokemon FIRING")
     pokeno = parseInt(pokeno)
     // Assign variables for correct player and check for KO'd or turn swap
     if(playerno===1){
@@ -241,6 +263,7 @@ function swap_pokemon(playerno,pokeno){
 // ******************************************************
 // Text gen for attacks
 function attack_text(attacker_no,attacktext,attacker_type){
+    console.log("attack_text FIRING")
     var typeimg = "static/images/type_imgs/"+attacker_type+".png"
     if(attacker_no===1){
         var textclass = "p1battletext"
@@ -265,6 +288,7 @@ function attack_text(attacker_no,attacktext,attacker_type){
 // typeno is 1 or 2 to denote which attack type (element)
 // atktype reg or sp to denote regular or special attack
 function attack(attacker_no,atktype_no,atktype){
+    console.log("attack FIRING")
     if(attacker_no===1){
         var ATKroster = p1roster
         var ATKactive = p1roster[p1active]
@@ -504,6 +528,7 @@ function attack(attacker_no,atktype_no,atktype){
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
 // Phase is start, combat, or end;start is for picking rosters up front, combat for swapping during combat, end for victory screen
 function render_player_roster(playerno,phase){
+    console.log("render_player_roster FIRING")
     var roster_div = "#p"+playerno+"rosterdiv"
     var ballz_row_create = "p"+playerno+"pokeballz"
     var ballz_row_grab = "#"+ballz_row_create
@@ -654,13 +679,17 @@ function render_player_roster(playerno,phase){
         }
     }
     // console.log(playerno)
-    // if(healthcheck>0 && playerno===2){
+
+    // SMOKING GUN RIGHT HERE
+
+    // if(healthcheck>0 && playerno===2 && phase==="combat"){
     //     clear_player_rosters(2,p2active),
     //     console.log("it's working")
     // }
 }
 // Function to clear rosters for initial active Pokemon selection
 function clear_player_rosters(playerno,pokeno){
+    console.log("clear_player_rosters FIRING")
     if(nplayers==="2"){
         if(playerno===1){
             d3.select("#p1rosterdiv").html("")
@@ -706,6 +735,7 @@ function clear_player_rosters(playerno,pokeno){
 }
 // Create Battle Interface
 function render_battle_interface(){
+    console.log("render_battle_interface FIRING")
     // P1 Name column
     d3.select("#battleinterface")
         .append("div")
@@ -750,6 +780,7 @@ function render_battle_interface(){
 }
 // Populate Battle Card
 function render_battlecard(playerno){
+    console.log("render_battlecard FIRING")
     // Define variables for appropriate player
     if(playerno===1){
         d3.select("#p1battlemain").html("")
@@ -796,6 +827,15 @@ function render_battlecard(playerno){
         .append("div")
         .attr("id",battlecardHP)
         .html(`${bcroster[bcactive].name}<br>${rosterpokeHP}`)
+    d3.select(battlecardselect)
+        .append("img")
+        .attr("id","minitypeimgs")
+        .attr("src",bcroster[bcactive].type1img)
+    d3.select(battlecardselect)
+        .append("img")
+        .attr("id","minitypeimgs")
+        .attr("alt"," - ")
+        .attr("src",bcroster[bcactive].type2img)
     // P1 Buttons; Attack(s), SP Attack(s), Swap Pokemon
     d3.select(battlecardselect)
         .append("hr")
@@ -904,6 +944,7 @@ function render_battlecard(playerno){
 }
 // Aggregate function to ensure array generation first
 function sigma_battle_interface(data){
+    console.log("sigma_battle_interface FIRING")
     generate_rosters(data,p1roster_raw,p1roster),
     generate_rosters(data,p2roster_raw,p2roster),
     render_player_roster(1,"start"),

@@ -393,4 +393,7 @@ td{
     /* visibility:hidden; */
     display:none;
 }
+#minitypeimgs{
+    height:25px;
+}
 /* END MATCH ACTIVE------------------------------------------------------------------ */
