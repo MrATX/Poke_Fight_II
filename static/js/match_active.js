@@ -41,7 +41,6 @@ var npoke = document.getElementById("npoke").innerText
 var p1name = document.getElementById("p1name").innerText
 var p1roster_raw = document.getElementsByName("p1roster")
 var wiprosterpull = []
-console.log(nplayers)
 // P1 stuffs
 var p1roster = {}
 for(var i=0,length=parseInt(npoke);i<length;i++){
@@ -67,6 +66,7 @@ console.log("player2",p2roster,p2active)
 // Game over screen
 function match_victory(loser){
     console.log("match_victory FIRING")
+    console.log("loser",loser)
     d3.select("#battleinterface").html("")
     var winner = 2
     if(loser===2){
@@ -167,6 +167,9 @@ function KOd_text(name){
 // swap button function
 function swap_button(playerno){
     console.log("swap_button FIRING")
+    if(nplayers==="1" && playerno===2){
+        console.log("w000000000000000000000t!!!!!!!!!!!!!!!!")
+    }
     // if(nplayers===1 && playerno===2){
     //     clear_player_rosters(2,p1active)
     // }
@@ -180,14 +183,24 @@ function swap_button(playerno){
     //     d3.select("#p2buttons")
     //         .attr("style","visibility:hidden")
     // }
-    render_player_roster(playerno,"combat"),
-    window.scrollTo(0,0),
-    d3.select("#battleinterface")
-        .attr("style","visibility:hidden")
-    d3.select("#p1buttons")
-        .attr("style","visibility:hidden")
-    d3.select("#p2buttons")
-        .attr("style","visibility:hidden")
+    if(nplayers==="2" ||(nplayers==="1" && playerno===1)){
+        render_player_roster(playerno,"combat"),
+        window.scrollTo(0,0),
+        d3.select("#battleinterface")
+            .attr("style","visibility:hidden")
+        d3.select("#p1buttons")
+            .attr("style","visibility:hidden")
+        d3.select("#p2buttons")
+            .attr("style","visibility:hidden")
+    }
+    // render_player_roster(playerno,"combat"),
+    // window.scrollTo(0,0),
+    // d3.select("#battleinterface")
+    //     .attr("style","visibility:hidden")
+    // d3.select("#p1buttons")
+    //     .attr("style","visibility:hidden")
+    // d3.select("#p2buttons")
+    //     .attr("style","visibility:hidden")
 }
 // text gen for pokeball/sprite swap function
 function swap_pokemon_text(playerno,prevpokno){
@@ -527,8 +540,13 @@ function attack(attacker_no,atktype_no,atktype){
 // HTML Rendering Functions -----------------------------------------------------------------
 // Render Player Rosters with Pokeballs, Sprites, & Name/HP text
 // Phase is start, combat, or end;start is for picking rosters up front, combat for swapping during combat, end for victory screen
+// ----------------------??????????????-------------------------------------------------- \\
+// If both players have the same pokemon it breaks the match_victory for some reason so 
+// that it loops indefinitely :/
+// ----------------------??????????????-------------------------------------------------- \\
 function render_player_roster(playerno,phase){
     console.log("render_player_roster FIRING")
+    console.log("playerno",playerno,"phase",phase)
     var roster_div = "#p"+playerno+"rosterdiv"
     var ballz_row_create = "p"+playerno+"pokeballz"
     var ballz_row_grab = "#"+ballz_row_create

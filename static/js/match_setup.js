@@ -341,9 +341,38 @@ function pokedex_table(pokedex,headers){
             <td class="pokedex_id">${d.id}`)
 }
 // Middle Function generating list of Pokemon based on chosen filters
-var pokedex_filtered = []
 // function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter,genfilter){
 function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter){
+    var pokedex_filtered = []
+    var firstplayerroster_array = []
+    // Create roster of P1 pokemon choices to prevent P2 picking same Pokemon
+    var firstplayerroster = document.getElementById("p1_roster_div")
+    var alpha = "hold"
+    var j = 0
+    if(firstplayerroster.children.length>0){
+        for(var i=0, length=firstplayerroster.children.length; i<length; i++){
+            j = j + 1
+            alpha = "p1pokemon"+j
+            // console.log(alpha)
+            // console.log(firstplayerroster.children[alpha].defaultValue)
+            firstplayerroster_array.push(parseInt(firstplayerroster.children[alpha].defaultValue))
+        }
+        console.log("array ",firstplayerroster_array)
+    }
+    // for(var i=0, length=firstplayerroster.children.length; i<length; i++){
+    //     alpha = "p1pokemon"+i
+    //     console.log(alpha)
+    //     console.log(firstplayerroster.children[alpha])
+    // }
+    // if(firstplayerroster.children.length > 0){
+    //     var alpha = "p1pokemon1"
+    //     console.log(firstplayerroster.children[alpha])
+    //     console.log(firstplayerroster.children.p1pokemon1)
+    //     console.log(firstplayerroster.children.p1pokemon1.defaultValue)
+    // }
+    // if(typeof p1roster!=='undefined'){
+    //     console.log("p1rosterup")
+    // }
     // Grab table body & header, and clear rows
     theader = d3.select("thead");
     theader.html("")
@@ -376,7 +405,8 @@ function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilte
         if(
             t1filter.includes(pokemon.type1) &&
             t2filter.includes(pokemon.type2) &&
-            classfilter.includes(pokemon.weight_class)
+            classfilter.includes(pokemon.weight_class) &&
+            !firstplayerroster_array.includes(pokemon.id)
             // classfilter.includes(pokemon.weight_class) &&
             // genfilter.includes(pokemon.generation)
         ){
