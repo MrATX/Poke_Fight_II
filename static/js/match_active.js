@@ -168,7 +168,29 @@ function KOd_text(name){
 function swap_button(playerno){
     console.log("swap_button FIRING")
     if(nplayers==="1" && playerno===2){
+        console.log(p2roster)
         console.log("w000000000000000000000t!!!!!!!!!!!!!!!!")
+        console.log(p2active)
+        // swap_pokemon_text(2,p2active)
+        // swap_pokemon(2,1032)
+        // render_battlecard(2)
+        window.scrollTo(0,58)
+        for(i in p2roster){
+            var AI_HP_var = 0
+            console.log(i)
+            console.log(p2roster[i].hpcount)
+            AI_HP_var = AI_HP_var + p2roster[i].hpcount
+            console.log("AI HP VAR"+" "+AI_HP_var)
+            if(p2roster[i].hpcount!=0){
+                swap_pokemon(2,i)
+                break
+            }
+        }
+        if(AI_HP_var===0){
+            console.log("AI done son")
+            match_victory(2)
+        }
+        // Got the AI roster to show and victory screen works for both P1 and AI but sometimes the Xs are out of order; need to troubleshoot
     }
     // if(nplayers===1 && playerno===2){
     //     clear_player_rosters(2,p1active)
@@ -584,7 +606,8 @@ function render_player_roster(playerno,phase){
     if(healthcheck>0 && (nplayers==="2" || (nplayers==="1" && playerno===1))){
         console.log("ipwn_testerz")
     }
-    if(healthcheck>0 && (nplayers==="2" || (nplayers==="1" && playerno===1))){
+    // if(healthcheck>0 && (nplayers==="2" || (nplayers==="1" && playerno===1))){
+        if(healthcheck>0){
         // Clear Roster div
         d3.select(roster_div).html("")
         // Create rows for Player Name, Pokeballs, Sprites, & Text
@@ -696,6 +719,12 @@ function render_player_roster(playerno,phase){
                     <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
         }
     }
+    if(nplayers==="1" && playerno===2 && phase==="end"){
+        d3.select("#p2rosterdiv")
+            .attr("style","visibility:visible")
+            .append("p")
+            .text("TESTERZZZZZZZZZZZZZ")
+    }
     // console.log(playerno)
 
     // SMOKING GUN RIGHT HERE
@@ -800,6 +829,10 @@ function render_battle_interface(){
 function render_battlecard(playerno){
     console.log("render_battlecard FIRING")
     // Define variables for appropriate player
+    console.log("nplayer",nplayers)
+    if(playerno===2 && nplayers==="1"){
+        console.log("1st condition")
+    }
     if(playerno===1){
         d3.select("#p1battlemain").html("")
         var rosterpokeHP = "HP - "+p1roster[p1active].hpcount+" / "+p1roster[p1active].hp

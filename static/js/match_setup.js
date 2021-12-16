@@ -342,8 +342,9 @@ function pokedex_table(pokedex,headers){
 }
 // Middle Function generating list of Pokemon based on chosen filters
 // function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter,genfilter){
-function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter){
     var pokedex_filtered = []
+function pokedex_filter(pokedex,headers,combat_vars,t1filter,t2filter,classfilter){
+    // var pokedex_filtered = []
     var firstplayerroster_array = []
     // Create roster of P1 pokemon choices to prevent P2 picking same Pokemon
     var firstplayerroster = document.getElementById("p1_roster_div")
