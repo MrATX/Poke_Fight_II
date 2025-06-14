@@ -1,5 +1,6 @@
 import pandas as pd
-import pymongo
+import os
+from pymongo import MongoClient
 ### Pokedex ---------------------------
 # Read & Clean Data
 pokemon = pd.read_csv("Pokemon.csv")
@@ -228,8 +229,8 @@ pokedex_headers = [
 match_vars_dict["pokedex_headers"]=(pokedex_headers)
 # MongoDB stuffs ----------------------------------------
 # Establish DB Connection (Local for meow)
-conn = 'mongodb://localhost:27017'
-client = pymongo.MongoClient(conn)
+MONGO_URI = os.environ.get("MONGO_URI",'mongodb://localhost:27017')
+client = MongoClient(MONGO_URI)
 # Define DB
 db = client.pokefight2
 # Clear and Populate Collections

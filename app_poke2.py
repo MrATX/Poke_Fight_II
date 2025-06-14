@@ -1,16 +1,23 @@
 from flask import Flask, render_template, redirect, url_for, jsonify, json, request
 from flask_pymongo import PyMongo
-import pymongo
+import os
+from pymongo import MongoClient
 import requests
 import sys
 # Data Variables --------------------------------------------------
-poke2=Flask(__name__)
+poke2 = Flask(__name__)
 poke2.config['JSON_SORT_KEYS'] = False
-poke2.config["MONGO_URI"]="mongodb://localhost:27017/pokefight2"
-mongo=PyMongo(poke2)
-pokedex = mongo.db.pokedex
-combat_vars = mongo.db.combat_vars
-match_vars = mongo.db.match_vars
+poke2.config["MONGO_URI"]=os.environ.get("MONGO_URI", "mongodb://localhost:27017/pokefight2")
+mongo = PyMongo(poke2)
+MONGO_URI = os.environ.get("MONGO_URI",'mongodb://localhost:27017')
+client = MongoClient(MONGO_URI)
+db = client.pokefight2
+#pokedex = mongo.db.pokedex
+#combat_vars = mongo.db.combat_vars
+#match_vars = mongo.db.match_vars
+pokedex = db.pokedex
+combat_vars = db.combat_vars
+match_vars = db.match_vars
 # Frontend App Routes --------------------------------------------------
 # Main Menu routes ----------------------------------------------------
 @poke2.route("/")
