@@ -1,0 +1,16 @@
+# Ignore all CSV files
+*.csv
+
+# Ignore the ETL script
+etl.py
+
+# Ignore any files named testerz (with or without extension)
+testerz
+testerz.*
+
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+
+# Ignore environment/config files
+.env
