@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 from pymongo import MongoClient
+import json
 ### Pokedex ---------------------------
 # Read & Clean Data
 pokemon = pd.read_csv("Pokemon.csv")
@@ -227,22 +228,33 @@ pokedex_headers = [
     "SPD","GENERATION","LEGENDARY"
 ]
 match_vars_dict["pokedex_headers"]=(pokedex_headers)
+
+# Changing it to save JSON files of dicts instead of creating DB
+with open('pokedex.json', 'w') as f:
+    json.dump(pokedex_dict, f, indent=2)
+
+with open('combat_vars.json', 'w') as f:
+    json.dump(combat_vars_dict, f, indent=2)
+
+with open('match_vars.json', 'w') as f:
+    json.dump(match_vars_dict, f, indent=2)
+
 # MongoDB stuffs ----------------------------------------
 # Establish DB Connection (Local for meow)
-MONGO_URI = os.environ.get("MONGO_URI",'mongodb://localhost:27017')
-client = MongoClient(MONGO_URI)
+#MONGO_URI = os.environ.get("MONGO_URI",'mongodb://localhost:27017')
+#client = MongoClient(MONGO_URI)
 # Define DB
-db = client.pokefight2
+#db = client.pokefight2
 # Clear and Populate Collections
 # Pokedex
-pokedex = db.pokedex
-pokedex.drop()
-pokedex.insert_one(pokedex_dict)
+#pokedex = db.pokedex
+#pokedex.drop()
+#pokedex.insert_one(pokedex_dict)
 # Combat Variables
-combat_vars = db.combat_vars
-combat_vars.drop()
-combat_vars.insert_one(combat_vars_dict)
+#combat_vars = db.combat_vars
+#combat_vars.drop()
+#combat_vars.insert_one(combat_vars_dict)
 # Match Options Variables
-match_vars = db.match_vars
-match_vars.drop()
-match_vars.insert_one(match_vars_dict)
+#match_vars = db.match_vars
+#match_vars.drop()
+#match_vars.insert_one(match_vars_dict)

@@ -1,0 +1,1748 @@
+{
+  "weight_classes": {
+    "feather": [
+      0,
+      300
+    ],
+    "light": [
+      300,
+      400
+    ],
+    "welter": [
+      400,
+      500
+    ],
+    "middle": [
+      500,
+      600
+    ],
+    "cruiser": [
+      600,
+      700
+    ],
+    "heavy": [
+      700,
+      800
+    ],
+    "all": [
+      0,
+      1000
+    ]
+  },
+  "type_matchups": {
+    "Normal": {
+      "type": "Normal",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 0.0,
+        "id": "no_dmg",
+        "text": "Ineffective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Fighting": {
+      "type": "Fighting",
+      "Normal": {
+        "coeff": 2,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Poison": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Bug": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ghost": {
+        "coeff": 0.0,
+        "id": "no_dmg",
+        "text": "Ineffective"
+      },
+      "Steel": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Fire": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ice": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Fairy": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      }
+    },
+    "Flying": {
+      "type": "Flying",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Bug": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Electric": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Poison": {
+      "type": "Poison",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ground": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Rock": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Steel": {
+        "coeff": 0.0,
+        "id": "no_dmg",
+        "text": "Ineffective"
+      },
+      "Fire": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      }
+    },
+    "Ground": {
+      "type": "Ground",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 0.0,
+        "id": "no_dmg",
+        "text": "Ineffective"
+      },
+      "Poison": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Bug": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Fire": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Electric": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Rock": {
+      "type": "Rock",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Flying": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Rock": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Bug": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Bug": {
+      "type": "Bug",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Flying": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Poison": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Fairy": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      }
+    },
+    "Ghost": {
+      "type": "Ghost",
+      "Normal": {
+        "coeff": 0,
+        "id": "no_dmg",
+        "text": "Ineffective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Steel": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fire": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Steel": {
+      "type": "Steel",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Water": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Grass": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Electric": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      }
+    },
+    "Fire": {
+      "type": "Fire",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Bug": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Fire": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Water": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Grass": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Dragon": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Water": {
+      "type": "Water",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Rock": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fire": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Water": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Grass": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Grass": {
+      "type": "Grass",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Poison": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ground": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Rock": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Bug": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Water": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Grass": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Electric": {
+      "type": "Electric",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 0.0,
+        "id": "no_dmg",
+        "text": "Ineffective"
+      },
+      "Rock": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fire": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Water": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Grass": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Electric": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Psychic": {
+      "type": "Psychic",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Flying": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Poison": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 0.0,
+        "id": "no_dmg",
+        "text": "Ineffective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Ice": {
+      "type": "Ice",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Rock": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Water": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Grass": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Dragon": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    },
+    "Dragon": {
+      "type": "Dragon",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Dark": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fairy": {
+        "coeff": 0.0,
+        "id": "no_dmg",
+        "text": "Ineffective"
+      }
+    },
+    "Dark": {
+      "type": "Dark",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Flying": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Poison": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Steel": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fire": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dark": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fairy": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      }
+    },
+    "Fairy": {
+      "type": "Fairy",
+      "Normal": {
+        "coeff": 1,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Fighting": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Flying": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Poison": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Ground": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Rock": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Bug": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ghost": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Steel": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Fire": {
+        "coeff": 0.5,
+        "id": "half_dmg",
+        "text": "Mildly Effective"
+      },
+      "Water": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Grass": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Electric": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Psychic": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Ice": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      },
+      "Dragon": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Dark": {
+        "coeff": 2.0,
+        "id": "double_dmg",
+        "text": "Very Effective"
+      },
+      "Fairy": {
+        "coeff": 1.0,
+        "id": "single_dmg",
+        "text": "Effective"
+      }
+    }
+  },
+  "types": {
+    "Normal": "Normal",
+    "Fighting": "Fighting",
+    "Flying": "Flying",
+    "Poison": "Poison",
+    "Ground": "Ground",
+    "Rock": "Rock",
+    "Bug": "Bug",
+    "Ghost": "Ghost",
+    "Steel": "Steel",
+    "Fire": "Fire",
+    "Water": "Water",
+    "Grass": "Grass",
+    "Electric": "Electric",
+    "Psychic": "Psychic",
+    "Ice": "Ice",
+    "Dragon": "Dragon",
+    "Dark": "Dark",
+    "Fairy": "Fairy"
+  },
+  "types_list": [
+    "Normal",
+    "Fighting",
+    "Flying",
+    "Poison",
+    "Ground",
+    "Rock",
+    "Bug",
+    "Ghost",
+    "Steel",
+    "Fire",
+    "Water",
+    "Grass",
+    "Electric",
+    "Psychic",
+    "Ice",
+    "Dragon",
+    "Dark",
+    "Fairy"
+  ]
+}

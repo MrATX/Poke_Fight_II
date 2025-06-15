@@ -1,0 +1,126 @@
+{
+  "radios": {
+    "nplayers": {
+      "name": "nplayers",
+      "prompt": "Choose Number of Players",
+      "values": [
+        "2"
+      ],
+      "ids": [
+        "twoplayerradio"
+      ],
+      "text": [
+        "Two Player"
+      ]
+    },
+    "npoke": {
+      "name": "npoke",
+      "prompt": "Choose Number of Pokemon",
+      "values": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "ids": [
+        "two",
+        "three",
+        "four",
+        "five",
+        "six"
+      ],
+      "text": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    "weight_class": {
+      "name": "weight_class",
+      "prompt": "Choose Pokemon Weight Class",
+      "values": [
+        "feather",
+        "light",
+        "welter",
+        "middle",
+        "cruiser",
+        "heavy",
+        "all"
+      ],
+      "ids": [
+        "Featherweight",
+        "Lightweight",
+        "Welterweight",
+        "Middleweight",
+        "Cruiserweight",
+        "Heavyweight",
+        "allclasses"
+      ],
+      "text": [
+        "Featherweight",
+        "Lightweight",
+        "Welterweight",
+        "Middleweight",
+        "Cruiserweight",
+        "Heavyweight",
+        "All Classes"
+      ]
+    },
+    "generation": {
+      "name": "generation",
+      "prompt": "Choose Pokemon Generation",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "all"
+      ],
+      "ids": [
+        "1st",
+        "2nd",
+        "3rd",
+        "4th",
+        "5th",
+        "6th",
+        "7th",
+        "8th",
+        "any"
+      ],
+      "text": [
+        "Gen I - Red & Blue",
+        "Gen II - Silver & Gold",
+        "Gen III - Ruby & Sapphire",
+        "Gen IV - Diamond & Pearl",
+        "Gen V - Black & White",
+        "Gen VI - X & Y",
+        "Gen VII - Sun & Moon",
+        "Gen VIII - Sword & Shield",
+        "All Generations"
+      ]
+    }
+  },
+  "pokedex_headers": [
+    "#",
+    "",
+    "",
+    "",
+    "",
+    "TOTAL",
+    "HP",
+    "ATK",
+    "DEF",
+    "SP ATK",
+    "SP DEF",
+    "SPD",
+    "GENERATION",
+    "LEGENDARY"
+  ]
+}
