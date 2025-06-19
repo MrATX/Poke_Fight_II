@@ -230,13 +230,13 @@ pokedex_headers = [
 match_vars_dict["pokedex_headers"]=(pokedex_headers)
 
 # Changing it to save JSON files of dicts instead of creating DB
-with open('../../init-mongo/pokedex.json', 'w') as f:
+with open('pokedex.json', 'w') as f:
     json.dump(pokedex_dict, f, indent=2)
 
-with open('../../init-mongo/combat_vars.json', 'w') as f:
+with open('combat_vars.json', 'w') as f:
     json.dump(combat_vars_dict, f, indent=2)
 
-with open('../../init-mongo/match_vars.json', 'w') as f:
+with open('match_vars.json', 'w') as f:
     json.dump(match_vars_dict, f, indent=2)
 
 # MongoDB stuffs ----------------------------------------
