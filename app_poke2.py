@@ -114,4 +114,4 @@ def serveMatchvars():
    { '_id': 0})))
 # Run App --------------------------------------------------
 if __name__=="__main__":
-    poke2.run(debug=True)
+    poke2.run(host='0.0.0.0', port=5000, debug=True)
