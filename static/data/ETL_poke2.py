@@ -14,14 +14,28 @@ totalpoke = pokemon.index.nunique()
 pokemon = pokemon.fillna(" - ")
 image_exceptions = ["slowbro-galar","sirfetchd","kubfu","urshifu","urshifu-rapid-strike","zarude"]
 for i in range(0,totalpoke):
+    # Three previous img_url solutions
+    # 1st
+    # Previously used static images; missing images for expanded Pokedex, should still work fine for most Pokemon though
+    # pokemon.iloc[i,16] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
+    # 2nd
     # Outdated image referencing; now pulling from local images and .png names changed appropriately
     # if pokemon.iloc[i,14] in image_exceptions:
     #     pokemon.iloc[i,16] = f"https://projectpokemon.org/images/sprites-models/swsh-normal-sprites/{pokemon.iloc[i,14]}.gif"
     # if pokemon.iloc[i,14] not in image_exceptions:
     #     pokemon.iloc[i,16] = f"https://projectpokemon.org/images/normal-sprite/{pokemon.iloc[i,14]}.gif"
-    pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,14]}.gif"
-    # Previously used static images; missing images for expanded Pokedex, should still work fine for most Pokemon though
-    # pokemon.iloc[i,16] = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.iloc[i,0].item()}.png"
+    # 3rd
+    # this puts them all as lower case but doesn't work since Dockerizing and getting lots of 404s
+    #pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,14]}.gif"
+
+    #current img_url solution
+    # If Pokemon is Mega, will use altname, otherwise uses regular name to assemble img_url
+    if pokemon.iloc[i,13] == "Yes":
+        pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,14]}.gif"
+    if pokemon.iloc[i,13] == "No":
+        pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,1]}.gif"
+
+    # Check for legendary
     if pokemon.iloc[i,12] == "Yes":
         pokemon.iloc[i,12] = "Legendary"
     if pokemon.iloc[i,12] == "No":
