@@ -4,7 +4,8 @@ from pymongo import MongoClient
 
 # function to construct file path and load json files in as variables
 def load_json_from_init(file_name):
-    path = os.path.join(file_name)
+    #path = os.path.join(file_name)
+    path = os.path.join('static', 'data', filename)
     with open(path, 'r') as f:
         return json.load(f)
 
