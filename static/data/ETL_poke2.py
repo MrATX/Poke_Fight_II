@@ -12,7 +12,12 @@ pokemon["type1img"] = "hold"
 pokemon["type2img"] = "hold"
 totalpoke = pokemon.index.nunique()
 pokemon = pokemon.fillna(" - ")
-image_exceptions = ["slowbro-galar","sirfetchd","kubfu","urshifu","urshifu-rapid-strike","zarude"]
+#image_exceptions = ["slowbro-galar","sirfetchd","kubfu","urshifu","urshifu-rapid-strike","zarude"]
+
+# Function to check images for keywords to see if their name is an exception for img_url
+def check_for_imgExceptions(name):
+    return any(char in name for char in [',','.', ' ','-',"'"])
+
 for i in range(0,totalpoke):
     # Three previous img_url solutions
     # 1st
@@ -30,10 +35,15 @@ for i in range(0,totalpoke):
 
     #current img_url solution
     # If Pokemon is Mega, will use altname, otherwise uses regular name to assemble img_url
-    if pokemon.iloc[i,13] == "Yes":
+    if check_for_imgExceptions(pokemon.iloc[i,1]) or pokemon.iloc[i,13] == "Yes":
         pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,14]}.gif"
-    if pokemon.iloc[i,13] == "No":
+    else:
         pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,1]}.gif"
+
+    #if pokemon.iloc[i,13] == "Yes":
+        #pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,14]}.gif"
+    #if pokemon.iloc[i,13] == "No":
+        #pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,1]}.gif"
 
     # Check for legendary
     if pokemon.iloc[i,12] == "Yes":
