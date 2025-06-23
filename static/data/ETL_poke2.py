@@ -12,7 +12,10 @@ pokemon["type1img"] = "hold"
 pokemon["type2img"] = "hold"
 totalpoke = pokemon.index.nunique()
 pokemon = pokemon.fillna(" - ")
+#outdated list of exceptions; remediated those otherwise but still have small batch of outliers
 #image_exceptions = ["slowbro-galar","sirfetchd","kubfu","urshifu","urshifu-rapid-strike","zarude"]
+image_outliers = ["Jangmo-o","Hakamo-o","Kommo-o","Rockruff - Own Tempo","Porygon-Z","Ho-Oh"]
+
 
 # Function to check images for keywords to see if their name is an exception for img_url
 def check_for_imgExceptions(name):
@@ -36,7 +39,10 @@ for i in range(0,totalpoke):
     #current img_url solution
     # If Pokemon is Mega, will use altname, otherwise uses regular name to assemble img_url
     if check_for_imgExceptions(pokemon.iloc[i,1]) or pokemon.iloc[i,13] == "Yes":
-        pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,14]}.gif"
+        if pokemon.iloc[i,1] in image_outliers:
+            pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,1]}.gif"
+        else:
+            pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,14]}.gif"
     else:
         pokemon.iloc[i,16] = f"static/images/PokePics/{pokemon.iloc[i,1]}.gif"
 
