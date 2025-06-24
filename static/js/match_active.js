@@ -225,7 +225,7 @@ function swap_pokemon(playerno,pokeno){
 // ******************************************************
 // Text gen for attacks
 function attack_text(attacker_no,attacktext,attacker_type){
-    var typeimg = "static/images/type_imgs/"+attacker_type+".png"
+    var typeimg = "static/images/type_imgs/"+attacker_type.lower()+".png"
     if(attacker_no===1){
         var textclass = "p1battletext"
     }

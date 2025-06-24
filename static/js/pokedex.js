@@ -117,7 +117,7 @@ function render_type_filters(combat_vars,type_no){
     for(var i=0,length=types.length;i<length;i++){
         var img_name = "type"+type_no
         var img_id = types[i]+"_type"+type_no+"_filter"
-        var img_url = "static/images/type_imgs/" + types[i] + ".png"
+        var img_url = "static/images/type_imgs/" + types[i].lower() + ".png"
         d3.select(selection)
             .select(".row")
             .append("img")
