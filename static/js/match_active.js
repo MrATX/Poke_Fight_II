@@ -225,7 +225,7 @@ function swap_pokemon(playerno,pokeno){
 // ******************************************************
 // Text gen for attacks
 function attack_text(attacker_no,attacktext,attacker_type){
-    var typeimg = "static/images/type_imgs/"+attacker_type.lower()+".png"
+    var typeimg = "static/images/type_imgs/"+attacker_type.toLowerCase()+".png"
     if(attacker_no===1){
         var textclass = "p1battletext"
     }
@@ -624,7 +624,19 @@ function render_player_roster(playerno,phase){
             var rosterindex = i
             var rosterpokename = wiproster[i].name
             var rosterpokeHP = "HP - "+wiproster[i].hpcount+" / "+wiproster[i].hp
-            d3.select(text_row_grab)
+            // if type 2 is -, then only render one type image
+            if(wiproster[i].type2 == " - "){
+                d3.select(text_row_grab)
+                .append("div")
+                .attr("class","col-md-2")
+                .append("p")
+                .attr("id",textid)
+                .html(`${rosterpokename}<br>${rosterpokeHP}<br>
+                    <img id='battletype' src='${wiproster[i].type1img}'>`)
+            }
+            // if type 2 is not -, render both images
+            else{
+                d3.select(text_row_grab)
                 .append("div")
                 .attr("class","col-md-2")
                 .append("p")
@@ -632,6 +644,17 @@ function render_player_roster(playerno,phase){
                 .html(`${rosterpokename}<br>${rosterpokeHP}<br>
                     <img id='battletype' src='${wiproster[i].type1img}'>
                     <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
+            }
+            // original version which would render an empty space for type 2 of -
+            // fixed to have single one centered and look nicer
+            // d3.select(text_row_grab)
+            //     .append("div")
+            //     .attr("class","col-md-2")
+            //     .append("p")
+            //     .attr("id",textid)
+            //     .html(`${rosterpokename}<br>${rosterpokeHP}<br>
+            //         <img id='battletype' src='${wiproster[i].type1img}'>
+            //         <img id='battletype' src='${wiproster[i].type2img}' alt=' - '>`)
         }
     }
 }

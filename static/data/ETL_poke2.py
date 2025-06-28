@@ -92,7 +92,7 @@ type_imgs = {
     "Rock":"static/images/type_imgs/rock.png",
     "Steel":"static/images/type_imgs/steel.png",
     "Water":"static/images/type_imgs/water.png",
-    " - ":" "
+    " - ":"static/images/type_imgs/black.png"
 }
 pokedex_dict = {}
 wip_list_gen = []

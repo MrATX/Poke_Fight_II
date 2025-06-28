@@ -103,6 +103,7 @@ function render_type_filters(combat_vars,type_no){
         .attr("id","filter_title")
         .text(title)
     if(type_no==="2"){
+        img_url = "/static/images/type_imgs/nonetype.png"
         d3.select(selection)
             .select(".row")
             .append("img")
@@ -111,13 +112,14 @@ function render_type_filters(combat_vars,type_no){
             .attr("class","typefilter_typeimg")
             .attr("onclick","click_typeimg(id)")
             .attr("title"," - ")
-            .attr("src","img_url")
+            .attr("src",img_url)
             .attr("alt","NONE")
+            .attr("onerror","")
     }
     for(var i=0,length=types.length;i<length;i++){
         var img_name = "type"+type_no
         var img_id = types[i]+"_type"+type_no+"_filter"
-        var img_url = "static/images/type_imgs/" + types[i].lower() + ".png"
+        var img_url = "static/images/type_imgs/" + types[i].toLowerCase() + ".png"
         d3.select(selection)
             .select(".row")
             .append("img")

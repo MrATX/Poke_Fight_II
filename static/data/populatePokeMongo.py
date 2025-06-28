@@ -6,6 +6,8 @@ from pymongo import MongoClient
 def load_json_from_init(file_name):
     #path = os.path.join(file_name)
     path = os.path.join('static', 'data', file_name)
+    #for faster testing with independent mongo EC2 instance and running app locally
+    #path = os.path.join(file_name)
     with open(path, 'r') as f:
         return json.load(f)
 
