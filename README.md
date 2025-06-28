@@ -1,6 +1,5 @@
 # Poke_Fight_II
 <br>
-<br>
 Poke_Fight_II is a simple game where you can do two player Pok-e-mon battles, via a web app with gifs for the Pok-e-mon!
 <br>
 <br>
